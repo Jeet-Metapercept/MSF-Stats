@@ -1,14 +1,22 @@
-
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Blitz statistics | amCharts</title>
-    <meta name="description" content="chart created using amCharts live editor" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <!-- amCharts javascript sources -->
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+   <title>Blitz statistics | amCharts</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="scripts/sb-admin-2.css" rel="stylesheet">
+      <!-- amCharts javascript sources -->
     <script type="text/javascript" src="scripts/amcharts.js"></script>
     <script type="text/javascript" src="scripts/serial.js"></script>
     <script type="text/javascript" src="scripts/light.js"></script>
@@ -17,13 +25,7 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
-
-	
 	<script>
-
-	</script>
-
-    <script>
       //get data from firebase
       	$.ajax({
       		url: "https://msf-stats.firebaseio.com/.json",
@@ -806,6 +808,9 @@
       		var blitzResults = document.getElementById("wl");
       			blitzResults.innerHTML =  " W " + BlitzTotalBattlesWon + " , L " + BlitzTotalBattlesLost;
 				
+			var battlesplayed =	document.getElementById("battlesplayed");
+      			battlesplayed.innerHTML =  BlitzTotalBattlesWon + BlitzTotalBattlesLost;
+				
 			if(isLive == 'true'){
 					var liveStatus = document.getElementById("running");
 					liveStatus.innerHTML = "<span style='color:red'>Live!</span>";
@@ -916,7 +921,7 @@
       				{
       					"id": "ValueAxis-1",
       					"position": "bottom",
-      					"title": "Live Blitz",
+      					"title": "Win Rate %",
       					"titleFontSize": 20,
       					"maximum": 100,
       					"minimum": 0
@@ -1026,7 +1031,7 @@
       				{
       					"id": "ValueAxis-1",
       					"position": "bottom",
-      					"title": "All Blitz",
+      					"title": "Win Rate %",
       					"titleFontSize": 20,
       					"maximum": 100,
       					"minimum": 0
@@ -1077,65 +1082,183 @@
       	}
         });
     </script>
-  </head>
-  <body>
-    <div class="stats" style="text-align:center; margin-bottom: 0rem; margin-top: 2rem;">
-      <div class="stat">
-        <h4>Updated at</h4>
-        <p><span id="stamp">---</span><span><sup></sup></span></p>
-      </div>
-	  <div class="stat">
-        <h4>Staus</h4>
-        <p><span id="running">---</span><span><sup></sup></span></p>
-      </div>
-      <div class="stat">
-        <h4>Next Blitz</h4>
-        <p><span id="timer">---</span><span><sup id="new" style="color: red; font-weight:300"></sup></span></p>
-      </div>
-    </div>
-    <div id="chartdiv" style="width: 100%; height: 35vh; background-color: #FFFFFF;"></div>
-    <div style="text-align: center; margin-top: 10px; width: 100%; margin-bottom: 0rem;" class="stats">
-      <div class="stat">
-        <h4>Last Round</h4>
-        <p id="winss">---</p>
-      </div>
-      <div class="stat">
-        <h4>Current Blitz</h4>
-        <p id="ThisBlitz">---</p>
-      </div>
-    </div>
-    <div id="chartdiv1" style="width: 100%; height: 35vh; background-color: #FFFFFF;"></div>
-    <div style="text-align: center; margin-top: 0px; margin-bottom: 0px; width: 100%;" class="stats">
-      <div class="stat">
-        <h4>Total Battles</h4>
-        <p id="totalblitz">---</p>
-      </div>
-      <div class="stat">
-        <h4>Win Rate</h4>
-        <p id="wr">---</p>
-      </div>
-      <div class="stat">
-        <h4>Results</h4>
-        <p id="wl">---</p>
-      </div>
-    </div>
-  </body>
-  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-    apiKey: "AIzaSyA0urZjaAX-PjTAtww4BXsa00ciFACiln4",
-    authDomain: "msf-stats.firebaseapp.com",
-    databaseURL: "https://msf-stats.firebaseio.com",
-    projectId: "msf-stats",
-    storageBucket: "msf-stats.appspot.com",
-    messagingSenderId: "373368426587"
-    };
-    firebase.initializeApp(config);
-    
-    //git command to update repo --> git commit -am "your message" && git push
-     
-  </script>
-</html>
+</head>
 
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+      
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" style="padding: 0.25rem;">
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-1 mt-1" >
+              <div class="card border-left-primary shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="running">-</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-1 mt-1">
+              <div class="card border-left-success shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Update</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="stamp">-</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-1 mt-1">
+              <div class="card border-left-info shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Next Blitz</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="timer">-</div>
+                        </div>
+         
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-1 mt-1">
+              <div class="card border-left-danger shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Battles</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="battlesplayed">18</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-12 mb-1">
+              <div class="card shadow ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Live Blitz</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-area" >
+                    <div id="chartdiv" style="height: 100%;"></div>
+                  </div>
+				  
+                </div>
+				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
+				  
+					  <div class="stat">
+						<h4>Last Round</h4>
+						<p id="winss">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Current Blitz</h4>
+						<p id="ThisBlitz">---</p>
+					  </div>
+					
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-12 col-lg-12">
+              <div class="card shadow ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Blitz All time</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-pie pt-4 pb-2">
+                    <div id="chartdiv1" style="height: 100%;"></div>
+                  </div>
+                </div>
+				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
+				  
+					  <div class="stat">
+						<h4>Total Battles</h4>
+						<p id="totalblitz">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Win Rate</h4>
+						<p id="wr">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Results</h4>
+						<p id="wl">---</p>
+					  </div>
+					
+                </div>
+              </div>
+            </div>
+          </div>
+
+         
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+
+
+
+</body>
+
+</html>
