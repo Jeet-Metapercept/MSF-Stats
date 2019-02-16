@@ -212,7 +212,7 @@
       			
       			var retrieved_LastBlitz = BlitzData.LastBlitz;
       			var LastBlitzNumber = retrieved_LastBlitz; 
-      			
+
       //Read NewBlitz.txt
       function readNewBlitzFile(fileso){
       		$.get(fileso, function(data) {
@@ -252,14 +252,17 @@
 				//console.log('222222222222222222222----'+sfile);
       				var allTimes = data;
       				//console.log(allTimes);
-      var battletime = new Date(allTimes).getTime() / 1000; 
+	  
+	  var strTodate = new Date(allTimes);
+      var battletime = Date.parse(new Date(allTimes));//this is in milliseconds
+	  console.log(battletime + Team_1_time);	  
+      //var battletime = new Date(allTimes).getTime() / 1000; 
 	
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	  console.log(Team_1_time,'yes', battletime, Team_1_time);
+	  //console.log(Team_1_time,'yes', battletime, Team_1_time);
       if(battletime > Team_1_time){
-	  	  console.log('change');
       readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team1.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team1.json",
@@ -555,7 +558,7 @@
 	  console.log(file);
       	$.get(file, function(data) {
 		file = file.split('/').pop();
-		console.log(file);
+		//console.log(file);
       	   var allText = data;
       	   //console.log(allText);
       	   var valueCheck = parseInt(allText);
