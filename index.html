@@ -253,10 +253,8 @@
       				var allTimes = data;
       				//console.log(allTimes);
 	  
-	  var strTodate = new Date(allTimes);
-      var battletime = Date.parse(new Date(allTimes));//this is in milliseconds
-	  console.log(battletime + Team_1_time);	  
-      //var battletime = new Date(allTimes).getTime() / 1000; 
+	  
+      var battletime = new Date(allTimes).getTime() / 1000; 
 	
       switch (sfile)  
       { 
