@@ -1,2 +1,2 @@
-"MSF-Blitz-Stats"
+"MSF-Blitz-Statstics"
  
