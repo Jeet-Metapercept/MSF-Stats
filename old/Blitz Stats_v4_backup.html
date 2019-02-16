@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Blitz statistics | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
+		<style>*{font-family: 'Cabin Condensed', sans-serif;}.md-form label{cursor:pointer !important}</style>		
+		
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+	
+			//https://msf.gg/my-teams
+		var upgradeTime = 6500;	 //2hrs 7200		
+		
+		 // Team 1
+		 var Team_1 = "W W L";	Team_1_time = 1549150418; 		
+		 
+		 // Team 2
+		 var Team_2 = "W W L"; 	Team_2_time = 1549150418; 	
+		 
+		 // Team 3
+		 var Team_3 = "W W L";	Team_3_time = 1549150418; 	
+		
+		 // Team 4
+		 var Team_4 = "W W L"; 	Team_4_time = 1549150418; 		
+		 
+		 // Team 5
+ 		 var Team_5 = "W W L"; 	Team_5_time = 1549150418; 	
+		 
+		 // Team 6
+ 		 var Team_6 = "W W L";	Team_6_time = 1549150418; 	
+		 
+		 // Team 7
+ 		 var Team_7 = "W W L"; 	Team_7_time = 1549150418; 	
+		 
+		 // Team 8
+ 		 var Team_8= "W W L"; 	Team_8_time = 1549150418; 	
+		 
+		 // Team 9
+ 		 var Team_9 = "W W L"; 	Team_9_time = 1549150418; 	
+		 
+		 // Team 10
+ 		 var Team_10 = "W W L";	Team_10_time = 1549150418; 	
+		 
+		 // Team 11
+ 		 var Team_11 = "W W L"; 	Team_11_time = 1549150418; 	
+		
+		// Put the object into storage
+		if (localStorage.Team_1 === undefined) {
+			localStorage.setItem('Team_1', Team_1);
+		}
+		if (localStorage.Team_2 === undefined) {
+			localStorage.setItem('Team_2', Team_2);
+		}
+		if (localStorage.Team_3 === undefined) {
+			localStorage.setItem('Team_3', Team_3);
+		}
+		if (localStorage.Team_4 === undefined) {
+			localStorage.setItem('Team_4', Team_4);
+		}
+		if (localStorage.Team_5 === undefined) {
+			localStorage.setItem('Team_5', Team_5);
+		}
+		if (localStorage.Team_6 === undefined) {
+			localStorage.setItem('Team_6', Team_6);
+		}
+		if (localStorage.Team_7 === undefined) {
+			localStorage.setItem('Team_7', Team_7);
+		}
+		if (localStorage.Team_8 === undefined) {
+			localStorage.setItem('Team_8', Team_8);
+		}
+		if (localStorage.Team_9 === undefined) {
+			localStorage.setItem('Team_9', Team_9);
+		}
+		if (localStorage.Team_10 === undefined) {
+			localStorage.setItem('Team_10', Team_10);
+		}
+		if (localStorage.Team_11 === undefined) {
+			localStorage.setItem('Team_11', Team_11);
+		}
+		
+		// Put the Times into storage
+		if (localStorage.Team_1_time === undefined) {
+			localStorage.setItem('Team_1_time', Team_1_time);
+		}
+		if (localStorage.Team_2_time === undefined) {
+			localStorage.setItem('Team_2_time', Team_2_time);
+		}
+		if (localStorage.Team_3_time === undefined) {
+			localStorage.setItem('Team_3_time', Team_3_time);
+		}
+		if (localStorage.Team_4_time === undefined) {
+			localStorage.setItem('Team_4_time', Team_4_time);
+		}
+		if (localStorage.Team_5_time === undefined) {
+			localStorage.setItem('Team_5_time', Team_5_time);
+		}
+		if (localStorage.Team_6_time === undefined) {
+			localStorage.setItem('Team_6_time', Team_6_time);
+		}
+		if (localStorage.Team_7_time === undefined) {
+			localStorage.setItem('Team_7_time', Team_7_time);
+		}
+		if (localStorage.Team_8_time === undefined) {
+			localStorage.setItem('Team_8_time', Team_8_time);
+		}
+		if (localStorage.Team_9_time === undefined) {
+			localStorage.setItem('Team_9_time', Team_9_time);
+		}
+		if (localStorage.Team_10_time === undefined) {
+			localStorage.setItem('Team_10_time', Team_10_time);
+		}
+		if (localStorage.Team_11_time === undefined) {
+			localStorage.setItem('Team_11_time', Team_11_time);
+		}
+
+		
+		// Retrieve the object from storage
+		var retrieved_Team1_Results = localStorage.getItem('Team_1');
+		Team_1 = retrieved_Team1_Results;
+		
+		var retrieved_Team2_Results = localStorage.getItem('Team_2');
+		Team_2 = retrieved_Team2_Results;
+		
+		var retrieved_Team3_Results = localStorage.getItem('Team_3');
+		Team_3 = retrieved_Team3_Results;
+		
+		var retrieved_Team4_Results = localStorage.getItem('Team_4');
+		Team_4 = retrieved_Team4_Results;
+		
+		var retrieved_Team5_Results = localStorage.getItem('Team_5');
+		Team_5 = retrieved_Team5_Results;
+		
+		var retrieved_Team6_Results = localStorage.getItem('Team_6');
+		Team_6 = retrieved_Team6_Results;
+		
+		var retrieved_Team7_Results = localStorage.getItem('Team_7');
+		Team_7 = retrieved_Team7_Results;
+		
+		var retrieved_Team8_Results = localStorage.getItem('Team_8');
+		Team_8 = retrieved_Team8_Results;
+		
+		var retrieved_Team9_Results = localStorage.getItem('Team_9');
+		Team_9 = retrieved_Team9_Results;
+		
+		var retrieved_Team10_Results = localStorage.getItem('Team_10');
+		Team_10 = retrieved_Team10_Results;
+		
+		var retrieved_Team11_Results = localStorage.getItem('Team_11');
+		Team_11 = retrieved_Team11_Results;
+		
+		// Retrieve the Times object from storage
+		var retrieved_Team1_Time = localStorage.getItem('Team_1_time');
+		Team_1_time = retrieved_Team1_Time ;
+		
+		var retrieved_Team2_Time = localStorage.getItem('Team_2_time');
+		Team_2_time = retrieved_Team2_Time ;
+		
+		var retrieved_Team3_Time = localStorage.getItem('Team_3_time');
+		Team_3_time = retrieved_Team3_Time;
+		
+		var retrieved_Team4_Time = localStorage.getItem('Team_4_time');
+		Team_4_time = retrieved_Team4_Time; 
+		
+		var retrieved_Team5_Time = localStorage.getItem('Team_5_time');
+		Team_5_time = retrieved_Team5_Time; 
+		
+		var retrieved_Team6_Time = localStorage.getItem('Team_6_time');
+		Team_6_time = retrieved_Team6_Time; 
+		
+		var retrieved_Team7_Time = localStorage.getItem('Team_7_time');
+		Team_7_time = retrieved_Team7_Time; 
+		
+		var retrieved_Team8_Time = localStorage.getItem('Team_8_time');
+		Team_8_time = retrieved_Team8_Time; 
+		
+		var retrieved_Team9_Time = localStorage.getItem('Team_9_time');
+		Team_9_time = retrieved_Team9_Time; 
+		
+		var retrieved_Team10_Time = localStorage.getItem('Team_10_time');
+		Team_10_time = retrieved_Team10_Time; 
+		
+		var retrieved_Team11_Time = localStorage.getItem('Team_11_time');
+		Team_11_time = retrieved_Team11_Time; 
+		//console.log("team 11 last time --- "+Team_11_time);
+		
+
+		////Graph work
+			var Team1 = Team_1.match(/W/gi).length;
+			var Team2 = Team_2.match(/W/gi).length;  		
+			var Team3 = Team_3.match(/W/gi).length;
+			var Team4 = Team_4.match(/W/gi).length;	
+			var Team5 = Team_5.match(/W/gi).length;	
+			var Team6 = Team_6.match(/W/gi).length;	
+			var Team7 = Team_7.match(/W/gi).length;	
+			var Team8 = Team_8.match(/W/gi).length;	
+			var Team9 = Team_9.match(/W/gi).length;	
+			var Team10 = Team_10.match(/W/gi).length;	
+			var Team11 = Team_11.match(/W/gi).length;	
+
+			AmCharts.makeChart("chartdiv",
+				{
+					"dataProvider": [
+						{
+							"Teams": "Team 1" + "\n" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "\n" + "Battles : " + retrieved_Team1_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team1_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team1_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team1*100/(Team_1.split(" ").length)).toFixed(2),
+							"Results" : Team_1
+						},
+						{
+							"Teams": "Team 2" + "\n" + retrieved_Team2_Results[retrieved_Team2_Results.length -1] + "\n" + "Battles : " + retrieved_Team2_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team2_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team2_Results.match(new RegExp('L','g')).length + " )", 
+							"WinRate" : (Team2*100/(Team_2.split(" ").length)).toFixed(2),
+							"Results" : Team_2
+						},
+						{
+							"Teams": "Team 3" + "\n" + retrieved_Team3_Results[retrieved_Team3_Results.length -1] + "\n" + "Battles : " + retrieved_Team3_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team3_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team3_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team3*100/(Team_3.split(" ").length)).toFixed(2),
+							"Results" : Team_3
+						},
+						{
+							"Teams": "Team 4" + "\n" + retrieved_Team4_Results[retrieved_Team4_Results.length -1] + "\n" + "Battles : " + retrieved_Team4_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team4_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team4_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team4*100/(Team_4.split(" ").length)).toFixed(2),
+							"Results" : Team_4
+						},
+						{
+							"Teams": "Team 5" + "\n" + retrieved_Team5_Results[retrieved_Team5_Results.length -1] + "\n" + "Battles : " + retrieved_Team5_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team5_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team5_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team5*100/(Team_5.split(" ").length )).toFixed(2),
+							"Results" : Team_5
+						},
+						{
+							"Teams": "Team 6" + "\n" + retrieved_Team6_Results[retrieved_Team6_Results.length -1] + "\n" + "Battles : " + retrieved_Team6_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team6_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team6_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team6*100/(Team_6.split(" ").length )).toFixed(2),
+							"Results" : Team_6
+						},
+						{
+							"Teams": "Team 7" + "\n" + retrieved_Team7_Results[retrieved_Team7_Results.length -1] + "\n" + "Battles : " + retrieved_Team7_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team7_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team7_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team7*100/(Team_7.split(" ").length )).toFixed(2),
+							"Results" : Team_7
+						},
+						{
+							"Teams": "Team 8" + "\n" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "\n" + "Battles : " + retrieved_Team8_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team8_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team8_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team8*100/(Team_8.split(" ").length )).toFixed(2),
+							"Results" : Team_8
+						},
+						{
+							"Teams": "Team 9" + "\n" + retrieved_Team9_Results[retrieved_Team9_Results.length -1] + "\n" + "Battles : " + retrieved_Team9_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team9_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team9_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team9*100/(Team_9.split(" ").length )).toFixed(2),
+							"Results" : Team_9
+						},
+						{
+							"Teams": "Team 10" + "\n" + retrieved_Team10_Results[retrieved_Team10_Results.length -1] + "\n" + "Battles : " + retrieved_Team10_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team10_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team10_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team10*100/(Team_10.split(" ").length )).toFixed(2),
+							"Results" : Team_10
+						},
+						{
+							"Teams": "Team 11" + "\n" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "\n" + "Battles : " + retrieved_Team11_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team11_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team11_Results.match(new RegExp('L','g')).length + " )",
+							"WinRate" : (Team11*100/(Team_11.split(" ").length )).toFixed(2),
+							"Results" : Team_11
+						}
+					],
+					"type": "serial",
+					"categoryField": "Teams", 
+					"fontSize": 15,
+					"columnSpacing": 12,
+					"columnWidth": 0.53,
+					"rotate": false,
+					"startDuration": 1,
+					"startEffect": "easeOutSine",
+					"classNamePrefix": "msf",
+					"creditsPosition": "top-right",
+					"panEventsEnabled": false,
+					"percentPrecision": 1,
+					"theme": "light",
+					"graphs": [
+						{
+							"balloonText": "[[value]]% : [[Results]]",
+							"fillAlphas": 1,
+							"gapPeriod": 15,
+							"id": "AmGraph-1",
+							"tabIndex": 0,
+							"title": "MSF",
+							"type": "column",
+							"valueField": "WinRate"
+						},
+					],
+					//"depth3D": 5,
+					//"angle": 15,
+					"export": {
+						"enabled": false
+					},
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"position": "bottom",
+							"title": "Win Ratio %",
+							"titleFontSize": 20,
+							"maximum": 100,
+							"minimum": 0
+						}
+					],
+					"titles": [
+						{
+							"id": "Blitz Statistics",
+							"size": 25,
+							"text": "Blitz Statistics"
+						}
+					]
+				}
+			);
+			
+		</script>
+		
+		<!-- Getting Updated Stats -->
+		<script type="text/javascript">
+		
+		var retrieved_LastBlitz = localStorage.getItem('LastBlitz');
+		var LastBlitzNumber = retrieved_LastBlitz; 
+		//console.log('last read ->>  '+LastBlitzNumber);
+		
+		function readLastBlitzFile(files){
+					var LastBlitzFile = new XMLHttpRequest();
+					
+					LastBlitzFile.open("GET", files, true);
+					LastBlitzFile.setRequestHeader('Content-Type', 'text; charset=UTF-8');
+					LastBlitzFile.onreadystatechange = function ()
+					{
+						if(LastBlitzFile.readyState === 4)
+						{
+							if(LastBlitzFile.status === 200 || LastBlitzFile.status == 0)
+							{
+								var allTexts = LastBlitzFile.responseText;
+								console.log(files + '         ' +allTexts); //Current Blitz Time
+								var myDate = new Date(allTexts).getTime() / 1000; //1440516958;
+								
+								var CurrentBlitzNumber = myDate; 
+								console.log('current ->>  '+CurrentBlitzNumber);
+								
+								
+
+								if(CurrentBlitzNumber > LastBlitzNumber){
+									console.log("New Data.");//true
+									
+									//readTextFile("Team1.txt");
+									//readTextFile("Team2.txt");
+									//readTextFile("Team3.txt");
+									//readTextFile("Team4.txt");
+									//readTextFile("Team5.txt");
+									//readTextFile("Team6.txt");
+									//readTextFile("Team7.txt");
+									//readTextFile("Team8.txt");
+									//readTextFile("Team9.txt");
+									//readTextFile("Team10.txt");
+									//readTextFile("Team11.txt");
+									
+									localStorage.setItem('LastBlitz', CurrentBlitzNumber);
+									
+									//if (localStorage.LastBlitz === undefined) {
+									//	localStorage.setItem('LastBlitz', CurrentBlitzNumber);
+									//}
+								}
+								else{
+								console.log("Previous Data.");//false
+								}
+								
+								
+							}
+						}
+					}
+					LastBlitzFile.send(null);
+		}
+		readLastBlitzFile("LastBlitz.txt");
+	
+		//Saving Teams Results
+		function readTextFile(file)
+				{
+					var rawFile = new XMLHttpRequest();
+					
+					rawFile.open("GET", file, true);
+					rawFile.setRequestHeader('Content-Type', 'text; charset=UTF-8');
+					rawFile.onreadystatechange = function ()
+					{
+						if(rawFile.readyState === 4)
+						{
+							if(rawFile.status === 200 || rawFile.status == 0)
+							{
+								var allText = rawFile.responseText;
+								//console.log(file + '         ' +allText);
+								var match_result = 'L';
+								if(allText == 1){
+									match_result = 'W'; 
+								}
+								if(file == 'Team1.txt'){
+									Team_1 = retrieved_Team1_Results + " " + match_result;
+									localStorage.setItem('Team_1', Team_1);
+								}
+								if(file == 'Team2.txt'){
+									Team_2 = retrieved_Team2_Results + " " + match_result;
+									localStorage.setItem('Team_2', Team_2);
+								}
+								if(file == 'Team3.txt'){
+									Team_3 = retrieved_Team3_Results + " " + match_result;
+									localStorage.setItem('Team_3', Team_3);
+								}
+								if(file == 'Team4.txt'){
+									Team_4 = retrieved_Team4_Results + " " + match_result;
+									localStorage.setItem('Team_4', Team_4);
+								}
+								if(file == 'Team5.txt'){
+									Team_5 = retrieved_Team5_Results + " " + match_result;
+									localStorage.setItem('Team_5', Team_5);
+								}
+								if(file == 'Team6.txt'){
+									Team_6 = retrieved_Team6_Results + " " + match_result;
+									localStorage.setItem('Team_6', Team_6);
+								}
+								if(file == 'Team7.txt'){
+									Team_7 = retrieved_Team7_Results + " " + match_result;
+									localStorage.setItem('Team_7', Team_7);
+								}
+								if(file == 'Team8.txt'){
+									Team_8 = retrieved_Team8_Results + " " + match_result;
+									localStorage.setItem('Team_8', Team_8);
+								}
+								if(file == 'Team9.txt'){
+									Team_9 = retrieved_Team9_Results + " " + match_result;
+									localStorage.setItem('Team_9', Team_9);
+								}
+								if(file == 'Team10.txt'){
+									Team_10 = retrieved_Team10_Results + " " + match_result;
+									localStorage.setItem('Team_10', Team_10);
+								}
+								if(file == 'Team11.txt'){
+									Team_11 = retrieved_Team11_Results + " " + match_result;
+									localStorage.setItem('Team_11', Team_11);
+								}
+							}
+						}
+					}
+					rawFile.send(null);
+				}
+			
+			//Saving Teams Times
+				function readTimesTextFile(sfile)
+				{
+					var rawFile = new XMLHttpRequest();
+					
+					rawFile.open("GET", sfile, true);
+					rawFile.setRequestHeader('Content-Type', 'text; charset=UTF-8');
+					rawFile.onreadystatechange = function ()
+					{
+						if(rawFile.readyState === 4)
+						{
+							if(rawFile.status === 200 || rawFile.status == 0)
+							{
+								var allTimes = rawFile.responseText;
+								console.log(sfile + '         ' +allTimes);
+
+								if(sfile == 'Team1LastBlitz.txt'){
+									var t1 = new Date(allTimes).getTime() / 1000; 
+									//console.log(Team_1_time + 't1 imte');
+									if(t1 > Team_1_time){
+									
+										localStorage.setItem('Team_1_time', t1);
+										readTextFile("Team1.txt");
+									}
+								}
+								if(sfile == 'Team2LastBlitz.txt'){
+									var t2 = new Date(allTimes).getTime() / 1000; 
+									if(t2 > Team_2_time){
+										localStorage.setItem('Team_2_time', t2);
+										readTextFile("Team2.txt");
+									}
+								}
+								if(sfile == 'Team3LastBlitz.txt'){
+									var t3 = new Date(allTimes).getTime() / 1000; 
+									if(t3 > Team_3_time){
+										localStorage.setItem('Team_3_time', t3);
+										readTextFile("Team3.txt");
+									}
+								}
+								if(sfile == 'Team4LastBlitz.txt'){
+									var t4 = new Date(allTimes).getTime() / 1000; 
+									if(t4 > Team_4_time){
+										localStorage.setItem('Team_4_time', t4);
+										readTextFile("Team4.txt");
+									}
+								}
+								if(sfile == 'Team5LastBlitz.txt'){
+									var t5 = new Date(allTimes).getTime() / 1000; 
+									if(t5 > Team_5_time){
+										localStorage.setItem('Team_5_time', t5);
+										readTextFile("Team5.txt");
+									}
+								}
+								if(sfile == 'Team6LastBlitz.txt'){
+									var t6 = new Date(allTimes).getTime() / 1000; 
+									if(t6 > Team_6_time){
+										localStorage.setItem('Team_6_time', t6);
+										readTextFile("Team6.txt");
+									}
+								}
+								if(sfile == 'Team7LastBlitz.txt'){
+									var t7 = new Date(allTimes).getTime() / 1000;
+									if(t7 > Team_7_time){
+										localStorage.setItem('Team_7_time', t7);
+										readTextFile("Team7.txt");
+									}
+								}
+								if(sfile == 'Team8LastBlitz.txt'){
+									var t8 = new Date(allTimes).getTime() / 1000; 
+									if(t8 > Team_8_time){
+										localStorage.setItem('Team_8_time', t8);
+										readTextFile("Team8.txt");
+									}
+								}
+								if(sfile == 'Team9LastBlitz.txt'){
+									var t9 = new Date(allTimes).getTime() / 1000; 
+									if(t9 > Team_9_time){
+										localStorage.setItem('Team_9_time', t9);
+										readTextFile("Team9.txt");
+									}
+								}
+								if(sfile == 'Team10LastBlitz.txt'){
+									var t10 = new Date(allTimes).getTime() / 1000; 
+									if(t10 > Team_10_time){
+										localStorage.setItem('Team_10_time', t10);
+										readTextFile("Team10.txt");
+									}
+								}
+								if(sfile == 'Team11LastBlitz.txt'){
+									var t11 = new Date(allTimes).getTime() / 1000; 
+									if(t11 > Team_11_time){
+										localStorage.setItem('Team_11_time', t11);
+										readTextFile("Team11.txt");
+									}
+								}
+							}
+						}
+					}
+					rawFile.send(null);
+				}
+									readTimesTextFile("Team1LastBlitz.txt");
+									readTimesTextFile("Team2LastBlitz.txt");
+									readTimesTextFile("Team3LastBlitz.txt");
+									readTimesTextFile("Team4LastBlitz.txt");
+									readTimesTextFile("Team5LastBlitz.txt");
+									readTimesTextFile("Team6LastBlitz.txt");
+									readTimesTextFile("Team7LastBlitz.txt");
+									readTimesTextFile("Team8LastBlitz.txt");
+									readTimesTextFile("Team9LastBlitz.txt");
+									readTimesTextFile("Team10LastBlitz.txt");
+									readTimesTextFile("Team11LastBlitz.txt");	
+									
+			
+			//Reload page after function work done		
+			window.onload = function() {
+				if(!window.location.hash) {
+					window.location = window.location + '#loaded';
+					window.location.reload();
+				}
+			}
+			
+			//Count wins/losses
+			var total_teams = 11;
+			var wins = 0;
+			if (retrieved_Team1_Results[retrieved_Team1_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team2_Results[retrieved_Team2_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team3_Results[retrieved_Team3_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team4_Results[retrieved_Team4_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team5_Results[retrieved_Team5_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team6_Results[retrieved_Team6_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team7_Results[retrieved_Team7_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team8_Results[retrieved_Team8_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team9_Results[retrieved_Team9_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team10_Results[retrieved_Team10_Results.length -1] ===  'W'){ wins++; };
+			if (retrieved_Team11_Results[retrieved_Team11_Results.length -1] ===  'W'){ wins++; };
+			console.log(wins);
+			var losses = total_teams - wins;
+			
+			setTimeout(function(){ 
+				var maincontent = document.getElementById("winss");
+				maincontent.innerHTML = "Last Round<br/>" + "Won : " + wins + " Lost : " + losses;
+			}, 2000);
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<div id="chartdiv" style="width: 100%; height: 85vh; background-color: #FFFFFF; margin-top:3%" ></div>
+<div style="text-align: center; font-size:20px" id="winss">please wait...</div>
+	</body>
+</html>

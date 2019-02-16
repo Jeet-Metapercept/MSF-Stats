@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
+		<script type="text/javascript">
+		</script>
+		
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+				
+			var Energy   = 14; 	var Energy_Results   = "W,W,W,W,W,W,W,L,W,W,W,L,W,W,W,L,L,L,W";
+			var Gardians = 18;	var Gardians_Results = "W,W,W,W,W,W,W,L,W,W,W,W,W,W,W,W,W,W,W";
+			var Avengers = 15;	var Avengers_Results = "W,W,W,W,W,W,W,W,L,L,L,W,L,W,W,W,W,W,W";
+			var Villains = 18;	var Villains_Results = "W,W,W,W,W,W,W,W,W,W,W,L,W,W,W,W,W,W,W";
+			//var Tech = 0;		var Tech_Results = "L";
+			
+			var total = 19;
+
+			AmCharts.makeChart("chartdiv",
+				{
+					"dataProvider": [
+						{
+							"Teams": "Energy Boom",
+							"WinRate" : Energy*100/total,
+							"Results" : Energy_Results
+						},
+						{
+							"Teams": "Gardians",
+							"WinRate" : Gardians*100/total,
+							"Results" : Gardians_Results
+						},
+						{
+							"Teams": "Avengers",
+							"WinRate" : Avengers*100/total,
+							"Results" : Avengers_Results
+						},
+						{
+							"Teams": "Villains",
+							"WinRate" : Villains*100/total,
+							"Results" : Villains_Results
+						}
+						<!-- { -->
+							<!-- "Teams": "Tech", -->
+							<!-- "WinRate" : Tech*100/total, -->
+							<!-- "Results" : Tech_Results -->
+						<!-- } -->
+					],
+					"type": "serial",
+					"categoryField": "Teams",
+					"columnSpacing": 12,
+					"columnWidth": 0.53,
+					"rotate": false,
+					"startDuration": 1,
+					"startEffect": "easeOutSine",
+					"classNamePrefix": "msf",
+					"creditsPosition": "top-right",
+					"panEventsEnabled": false,
+					"percentPrecision": 1,
+					"theme": "light",
+					"graphs": [
+						{
+							"balloonText": "[[value]]: [[Results]]",
+							"fillAlphas": 1,
+							"gapPeriod": 15,
+							"id": "AmGraph-1",
+							"tabIndex": 0,
+							"title": "MSF",
+							"type": "column",
+							"valueField": "WinRate"
+						},
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"position": "bottom",
+							"title": "Win Ratio %",
+							"maximum": 100,
+							"minimum": 0
+						}
+					],
+					"titles": [
+						{
+							"id": "Blitz Teams",
+							"size": 15,
+							"text": "Blitz Teams"
+						}
+					]
+				}
+			);
+	
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 100%; height: 90vh; background-color: #FFFFFF;" ></div>
+	</body>
+</html>

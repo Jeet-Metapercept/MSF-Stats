@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hwakeye Blitz | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>	
+		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
+		<style>*{font-family: 'Cabin Condensed', sans-serif;}.md-form label{cursor:pointer !important}</style>
+		
+		<!-- MDB -->
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- Bootstrap core CSS -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Material Design Bootstrap -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/css/mdb.min.css" rel="stylesheet"><!-- JQuery -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<!-- MDB core JavaScript -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.8/js/mdb.min.js"></script>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+		
+		
+			//https://msf.gg/my-teams
+		var upgradeTime = 6500;	 //2hrs 7200							[Cores: 0 + 75 + 75]
+		
+		 // Electra-Spiderman-Deadpool-Bullzeye-Daredevil				[81k]
+		 var Nuke_Results  	   = "W W";		
+		 
+		 // Crossbones-JessicaJones-MercLT-Vision-Korath				[82k]
+		 var Energy_Results    = "W W"; 	 	
+		 
+		 //Nebula-Nobu-Kingpin-WinterSoldier-Yondu   					[129k]
+		 var Villains_Results  = "W W";
+		
+		//Starlord-Gamora-Rocket-Drax-Electra/Thor  					[110k]
+		 var Gardians_Results  = "W W"; 		
+		 
+		 //CaptainAmerica-BlackWidow-Quake-Ironman-Thor/BlackPanther	[127k]
+ 		 var Avengers_Results  = "W W"; 	
+		
+		// Put the object into storage
+		if (localStorage.Nuke_Results === undefined) {
+			localStorage.setItem('Nuke_Results', Nuke_Results);
+		}
+		if (localStorage.Energy_Results === undefined) {
+			localStorage.setItem('Energy_Results', Energy_Results);
+		}
+		if (localStorage.Villains_Results === undefined) {
+			localStorage.setItem('Villains_Results', Villains_Results);
+		}
+		if (localStorage.Gardians_Results === undefined) {
+			localStorage.setItem('Gardians_Results', Gardians_Results);
+		}
+		if (localStorage.Avengers_Results === undefined) {
+			localStorage.setItem('Avengers_Results', Avengers_Results);
+		}
+
+		
+		// Retrieve the object from storage
+		var retrieved_Nuke_Results = localStorage.getItem('Nuke_Results');
+		Nuke_Results = retrieved_Nuke_Results;
+		
+		var retrieved_Energy_Results = localStorage.getItem('Energy_Results');
+		Energy_Results = retrieved_Energy_Results;
+		
+		var retrieved_Villains_Results = localStorage.getItem('Villains_Results');
+		Villains_Results = retrieved_Villains_Results;
+		
+		var retrieved_Gardians_Results = localStorage.getItem('Gardians_Results');
+		Gardians_Results = retrieved_Gardians_Results;
+		
+		var retrieved_Avengers_Results = localStorage.getItem('Avengers_Results');
+		Avengers_Results = retrieved_Avengers_Results;
+		
+		
+		 var total = (Avengers_Results.split(" ").length );
+
+			var Energy   = Energy_Results.match(/W/gi).length;  		
+			var Gardians = Gardians_Results.match(/W/gi).length;	
+			var Avengers = Avengers_Results.match(/W/gi).length;	
+			var Villains = Villains_Results.match(/W/gi).length;
+			var Nuke	 = Nuke_Results.match(/W/gi).length;
+
+			AmCharts.makeChart("chartdiv",
+				{
+					"dataProvider": [
+						{
+							"Teams": "Energy Boom",
+							"WinRate" : (Energy*100/(Energy_Results.split(" ").length)).toFixed(2),
+							"Results" : Energy_Results
+						},
+						{
+							"Teams": "Gardians",
+							"WinRate" : (Gardians*100/(Gardians_Results.split(" ").length)).toFixed(2),
+							"Results" : Gardians_Results
+						},
+						{
+							"Teams": "Avengers",
+							"WinRate" : (Avengers*100/(Avengers_Results.split(" ").length)).toFixed(2),
+							"Results" : Avengers_Results
+						},
+						{
+							"Teams": "Villains",
+							"WinRate" : (Villains*100/(Villains_Results.split(" ").length)).toFixed(2),
+							"Results" : Villains_Results
+						},
+						{
+							"Teams": "Nuke",
+							"WinRate" : (Nuke*100/(Nuke_Results.split(" ").length )).toFixed(2),
+							"Results" : Nuke_Results
+						}
+					],
+					"type": "serial",
+					"categoryField": "Teams",
+					"columnSpacing": 12,
+					"columnWidth": 0.53,
+					"rotate": false,
+					"startDuration": 1,
+					"startEffect": "easeOutSine",
+					"classNamePrefix": "msf",
+					"creditsPosition": "top-right",
+					"panEventsEnabled": false,
+					"percentPrecision": 1,
+					"theme": "patterns",
+					"graphs": [
+						{
+							"balloonText": "[[value]]: [[Results]]",
+							"fillAlphas": 1,
+							"gapPeriod": 15,
+							"id": "AmGraph-1",
+							"tabIndex": 0,
+							"title": "MSF",
+							"type": "column",
+							"valueField": "WinRate"
+						},
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"position": "bottom",
+							"title": "Win Ratio %",
+							"maximum": 100,
+							"minimum": 0
+						}
+					],
+					"titles": [
+						{
+							"id": "Blitz Teams",
+							"size": 25,
+							"text": "Blitz Teams"
+						}
+					]
+				}
+			);
+	
+		</script>
+	</head>
+	<body>
+	<span id="countdown" style="font-size: 2vw; font-weight: 900; position: absolute; top: 2%; right: 45%;"></span>
+	<script>
+	//var upgradeTime = 5400;
+	var seconds = upgradeTime;
+	function timer() {
+		var days        = Math.floor(seconds/24/60/60);
+		var hoursLeft   = Math.floor((seconds) - (days*86400));
+		var hours       = Math.floor(hoursLeft/3600);
+		var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+		var minutes     = Math.floor(minutesLeft/60);
+		var remainingSeconds = seconds % 60;
+		if (remainingSeconds < 10) {
+			remainingSeconds = "0" + remainingSeconds; 
+		}
+		document.getElementById('countdown').innerHTML = days + ":" + hours + ":" + minutes + ":" + remainingSeconds;
+		if (seconds == 0) {
+			clearInterval(countdownTimer);
+			document.getElementById('countdown').innerHTML = "Completed";
+		} else {
+			seconds--;
+		}
+	}
+	var countdownTimer = setInterval('timer()', 1000);
+	
+	function getScore(){
+		   // Get the selected score (assuming one was selected)
+		   var add_avengers = document.querySelector('input[name="inlineDefaultRadiosExample"]:checked').value;
+		   Avengers_Results = retrieved_Avengers_Results + " " + add_avengers;
+		   localStorage.setItem('Avengers_Results', Avengers_Results);
+		   
+		   var add_gardians = document.querySelector('input[name="Gardians"]:checked').value;
+		   Gardians_Results = retrieved_Gardians_Results + " " + add_gardians;
+		   localStorage.setItem('Gardians_Results', Gardians_Results);
+		   
+		   var add_villians = document.querySelector('input[name="inlineDefaultRadiosExample2"]:checked').value;
+		   Villains_Results = retrieved_Villains_Results + " " + add_villians;
+		   localStorage.setItem('Villains_Results', Villains_Results);
+		   
+		   var add_energy = document.querySelector('input[name="inlineDefaultRadiosExample3"]:checked').value;
+		   Energy_Results = retrieved_Energy_Results + " " + add_energy;
+		   localStorage.setItem('Energy_Results', Energy_Results);
+		   
+		   var add_nuke = document.querySelector('input[name="inlineDefaultRadiosExample4"]:checked').value;
+		   Nuke_Results = retrieved_Nuke_Results + " " + add_nuke;
+		   localStorage.setItem('Nuke_Results', Nuke_Results);
+	}
+	</script>
+		<div id="chartdiv" style="width: 100%; height: 85vh; background-color: #FFFFFF; margin-top:3%" ></div>
+		<!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src="https://pbs.twimg.com/profile_images/1024753851604250624/4zlKk89-_400x400.jpg" style="height:100px; width: 100px" alt="avatar" class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+<form class="text-center border border-light p-5"  onsubmit="getScore();">
+                <h3 class="mt-1 mb-2">Add Results</h3>
+<hr>
+                <div class="md-form ml-0 mr-0">
+				<h6 class="mt-1 mb-2"><strong>Avengers</strong></h6>
+					<!-- Default inline 1-->
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" value="W">
+					  <label class="custom-control-label" for="defaultInline1">Win</label>
+					</div>
+
+					<!-- Default inline 2-->
+					<div class="custom-control custom-radio custom-control-inline ml-5">
+					  <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample" value="L">
+					  <label class="custom-control-label" for="defaultInline2">Lost</label>
+					</div>
+                </div>
+<hr>				
+				<div class="md-form ml-0 mr-0">
+				<h6 class="mt-1 mb-2"><strong>Gardians</strong></h6>
+					<!-- Default inline 1-->
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input type="radio" class="custom-control-input" id="defaultInline4" name="Gardians" value="W">
+					  <label class="custom-control-label" for="defaultInline4">Win</label>
+					</div>
+
+					<!-- Default inline 2-->
+					<div class="custom-control custom-radio custom-control-inline ml-5">
+					  <input type="radio" class="custom-control-input" id="defaultInline3" name="Gardians" value="L">
+					  <label class="custom-control-label" for="defaultInline3">Lost</label>
+					</div>
+                </div>
+<hr>				
+				<div class="md-form ml-0 mr-0">
+				<h6 class="mt-1 mb-2"><strong>Villains</strong></h6>
+					<!-- Default inline 1-->
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input type="radio" class="custom-control-input" id="defaultInline5" name="inlineDefaultRadiosExample2" value="W">
+					  <label class="custom-control-label" for="defaultInline5">Win</label>
+					</div>
+
+					<!-- Default inline 2-->
+					<div class="custom-control custom-radio custom-control-inline ml-5">
+					  <input type="radio" class="custom-control-input" id="defaultInline6" name="inlineDefaultRadiosExample2" value="L">
+					  <label class="custom-control-label" for="defaultInline6">Lost</label>
+					</div>
+                </div>
+<hr>				
+				<div class="md-form ml-0 mr-0">
+				<h6 class="mt-1 mb-2"><strong>Energy</strong></h6>
+					<!-- Default inline 1-->
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input type="radio" class="custom-control-input" id="defaultInline7" name="inlineDefaultRadiosExample3" value="W">
+					  <label class="custom-control-label" for="defaultInline7">Win</label>
+					</div>
+
+					<!-- Default inline 2-->
+					<div class="custom-control custom-radio custom-control-inline ml-5">
+					  <input type="radio" class="custom-control-input" id="defaultInline8" name="inlineDefaultRadiosExample3" value="L">
+					  <label class="custom-control-label" for="defaultInline8">Lost</label>
+					</div>
+                </div>
+<hr>				
+				<div class="md-form ml-0 mr-0">
+				<h6 class="mt-1 mb-2"><strong>Nuke</strong></h6>
+					<!-- Default inline 1-->
+					<div class="custom-control custom-radio custom-control-inline">
+					  <input type="radio" class="custom-control-input" id="defaultInline9" name="inlineDefaultRadiosExample4" value="W">
+					  <label class="custom-control-label" for="defaultInline9">Win</label>
+					</div>
+
+					<!-- Default inline 2-->
+					<div class="custom-control custom-radio custom-control-inline ml-5">
+					  <input type="radio" class="custom-control-input" id="defaultInline10" name="inlineDefaultRadiosExample4" value="L">
+					  <label class="custom-control-label" for="defaultInline10">Lost</label>
+					</div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-cyan mt-3">Submit <i class="fa fa-sign-in ml-1"></i></button>
+                </div>
+				</form>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<div class="text-center">
+    <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">ADD</a>
+</div>
+	</body>
+</html>

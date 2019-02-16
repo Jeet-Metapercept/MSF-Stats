@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hwakeye Blitz | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>		
+		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
+		<style>*{font-family: 'Cabin Condensed', sans-serif;}</style>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+		
+		
+			//https://msf.gg/my-teams
+		var upgradeTime = 6500;	 //2hrs 7200							[Cores: 0 + 75 + 75]
+
+		 // Electra-Spiderman-Deadpool-Bullzeye-Daredevil				[81k]
+		 var Nuke_Results  	   = "W W W W L W W W L W L W W W L W W W L W W W";		
+		 
+		 // Crossbones-JessicaJones-MercLT-Vision-Korath				[82k]
+		 var Energy_Results    = "W W W W W W W W W W W L L W W W W W W W W W W W W L W W W"; 	 	
+		 
+		 //Nebula-Nobu-Kingpin-WinterSoldier-Yondu   					[129k]
+		 var Villains_Results  = "W W W L W W W L W W W W L W W W W W W W W W W W W W W L W W";
+		
+		//Starlord-Gamora-Rocket-Drax-Electra/Thor  					[110k]
+		 var Gardians_Results  = "W W W W W W W L W W W W W W W W W W L W W W W W W W W W W W"; 		
+		 
+		 //CaptainAmerica-BlackWidow-Quake-Ironman-Thor/BlackPanther	[127k]
+ 		 var Avengers_Results  = "W W W W W W W W L W W W W W W W W W W W W W W L W W W W W W"; 	
+		
+		 var total = (Avengers_Results.split(" ").length );
+
+			var Energy   = Energy_Results.match(/W/gi).length;  		
+			var Gardians = Gardians_Results.match(/W/gi).length;	
+			var Avengers = Avengers_Results.match(/W/gi).length;	
+			var Villains = Villains_Results.match(/W/gi).length;
+			var Nuke	 = Nuke_Results.match(/W/gi).length;
+
+			AmCharts.makeChart("chartdiv",
+				{
+					"dataProvider": [
+						{
+							"Teams": "Energy Boom",
+							"WinRate" : (Energy*100/(Energy_Results.split(" ").length)).toFixed(2),
+							"Results" : Energy_Results
+						},
+						{
+							"Teams": "Gardians",
+							"WinRate" : (Gardians*100/(Gardians_Results.split(" ").length)).toFixed(2),
+							"Results" : Gardians_Results
+						},
+						{
+							"Teams": "Avengers",
+							"WinRate" : (Avengers*100/(Avengers_Results.split(" ").length)).toFixed(2),
+							"Results" : Avengers_Results
+						},
+						{
+							"Teams": "Villains",
+							"WinRate" : (Villains*100/(Villains_Results.split(" ").length)).toFixed(2),
+							"Results" : Villains_Results
+						},
+						{
+							"Teams": "Nuke",
+							"WinRate" : (Nuke*100/(Nuke_Results.split(" ").length )).toFixed(2),
+							"Results" : Nuke_Results
+						}
+					],
+					"type": "serial",
+					"categoryField": "Teams",
+					"columnSpacing": 12,
+					"columnWidth": 0.53,
+					"rotate": false,
+					"startDuration": 1,
+					"startEffect": "easeOutSine",
+					"classNamePrefix": "msf",
+					"creditsPosition": "top-right",
+					"panEventsEnabled": false,
+					"percentPrecision": 1,
+					"theme": "light",
+					"graphs": [
+						{
+							"balloonText": "[[value]]: [[Results]]",
+							"fillAlphas": 1,
+							"gapPeriod": 15,
+							"id": "AmGraph-1",
+							"tabIndex": 0,
+							"title": "MSF",
+							"type": "column",
+							"valueField": "WinRate"
+						},
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"position": "bottom",
+							"title": "Win Ratio %",
+							"maximum": 100,
+							"minimum": 0
+						}
+					],
+					"titles": [
+						{
+							"id": "Blitz Teams",
+							"size": 25,
+							"text": "Blitz Teams"
+						}
+					]
+				}
+			);
+	
+		</script>
+	</head>
+	<body>
+	<span id="countdown" style="font-size: 2vw; font-weight: 900; position: absolute; top: 2%; right: 45%;"></span>
+	<script>
+	//var upgradeTime = 5400;
+	var seconds = upgradeTime;
+	function timer() {
+		var days        = Math.floor(seconds/24/60/60);
+		var hoursLeft   = Math.floor((seconds) - (days*86400));
+		var hours       = Math.floor(hoursLeft/3600);
+		var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+		var minutes     = Math.floor(minutesLeft/60);
+		var remainingSeconds = seconds % 60;
+		if (remainingSeconds < 10) {
+			remainingSeconds = "0" + remainingSeconds; 
+		}
+		document.getElementById('countdown').innerHTML = days + ":" + hours + ":" + minutes + ":" + remainingSeconds;
+		if (seconds == 0) {
+			clearInterval(countdownTimer);
+			document.getElementById('countdown').innerHTML = "Completed";
+		} else {
+			seconds--;
+		}
+	}
+	var countdownTimer = setInterval('timer()', 1000);
+	</script>
+		<div id="chartdiv" style="width: 100%; height: 90vh; background-color: #FFFFFF; margin-top:3%" ></div>
+	</body>
+</html>
