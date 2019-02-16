@@ -1,1 +1,1 @@
-"# MSF-Stats" 
+"#MSF-Blitz-Stats" 
