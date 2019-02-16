@@ -244,9 +244,11 @@
       				
       	}
       //Saving Teams Times
-      function readTimesTextFile(sfile){	  
+      function readTimesTextFile(sfile){	 
+	  
       			$.get(sfile, function(data) {
 				sfile = sfile.split('/').pop();
+				
 				//console.log('222222222222222222222----'+sfile);
       				var allTimes = data;
       				//console.log(allTimes);
@@ -255,8 +257,9 @@
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	  //console.log(allTimes);
+	  console.log(Team_1_time,'yes', battletime, Team_1_time);
       if(battletime > Team_1_time){
+	  	  console.log('change');
       readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team1.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team1.json",
@@ -549,10 +552,12 @@
       
       //Saving Teams Results
       function readTextFile(file){
+	  console.log(file);
       	$.get(file, function(data) {
 		file = file.split('/').pop();
+		console.log(file);
       	   var allText = data;
-      	   console.log(allText);
+      	   //console.log(allText);
       	   var valueCheck = parseInt(allText);
       						//console.log(file + '         ' +allText + "adn" + ());
       		if(valueCheck == 1){
