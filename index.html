@@ -255,7 +255,7 @@
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	  console.log(allTimes);
+	  //console.log(allTimes);
       if(battletime > Team_1_time){
       readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team1.txt");
       $.ajax({
@@ -487,10 +487,6 @@
       						var myDate = new Date(allTexts).getTime(); //1440516958;
       						
       						var CurrentBlitzNumber = myDate; 
-      						//console.log('current ->>  '+CurrentBlitzNumber);
-      						//console.log(CurrentBlitzNumber);
-      						//if(CurrentBlitzNumber>LastBlitzNumber){console.log(true);};
-      						//console.log();
       						
       						//Blitz Time Stamp
       						
@@ -527,8 +523,7 @@
       			
       							document.getElementById("new").innerHTML = " New!";
       							
-      							//Export as image
-      							setTimeout(function(){ 
+       
       								//localStorage.setItem('LastBlitz', CurrentBlitzNumber);
       								$.ajax({
 									url: "https://msf-stats.firebaseio.com/.json",
@@ -541,8 +536,7 @@
 									}
 								  
 									});
-      								//download(document.body.outerHTML, "BlitzBotResults.htm", "text/html");
-      							},  3000);
+    
       						}
       						else{
       							console.log("Previous Data.");//false
