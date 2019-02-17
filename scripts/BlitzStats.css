@@ -9,13 +9,13 @@
 		}
 		.stat {
 		  display: inline-block;
-		  margin-right: 2rem;
+		   margin-right: 1rem; 
 		  margin-bottom: 1rem;
 		}
 		@media (min-width: 640px) {
 		  .stat {
-			margin-right: 4rem;
-			margin-bottom: 1.5rem;
+			/* margin-right: 4rem; */
+			 margin-bottom: 1.5rem;
 		  }
 		}
 		.stat h4 {
@@ -36,10 +36,10 @@
 		  font-weight: 800;
 		  color: #393e46;
 		  margin: 0;
-		  font-size: 1.24rem;
+		  font-size: 1rem;
 		}
 		@media (min-width: 640px) {
 		  .stat p {
-			font-size: 1.24rem;
+			font-size: 	1rem;
 		  }
 		}
