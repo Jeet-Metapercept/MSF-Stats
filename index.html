@@ -47,7 +47,7 @@
 							liveStatus.innerHTML = "<span class='badge badge-danger'>Live!</span>";
 					}else if(isLive === 'false'){
 							var liveStatus = document.getElementById("running");
-							liveStatus.innerHTML = "<span class='badge badge-secondary'>Live!</span>";
+							liveStatus.innerHTML = "<span class='badge badge-secondary'>Offline</span>";
 					}
 				  }
 			});
@@ -818,7 +818,82 @@
 			var battlesplayed =	document.getElementById("battlesplayed");
       			battlesplayed.innerHTML =  BlitzTotalBattlesWon + BlitzTotalBattlesLost;
 				
+			//ALL teams last results
+			var T1_lastround = document.getElementById("T1_lastround");
+				if(retrieved_Team1_Results[retrieved_Team1_Results.length -1] == 'W'){
+					T1_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "</span>";
+				}else{
+					T1_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "</span>";
+				}
+			var T2_lastround = document.getElementById("T2_lastround");
+				if(retrieved_Team2_Results[retrieved_Team2_Results.length -1] == 'W'){
+					T2_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team2_Results[retrieved_Team2_Results.length -1] + "</span>";
+				}else{
+					T2_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team2_Results[retrieved_Team2_Results.length -1] + "</span>";
+				}
+			var T3_lastround = document.getElementById("T3_lastround");
+				if(retrieved_Team3_Results[retrieved_Team3_Results.length -1] == 'W'){
+					T3_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team3_Results[retrieved_Team3_Results.length -1] + "</span>";
+				}else{
+					T3_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team3_Results[retrieved_Team3_Results.length -1] + "</span>";
+				}
+			var T4_lastround = document.getElementById("T4_lastround");
+				if(retrieved_Team4_Results[retrieved_Team4_Results.length -1] == 'W'){
+					T4_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team4_Results[retrieved_Team4_Results.length -1] + "</span>";
+				}else{
+					T4_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team4_Results[retrieved_Team4_Results.length -1] + "</span>";
+				}
+			var T5_lastround = document.getElementById("T5_lastround");
+				if(retrieved_Team5_Results[retrieved_Team5_Results.length -1] == 'W'){
+					T5_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team5_Results[retrieved_Team5_Results.length -1] + "</span>";
+				}else{
+					T5_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team5_Results[retrieved_Team5_Results.length -1] + "</span>";
+				}
+			var T6_lastround = document.getElementById("T6_lastround");
+				if(retrieved_Team6_Results[retrieved_Team6_Results.length -1] == 'W'){
+					T6_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team6_Results[retrieved_Team6_Results.length -1] + "</span>";
+				}else{
+					T6_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team6_Results[retrieved_Team6_Results.length -1] + "</span>";
+				}
+			var T7_lastround = document.getElementById("T7_lastround");
+			if(retrieved_Team7_Results[retrieved_Team7_Results.length -1] == 'W'){
+					T7_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team7_Results[retrieved_Team7_Results.length -1] + "</span>";
+				}else{
+					T7_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team7_Results[retrieved_Team7_Results.length -1] + "</span>";
+				}
+			var T8_lastround = document.getElementById("T8_lastround");
+			if(retrieved_Team8_Results[retrieved_Team8_Results.length -1] == 'W'){
+					T8_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
+				}else{
+					T8_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
+				}
+			var T9_lastround = document.getElementById("T9_lastround");
+			if(retrieved_Team9_Results[retrieved_Team9_Results.length -1] == 'W'){
+					T9_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team9_Results[retrieved_Team9_Results.length -1] + "</span>";
+				}else{
+					T9_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team9_Results[retrieved_Team9_Results.length -1] + "</span>";
+				}
+			var T10_lastround = document.getElementById("T10_lastround");
+			if(retrieved_Team10_Results[retrieved_Team10_Results.length -1] == 'W'){
+					T10_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team10_Results[retrieved_Team10_Results.length -1] + "</span>";
+				}else{
+					T10_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team10_Results[retrieved_Team10_Results.length -1] + "</span>";
+				}
+			var T11_lastround = document.getElementById("T11_lastround");
+			if(retrieved_Team11_Results[retrieved_Team11_Results.length -1] == 'W'){
+					T11_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "</span>";
+				}else{
+					T11_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "</span>";
+				}
+			var T12_lastround = document.getElementById("T12_lastround");
+			if(retrieved_Team12_Results[retrieved_Team12_Results.length -1] == 'W'){
+					T12_lastround.innerHTML =  "<span class='badge badge-pill badge-success'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>";
+				}else{
+					T12_lastround.innerHTML =  "<span class='badge badge-pill badge-danger'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>";
+				}
 			
+	
+				
       		}, 100);
       		
       		
@@ -1161,11 +1236,11 @@
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-1">
-              <div class="card border-left-danger shadow h-60 py-2">
+              <div class="card border-left-warning shadow h-60 py-2">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Battles</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Battles</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="battlesplayed">18</div>
                     </div>
                     <div class="col-auto">
@@ -1175,7 +1250,58 @@
                 </div>
               </div>
             </div>
+			
+			<!-- Last round Requests Card Example -->
+            <div class="col-xl-12 col-xs-12 mb-1">
+              <div class="card border-left-danger shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Last Round Results</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+						<div class="Row">
+							<div class="Column h5 mb-0 mr-1" id="T1_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T2_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T3_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T4_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T5_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T6_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T7_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T8_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T9_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T10_lastround"> - </div>
+							<div class="Column h5 mb-0 mr-1" id="T11_lastround"> - </div>
+							<!-- <div class="Column h5 mb-0 mr-1" id="T1_lastround"> - </div> -->
+						</div>
+                          <!-- <span class="h5 mb-0 mr-1 " id="T1_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T2_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T3_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T4_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T5_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T6_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T7_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T8_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T9_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T10_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 mr-1 " id="T11_lastround">-</span> -->
+						  <!-- <span class="h5 mb-0 " id="T12_lastround">-</span> -->
+                        </div>
+         
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
+		  
+          </div>
+		  
+		  
+		  
 
           <!-- Content Row -->
 
@@ -1185,7 +1311,7 @@
             <div class="col-xl-12 col-lg-12 mb-1">
               <div class="card shadow " style="min-height: 520px;">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header py-3 d-flex flex-row align-items-center ">
                   <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
                 </div>
                 <!-- Card Body -->
@@ -1196,7 +1322,7 @@
 				  
                 </div>
 				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
-				  
+						
 					  <div class="stat">
 						<h4>Last Round</h4>
 						<p id="winss">---</p>
