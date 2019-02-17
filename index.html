@@ -26,6 +26,31 @@
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<script>
+	//status read/change
+		$.get('status.txt', function(data) {
+			console.log(data);
+			var status = data;
+			$.ajax({
+				  url: "https://msf-stats.firebaseio.com/.json",
+				  type: 'PATCH',
+				  contentType: "application/json; charset=utf-8",
+				  dataType: "json",
+				  data: JSON.stringify({
+					"isLive" : status,
+				  }),
+				  success: function(res) {
+					//console.log(res);
+					var isLive = status;
+					if(isLive === 'true'){
+					var liveStatus = document.getElementById("running");
+							liveStatus.innerHTML = "<span style='color:red'>Live!</span>";
+					}else if(isLive === 'false'){
+							var liveStatus = document.getElementById("running");
+							liveStatus.innerHTML = "offline";
+					}
+				  }
+			});
+	     }, "text");
       //get data from firebase
       	$.ajax({
       		url: "https://msf-stats.firebaseio.com/.json",
@@ -35,8 +60,6 @@
       		success: function(res) {
       			var BlitzData = res;
       			//console.log(BlitzData);
-			
-				var isLive = BlitzData.isLive;
 			
       			var BlitzAllTime = {
       				battles: BlitzData.BlitzTotalBattles,
@@ -555,24 +578,7 @@
       							console.log("Previous Data.");//false
       						}
 							
-								//status read/change
-								 $.get('status.txt', function(data) {
-									console.log(data);
-									var status = data;
-									$.ajax({
-										  url: "https://msf-stats.firebaseio.com/.json",
-										  type: 'PATCH',
-										  contentType: "application/json; charset=utf-8",
-										  dataType: "json",
-										  data: JSON.stringify({
-										  "isLive" : status,
-										  }),
-										  success: function(res) {
-											//console.log(res);
-										  }
-									});
-									
-								}, "text");
+								
       	}, 'text');
       	
       }
@@ -811,13 +817,6 @@
 			var battlesplayed =	document.getElementById("battlesplayed");
       			battlesplayed.innerHTML =  BlitzTotalBattlesWon + BlitzTotalBattlesLost;
 				
-			if(isLive == 'true'){
-					var liveStatus = document.getElementById("running");
-					liveStatus.innerHTML = "<span style='color:red'>Live!</span>";
-			}else{
-					var liveStatus = document.getElementById("running");
-					liveStatus.innerHTML = "offline";
-			}
 			
       		}, 100);
       		
