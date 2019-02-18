@@ -819,6 +819,7 @@
       			battlesplayed.innerHTML =  CurrentBattlesWon + CurrentBattlesLost;
 				
 			//ALL teams last results
+			
 			var T1_lastround = document.getElementById("T1_lastround");
 				if(retrieved_Team1_Results[retrieved_Team1_Results.length -1] == 'W'){
 					T1_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "</span>";
@@ -1224,19 +1225,19 @@
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
 						<div class="Row">
-							<div class="Column  mb-0 pr-1" id="T1_lastround"> - </div>
-							<div class="Column  mb-0 pr-1" id="T2_lastround"> - </div>
+							<div class="Column  mb-0 pr-1 qtip tip-top" id="T1_lastround" data-tip="Team 1"> - </div>
+							<div class="Column  mb-0 pr-1 qtip tip-top" id="T2_lastround" data-tip="Team 2"> - </div>
 							<!-- <button type="button" class="btn btn-primary btn-circle btn-lg" id="T2_lastround">L</button> -->
-							<div class="Column  mb-0 mr-1" id="T3_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T4_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T5_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T6_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T7_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T8_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T9_lastround"> - </div>
-							<div class="Column  mb-0 mr-1" id="T10_lastround"> - </div>
-							<div class="Column  mb-0 pr-1" id="T11_lastround"> - </div>
-							<!-- <div class="Column h5 mb-0 mr-1" id="T1_lastround"> - </div> -->
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T3_lastround" data-tip="Team 3"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T4_lastround" data-tip="Team 4"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T5_lastround" data-tip="Team 5"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T6_lastround" data-tip="Team 6"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T7_lastround" data-tip="Team 7"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T8_lastround" data-tip="Team 8"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T9_lastround" data-tip="Team 9"> - </div>
+							<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_lastround" data-tip="Team 10"> - </div>
+							<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_lastround" data-tip="Team 11"> - </div>
+							<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T1_lastround" data-tip="Team 1"> - </div> -->
 						</div>
                           <!-- <span class="h5 mb-0 mr-1 " id="T1_lastround">-</span> -->
                         </div>
