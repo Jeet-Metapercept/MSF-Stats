@@ -807,7 +807,7 @@
       		
       		//update html fields
       		var blitzTotalcontent = document.getElementById("totalblitz");
-      			blitzTotalcontent.innerHTML = CurrentBattlesBlitz;
+      			blitzTotalcontent.innerHTML = BlitzTotalBattles;
       
       		var blitzRate = document.getElementById("wr");
       			blitzRate.innerHTML = BlitzBattleRatio + " <span style='font-size:1rem'>%</span>";
@@ -816,7 +816,7 @@
       			blitzResults.innerHTML =  " W " + BlitzTotalBattlesWon + " , L " + BlitzTotalBattlesLost;
 				
 			var battlesplayed =	document.getElementById("battlesplayed");
-      			battlesplayed.innerHTML =  BlitzTotalBattlesWon + BlitzTotalBattlesLost;
+      			battlesplayed.innerHTML =  CurrentBattlesWon + CurrentBattlesLost;
 				
 			//ALL teams last results
 			var T1_lastround = document.getElementById("T1_lastround");
