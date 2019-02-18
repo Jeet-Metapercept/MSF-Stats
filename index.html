@@ -807,7 +807,7 @@
       		
       		//update html fields
       		var blitzTotalcontent = document.getElementById("totalblitz");
-      			blitzTotalcontent.innerHTML = BlitzTotalBattles;
+      			blitzTotalcontent.innerHTML = CurrentBattlesBlitz;
       
       		var blitzRate = document.getElementById("wr");
       			blitzRate.innerHTML = BlitzBattleRatio + " <span style='font-size:1rem'>%</span>";
@@ -865,7 +865,7 @@
 			if(retrieved_Team8_Results[retrieved_Team8_Results.length -1] == 'W'){
 					T8_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
 				}else{
-					T8_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
+					T8_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
 				}
 			var T9_lastround = document.getElementById("T9_lastround");
 			if(retrieved_Team9_Results[retrieved_Team9_Results.length -1] == 'W'){
