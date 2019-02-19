@@ -33,7 +33,7 @@
 		}
 		.stat p {
 		  line-height: 1;
-		  font-weight: 800;
+		  /* font-weight: 800; */
 		  color: #393e46;
 		  margin: 0;
 		  font-size: 1rem;
