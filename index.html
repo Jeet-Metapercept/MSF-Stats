@@ -26,7 +26,7 @@
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<script>
-	//git command to update repo --> git commit -am "your message" && git push
+	//git command to update repo --> git commit -am "update" && git push
 	//status read/change
 		$.get('status.txt', function(data) {
 			console.log(data);
@@ -992,7 +992,7 @@
       			],
       			"type": "serial",
       			"categoryField": "Teams", 
-      			"fontSize": 15,
+      			//"fontSize": 15,
       			"columnSpacing": 12,
       			"columnWidth": 0.53,
       			"rotate": false,
@@ -1007,8 +1007,10 @@
       				{
       					"title": "Blitz Live",
       					"balloonText": "[[value]]% : [[Results]]",
-      					"fillAlphas": 1,
-      					"gapPeriod": 15,
+						"fillAlphas": 0.85,
+						"lineAlpha": 0.1,
+						"topRadius": 1,
+      					//"gapPeriod": 15,
       					"id": "AmGraph-1",
       					"tabIndex": 0,
       					"title": "MSF",
@@ -1016,8 +1018,8 @@
       					"valueField": "WinRate"
       				}
       			],
-      			"depth3D": 5,
-      			"angle": 10,
+      			"depth3D": 40,
+      			"angle": 5,
       			"export": {
       				"enabled": false
       			},
@@ -1102,7 +1104,7 @@
       			],
       			"type": "serial",
       			"categoryField": "Teams", 
-      			"fontSize": 15,
+      			//"fontSize": 15,
       			"columnSpacing": 12,
       			"columnWidth": 0.53,
       			"rotate": false,
@@ -1117,8 +1119,10 @@
       				{
       					"title": "Blitz Live",
       					"balloonText": "[[value]]% : [[Results]]",
-      					"fillAlphas": 1,
-      					"gapPeriod": 15,
+      					"fillAlphas": 0.85,
+						"lineAlpha": 0.1,
+						"topRadius": 1,
+      					//"gapPeriod": 15,
       					"id": "AmGraph-2",
       					"tabIndex": 0,
       					"title": "MSF",
@@ -1126,8 +1130,8 @@
       					"valueField": "WinRate"
       				}
       			],
-      			"depth3D": 5,
-      			"angle": 10,
+      			"depth3D": 40,
+      			"angle": 5,
       			"export": {
       				"enabled": false
       			},
@@ -1152,6 +1156,78 @@
       	);
       			
       	
+		//previous scores
+		AmCharts.makeChart("chartdivscore",
+			{
+				"theme": "none",
+				"type": "serial",
+				"startDuration": 1,
+				"columnSpacing": 12,
+      			"columnWidth": 0.53,
+				"creditsPosition": "top-right",
+				"dataProvider": [{
+					"Blitz": "Vison" + "\n" + "19 Feb",
+					"Score": 0,
+					"rank" : 0,
+					"color": "#0D52D1" //black
+				},
+				{
+					"Blitz": "Red Star" + "\n" + "17 Feb",
+					"Score": 1611045,
+					"rank" : 115,
+					"color": "#0D52D1" //red
+				},
+				{
+					"Blitz": "Orb Assult" + "\n" + "17 Feb",
+					"Score": 0,
+					"rank" : 0,
+					"color": "#0D52D1" //blue
+				},
+				{
+					"Blitz": "Mentis" + "\n" + "14 Feb",
+					"Score": 3799213,
+					"rank" : 1637,
+					"color": "#0D52D1" //black
+				}
+				],
+				"valueAxes": [{
+					"position": "left",
+					"axisAlpha":0,
+					"gridAlpha":0
+				}],
+				"graphs": [{
+					"balloonText": "<b>Rank : [[rank]]</b>" + "\n" + "[[category]]: [[value]]",
+					"colorField": "color",
+					"fillAlphas": 0.85,
+					"lineAlpha": 0.1,
+					"type": "column",
+					"topRadius":1,
+					"valueField": "Score"
+				}],
+      			"depth3D": 40,
+      			"angle": 5,
+				<!-- "chartCursor": { -->
+					<!-- "categoryBalloonEnabled": false, -->
+					<!-- "cursorAlpha": 0, -->
+					<!-- "zoomable": false -->
+				<!-- }, -->
+				"categoryField": "Blitz",
+				"categoryAxis": {
+					"gridPosition": "start",
+					"axisAlpha":0,
+					"gridAlpha":0
+
+				},
+				"valueAxes": [
+      				{
+      					"id": "ValueAxis-1",
+      					"position": "bottom",
+      					"title": "Score"
+      				}
+      			]
+
+			}, 0);
+		
       }, 500);
       		
       
@@ -1348,6 +1424,22 @@
 						<p id="wl">---</p>
 					  </div>
 					
+                </div>
+              </div>
+            </div>
+			
+			<!-- previous ranking -->
+            <div class="col-xl-12 col-lg-12">
+              <div class="card shadow " style="min-height: 550px;">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-bold text-primary">Blitz Scores</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-pie pt-4 pb-2">
+                    <div id="chartdivscore" style="min-height: 450px;"></div>
+                  </div>
                 </div>
               </div>
             </div>
