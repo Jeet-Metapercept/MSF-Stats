@@ -28,7 +28,7 @@
 	<script>
 	//git command to update repo --> git commit -am "update" && git push
 	//status read/change
-		$.get('https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/status.txt', function(data) {
+		$.get('status.txt', function(data) {
 			console.log(data);
 			var status = data;
 			$.ajax({
@@ -282,9 +282,9 @@
       function readTimesTextFile(sfile){	 
 	  
       			$.get(sfile, function(data) {
-				sfile = sfile.split('/').pop();
+				//sfile = sfile.split('/').pop();
 				
-				//console.log('this is file----'+sfile);
+				//console.log('222222222222222222222----'+sfile);
       				var allTimes = data;
       				//console.log(allTimes +" -- "+ new Date(allTimes).getTime() / 1000);
 	  
@@ -296,7 +296,7 @@
       case 'Team1LastBlitz.txt': 
 	  console.log(Team_1_time, battletime);
       if(battletime > Team_1_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team1.txt");
+      readTextFile("Team1.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team1.json",
       	type: 'PATCH',
@@ -314,7 +314,7 @@
        break; 
       case 'Team2LastBlitz.txt': 
       if(battletime > Team_2_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team2.txt");
+      readTextFile("Team2.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team2.json",
       	type: 'PATCH',
@@ -332,7 +332,7 @@
        break; 
       case 'Team3LastBlitz.txt': 
        if(battletime > Team_3_time){
-       readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team3.txt");
+       readTextFile("Team3.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team3.json",
       	type: 'PATCH',
@@ -350,7 +350,7 @@
        break;
       case 'Team4LastBlitz.txt': 
       if(battletime > Team_4_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team4.txt");
+      readTextFile("Team4.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team4.json",
       	type: 'PATCH',
@@ -368,7 +368,7 @@
        break; 
       case 'Team5LastBlitz.txt': 
       if(battletime > Team_5_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team5.txt");
+      readTextFile("Team5.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team5.json",
       	type: 'PATCH',
@@ -386,7 +386,7 @@
        break; 
       case 'Team6LastBlitz.txt': 
       if(battletime > Team_6_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team6.txt");
+      readTextFile("Team6.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team6.json",
       	type: 'PATCH',
@@ -404,7 +404,7 @@
        break; 
       case 'Team7LastBlitz.txt': 
       if(battletime > Team_7_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team7.txt");
+      readTextFile("Team7.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team7.json",
       	type: 'PATCH',
@@ -422,7 +422,7 @@
        break; 
       case 'Team8LastBlitz.txt': 
       if(battletime > Team_8_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team8.txt");
+      readTextFile("Team8.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team8.json",
       	type: 'PATCH',
@@ -440,7 +440,7 @@
        break; 
       case 'Team9LastBlitz.txt': 
       if(battletime > Team_9_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team9.txt");
+      readTextFile("Team9.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team9.json",
       	type: 'PATCH',
@@ -458,7 +458,7 @@
        break; 
       case 'Team10LastBlitz.txt': 
       if(battletime > Team_10_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team10.txt");
+      readTextFile("Team10.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team10.json",
       	type: 'PATCH',
@@ -476,7 +476,7 @@
        break; 
       case 'Team11LastBlitz.txt': 
       if(battletime > Team_11_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team11.txt");
+      readTextFile("Team11.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team11.json",
       	type: 'PATCH',
@@ -494,7 +494,7 @@
        break; 
       case 'Team12LastBlitz.txt': 
       if(battletime > Team_12_time){
-      readTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team12.txt");
+      readTextFile("Team12.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team12.json",
       	type: 'PATCH',
@@ -519,7 +519,7 @@
       		}
       function readLastBlitzFile(files){
       	$.get(files, function(data) {
-			files = files.split('/').pop();
+			//files = files.split('/').pop();
 			//console.log('222222222222222222222----'+files);
       		var allTexts = data;
       						//console.log(files + '         ' +allTexts); //Current Blitz Time
@@ -560,7 +560,7 @@
       						if(CurrentBlitzNumber > LastBlitzNumber){
       							console.log("New Data.");//true
       			
-      							//document.getElementById("new").innerHTML = " New!";
+      							document.getElementById("new").innerHTML = " New!";
 								
       								//localStorage.setItem('LastBlitz', CurrentBlitzNumber);
       								$.ajax({
@@ -607,13 +607,14 @@
       	}, 'text');
       	
       }
-      readTierCheckFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/SuicideSquad.txt");
+      readTierCheckFile("SuicideSquad.txt");
+	  
       //Saving Teams Results
       function readTextFile(file){
 	  
       	$.get(file, function(data) {
-		file = file.split('/').pop();
-		//console.log("this is file -----"+file);
+		//file = file.split('/').pop();
+		//console.log(file);
       	   var allText = data;
       	   //console.log(allText);
       	   var valueCheck = parseInt(allText);
@@ -802,21 +803,21 @@
       
       }
       		//retrive Last Blitz times
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team1LastBlitz.txt");
-      	    readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team2LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team3LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team4LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team5LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team6LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team7LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team8LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team9LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team10LastBlitz.txt");
-      		readTimesTextFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/Team11LastBlitz.txt");
+      		readTimesTextFile("Team1LastBlitz.txt");
+      	    readTimesTextFile("Team2LastBlitz.txt");
+      		readTimesTextFile("Team3LastBlitz.txt");
+      		readTimesTextFile("Team4LastBlitz.txt");
+      		readTimesTextFile("Team5LastBlitz.txt");
+      		readTimesTextFile("Team6LastBlitz.txt");
+      		readTimesTextFile("Team7LastBlitz.txt");
+      		readTimesTextFile("Team8LastBlitz.txt");
+      		readTimesTextFile("Team9LastBlitz.txt");
+      		readTimesTextFile("Team10LastBlitz.txt");
+      		readTimesTextFile("Team11LastBlitz.txt");
       
-      		readLastBlitzFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/LastBlitz.txt");
+      		readLastBlitzFile("LastBlitz.txt");
       		
-      		readNewBlitzFile("https://raw.githubusercontent.com/Jeet-Metapercept/MSF-Stats/master/NewBlitz.txt");
+      		readNewBlitzFile("NewBlitz.txt");
 			
 			
 			//reload after all functions
