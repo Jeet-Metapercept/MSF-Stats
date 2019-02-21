@@ -1157,7 +1157,14 @@
       			
       	
 		//previous scores
-		AmCharts.makeChart("chartdivscore",
+		$.ajax({
+      		url: "https://msf-stats.firebaseio.com/BlitzScore.json",
+      		type: 'GET',
+      		contentType: "application/json; charset=utf-8",
+      		dataType: "json",
+      		success: function(res) {
+      			var BlitzScore = res;
+				AmCharts.makeChart("chartdivscore",
 			{
 				"theme": "none",
 				"type": "serial",
@@ -1166,38 +1173,14 @@
       			"columnWidth": 0.53,
 				"startEffect": "easeOutSine",
 				"creditsPosition": "top-right",
-				"dataProvider": [{
-					"Blitz": "Vison" + "\n" + "19 Feb",
-					"Score": 0,
-					"rank" : 0,
-					"color": "#0D52D1" //black
-				},
-				{
-					"Blitz": "Red Star" + "\n" + "17 Feb",
-					"Score": 1611045,
-					"rank" : 115,
-					"color": "#0D52D1" //red
-				},
-				{
-					"Blitz": "Orb Assult" + "\n" + "17 Feb",
-					"Score": 0,
-					"rank" : 0,
-					"color": "#0D52D1" //blue
-				},
-				{
-					"Blitz": "Mentis" + "\n" + "14 Feb",
-					"Score": 3799213,
-					"rank" : 1637,
-					"color": "#0D52D1" //black
-				}
-				],
+				"dataProvider": BlitzScore,
 				"valueAxes": [{
 					"position": "left",
 					"axisAlpha":0,
 					"gridAlpha":0
 				}],
 				"graphs": [{
-					"balloonText": "<b>Rank : [[rank]]</b>" + "\n" + "[[category]]: [[value]]",
+					"balloonText": "<b>Rank : [[rank]]</b>" + "\n" + "[[category]]: [[value]]" + "\n" + "[[date]]",
 					"colorField": "color",
 					"fillAlphas": 0.85,
 					"lineAlpha": 0.1,
@@ -1228,6 +1211,8 @@
       			]
 
 			}, 0);
+			}
+		});
 		
       }, 500);
       		
