@@ -1261,11 +1261,11 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="running">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="running">-</div>
                     </div>
                     <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Step</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="firebaseLive">-</div>
+                      <div class="text-s mb-0 text-gray-800" id="firebaseLive">-</div>
                     </div>
                   </div>
                 </div>
@@ -1279,11 +1279,11 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Update</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="stamp">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="stamp">-</div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next Blitz</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="timer">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="timer">-</div>
                     </div>
                   </div>
                 </div>
@@ -1444,14 +1444,20 @@
   };
   firebase.initializeApp(config);
   
-  var ref = firebase.database().ref('/Live/step');                           
-  ref.on("value", function(snapshot){
-    firebaseLive.innerHTML = snapshot.val();
+	var ref = firebase.database().ref('/Live/step');                           
+		ref.on("value", function(snapshot){
+		firebaseLive.innerHTML = snapshot.val();
+		
+	});
+	//if firebaseLive doesnt change for a while change to error with bot
+	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
+		var firebaseLiveChanged = true;
+			setTimeout(function(){ 
+				firebaseLiveChanged = false;
+				if(firebaseLiveChanged == false){firebaseLive.innerHTML = "Something Wrong..."}
+      		}, 300000);			
+	});
 	
-	$("body").on('DOMSubtreeModified', "firebaseLive", function() {
-    console.log('changed');
-});
-});
 </script>
 
 
