@@ -1447,6 +1447,10 @@
   var ref = firebase.database().ref('/Live/step');                           
   ref.on("value", function(snapshot){
     firebaseLive.innerHTML = snapshot.val();
+	
+	$("body").on('DOMSubtreeModified', "firebaseLive", function() {
+    console.log('changed');
+});
 });
 </script>
 
