@@ -32,12 +32,12 @@
 			console.log(data);
 			var status = data;
 			$.ajax({
-				  url: "https://msf-stats.firebaseio.com/.json",
+				  url: "https://msf-stats.firebaseio.com/Live.json",
 				  type: 'PATCH',
 				  contentType: "application/json; charset=utf-8",
 				  dataType: "json",
 				  data: JSON.stringify({
-					"isLive" : status,
+					"status" : status,
 				  }),
 				  success: function(res) {
 					//console.log(res);
