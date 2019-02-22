@@ -136,3 +136,49 @@
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
 }
+
+/*Live*/
+.live-dot {
+    height: .5rem;
+    position: relative;
+    width: .5rem;
+    
+    border-radius: 100%;
+    
+    background-color: royalBlue;
+	
+	margin-right: 30px;
+}
+    
+    .live-dot::after {
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        
+        border-radius: 100%;
+        
+        background-color: inherit;
+        
+        -webkit-animation: 4s ease-out signal infinite;
+        
+                animation: 4s ease-out signal infinite;
+        opacity: .5;
+    }
+
+@-webkit-keyframes signal {
+    20%, 100% {
+        opacity: 0;
+        -webkit-transform: scale(5);
+                transform: scale(5);
+    }
+}
+
+@keyframes signal {
+    20%, 100% {
+        opacity: 0;
+        -webkit-transform: scale(5);
+                transform: scale(5);
+    }
+}

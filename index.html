@@ -38,13 +38,35 @@
       			var BlitzData = res;
       			//console.log(BlitzData);
 				
-				var isLive = BlitzData.Live.status;
+				var NewBlitzCheck =  BlitzData.NewBlitz;
+				if(NewBlitzCheck === 'true'){
+					var i;
+					for(i = 1; i<12; i++){
+						$.ajax({
+						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+							"live" : "W L"
+							}),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+						});
+					}
+				}
+				
+				
+				var isLive = BlitzData.Live.status; console.log(isLive);
 				if(isLive === 'true'){
 					var liveStatus = document.getElementById("running");
 							liveStatus.innerHTML = "<span class='badge badge-danger'>Live!</span>";
+					 $("#liveSignal").addClass("live-dot");
 				}else if(isLive === 'false'){
 							var liveStatus = document.getElementById("running");
 							liveStatus.innerHTML = "<span class='badge badge-secondary'>Offline</span>";
+					 $("#liveSignal").removeClass("live-dot");
 				}
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
@@ -232,37 +254,9 @@
       			
       			var retrieved_LastBlitz = BlitzData.LastBlitz;
       			var LastBlitzNumber = retrieved_LastBlitz; 
+	  
+	  
 
-      //Read NewBlitz.txt
-      function readNewBlitzFile(fileso){
-      		$.get(fileso, function(data) {
-			//fileso = fileso.split('/').pop();
-			//console.log('222222222222222222222----'+fileso);
-      		  var newBlitz = data;
-      		  if( newBlitz === 'True'){		
-      								//Resetting for new blitz
-      									localStorage.setItem('Team_1', 'W L');
-      		var i;
-      		for(i = 1; i<12; i++){
-      		  $.ajax({
-      			  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
-      			  type: 'PATCH',
-      			  contentType: "application/json; charset=utf-8",
-      			  dataType: "json",
-      			  data: JSON.stringify({
-      				"live" : "W L"
-      				}),
-      				   success: function(res) {
-      					   //console.log(res);
-      				   }
-      			});
-      		}
-      		
-      		
-      								}
-      		}, 'text');
-      				
-      	}
       //Saving Teams Times
       function readTimesTextFile(sfile){	 
 	  
@@ -802,7 +796,6 @@
       
       		readLastBlitzFile("LastBlitz.txt");
       		
-      		readNewBlitzFile("NewBlitz.txt");
 			
 			
 			//reload after all functions
@@ -1171,7 +1164,7 @@
 					"lineAlpha": 0.1,
 					"type": "column",
 					"topRadius":1,
-					"valueField": "Score"
+					"valueField": "AvgScorePerDay"
 				}],
       			//"depth3D": 1,
       			"angle": 5,
@@ -1253,13 +1246,16 @@
 
           <!-- Content Row -->
           <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-6 col-md-6 mb-1" >
+		  
+            <!-- Earnings (Monthly) Card Example --> 
+            <div class="col-xl-8 col-md-6 mb-1" >
               <div class="card border-left-primary shadow h-60 py-2">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
+				  
+					<div id="liveSignal" class="live-dot"></div>
+					
+                    <div class="col-70 mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
                       <div class="h5 mb-0  text-gray-800" id="running">-</div>
                     </div>
@@ -1273,7 +1269,7 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-6 col-md-6 mb-1 ">
+            <div class="col-xl-4 col-md-6 mb-1 ">
               <div class="card border-left-success shadow h-60 py-2">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
@@ -1330,8 +1326,8 @@
           </div>
 		  
           </div>
-		  <div class="progress progress-sm mb-1">
-                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+		  <div class="progress progress-sm mb-2 mt-1">
+                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
 		  
 		  
@@ -1344,7 +1340,7 @@
             <div class="col-xl-12 col-lg-12 mb-1">
               <div class="card shadow " style="min-height: 50vh;">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center ">
+                <div class="card-header  d-flex flex-row align-items-center ">
                   <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
                 </div>
                 <!-- Card Body -->
@@ -1373,7 +1369,7 @@
             <div class="col-xl-12 col-lg-12">
               <div class="card shadow " style="min-height: 50vh;">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header d-flex flex-row align-items-center justify-content-between">
                   <h5 class="m-0 font-weight-bold text-primary">Blitz All time</h5>
                 </div>
                 <!-- Card Body -->
@@ -1534,7 +1530,11 @@
 		var firebaseLiveChanged = true;
 			setTimeout(function(){ 
 				firebaseLiveChanged = false;
-				if(firebaseLiveChanged == false){firebaseLive.innerHTML = "Something Wrong..."}
+				if(snapshot.val() !== 'Complete'){
+					if(firebaseLiveChanged == false){
+						firebaseLive.innerHTML = "Uhhmmmm..."
+					}
+				}
       		}, 300000);			
 	});
 	
