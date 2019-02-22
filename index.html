@@ -569,7 +569,7 @@
 	  function readTierCheckFile(tier){
       	$.get(tier, function(data) {
 			
-      		var tierResult = parseInt(data);
+      		var tierResult = data;
 		
       						$.ajax({
 									url: "https://msf-stats.firebaseio.com/.json",
@@ -1533,7 +1533,7 @@
 		var firebaseLiveChanged = true;
 			setTimeout(function(){ 
 				firebaseLiveChanged = false;
-				if(snapshot.val() !== 'Uhhmmmm...'){
+				if(firebaseLive.innerHTML) !== 'Uhhmmmm...'){
 					if(firebaseLiveChanged == false){
 						firebaseLive.innerHTML = "Somthing Wrong";
 					}
