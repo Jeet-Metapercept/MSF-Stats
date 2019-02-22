@@ -539,7 +539,7 @@
       						if(CurrentBlitzNumber > LastBlitzNumber){
       							console.log("New Data.");//true
       			
-      							document.getElementById("new").innerHTML = " New!";
+      							
 								
       								//localStorage.setItem('LastBlitz', CurrentBlitzNumber);
       								$.ajax({
@@ -1529,17 +1529,17 @@
 		
 	});
 	//if firebaseLive doesnt change for a while change to error with bot
-	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
-		var firebaseLiveChanged = true;
-			setTimeout(function(){ 
-				firebaseLiveChanged = false;
-				if(firebaseLive.innerHTML) !== 'Uhhmmmm...'){
-					if(firebaseLiveChanged == false){
-						firebaseLive.innerHTML = "Somthing Wrong";
-					}
-				}
-      		}, 310000);			
-	});
+	<!-- $("body").on('DOMSubtreeModified', "#firebaseLive", function() { -->
+		<!-- var firebaseLiveChanged = true; -->
+			<!-- setTimeout(function(){  -->
+				<!-- firebaseLiveChanged = false; -->
+				<!-- if(firebaseLive.innerHTML) !== 'Uhhmmmm...'){ -->
+					<!-- if(firebaseLiveChanged == false){ -->
+						<!-- firebaseLive.innerHTML = "Somthing Wrong"; -->
+					<!-- } -->
+				<!-- } -->
+      		<!-- }, 310000);			 -->
+	<!-- }); -->
 	
 	
 </script>
