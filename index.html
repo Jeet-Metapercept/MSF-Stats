@@ -66,7 +66,7 @@
 				}else if(isLive === 'false'){
 							var liveStatus = document.getElementById("running");
 							liveStatus.innerHTML = "<span class='badge badge-secondary'>Offline</span>";
-					 $("#liveSignal").removeClass("live-dot");
+					// $("#liveSignal").removeClass("live-dot");
 				}
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
@@ -1248,18 +1248,16 @@
           <div class="row">
 		  
             <!-- Earnings (Monthly) Card Example --> 
-            <div class="col-xl-8 col-md-6 mb-1" >
+            <div class="col-xl-6 col-md-6 mb-1" >
               <div class="card border-left-primary shadow h-60 py-2">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
-				  
-					<div id="liveSignal" class="live-dot"></div>
-					
                     <div class="col-70 mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
                       <div class="h5 mb-0  text-gray-800" id="running">-</div>
                     </div>
 					
+					<div id="liveSignal" class="live-dot" style="position: absolute;left: 0;right: 0;margin: auto"></div>	
                     <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Step</div>
                       <div class="text-s mb-0 text-gray-800" id="firebaseLive">-</div>
@@ -1270,7 +1268,7 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-1 ">
+            <div class="col-xl-6 col-md-6 mb-1 ">
               <div class="card border-left-success shadow h-60 py-2">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
@@ -1520,6 +1518,10 @@
 					break;	
 		  case 'Complete':
 					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
+					setTimeout(function(){ 
+						firebaseLive.innerHTML = "Uhhmmmm...";
+						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+					}, 300000);	//5 min
 					break;					
 		  default:
 			$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
@@ -1531,13 +1533,14 @@
 		var firebaseLiveChanged = true;
 			setTimeout(function(){ 
 				firebaseLiveChanged = false;
-				if(snapshot.val() !== 'Complete'){
+				if(snapshot.val() !== 'Uhhmmmm...'){
 					if(firebaseLiveChanged == false){
-						firebaseLive.innerHTML = "Uhhmmmm..."
+						firebaseLive.innerHTML = "Somthing Wrong";
 					}
 				}
-      		}, 300000);			
+      		}, 310000);			
 	});
+	
 	
 </script>
 
