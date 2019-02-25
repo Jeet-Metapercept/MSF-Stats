@@ -1476,6 +1476,7 @@
         NotisElem = document.getElementById("notis")
         ErrElem = document.getElementById("err")
   const messaging = firebase.messaging();
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
   messaging
             .requestPermission()
             .then(function () {
