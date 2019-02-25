@@ -27,13 +27,7 @@
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<!-- Push API notification -->
 	<!-- <script type="text/javascript" src="scripts/push.min.js"></script> -->
-	<script>
- const title = 'Simple Title';
-    const options = {
-      body: 'Simple piece of body text.\nSecond line of body text :)'
-    };
-    registration.showNotification(title, options);
-	</script>
+
 	
 	<script>
 	//git command to update repo --> git commit -am "update" && git push
@@ -1475,8 +1469,27 @@
         TokenElem = document.getElementById("token")
         NotisElem = document.getElementById("notis")
         ErrElem = document.getElementById("err")
+		
+	// register service worker
+
+	if ('serviceWorker' in navigator) {
+	  navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(reg) {
+
+		if(reg.installing) {
+		  console.log('Service worker installing');
+		} else if(reg.waiting) {
+		  console.log('Service worker installed');
+		} else if(reg.active) {
+		  console.log('Service worker active');
+		}
+
+	  }).catch(function(error) {
+		// registration failed
+		console.log('Registration failed with ' + error);
+	  });
+	}		
+		
   const messaging = firebase.messaging();
-  navigator.serviceWorker.register('firebase-messaging-sw.js')
   messaging
             .requestPermission()
             .then(function () {
