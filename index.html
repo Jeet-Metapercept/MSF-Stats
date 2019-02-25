@@ -27,24 +27,24 @@
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<!-- Push API notification -->
 	<script type="text/javascript" src="scripts/push.min.js"></script>
-	<script>
-	Push.Permission.request();
+	<!-- <script> -->
+	<!-- Push.Permission.request(); -->
 	
-var Pushnow = moment().format('LT');
-								//Send Push Notification
-									Push.create('Blitz Stats', {
-									body: 'Blitz started at ' + Pushnow,
-									icon: 'https://i.downloadatoz.com/upload/android/icon/9/4/2/b309883028c52ccb740f3d49bcbc2823.jpg',
-									link: 'https://msfstats.netlify.com/',
-									requireInteraction: true,
-									timeout: 5000,               // Timeout before notification closes automatically.
-									vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
-									onClick: function() {
-										// Callback for when the notification is clicked. 
-										console.log(this);
-									}  
-								});
-	</script>
+<!-- var Pushnow = moment().format('LT'); -->
+								<!-- //Send Push Notification -->
+									<!-- Push.create('Blitz Stats', { -->
+									<!-- body: 'Blitz started at ' + Pushnow, -->
+									<!-- icon: 'https://i.downloadatoz.com/upload/android/icon/9/4/2/b309883028c52ccb740f3d49bcbc2823.jpg', -->
+									<!-- link: 'https://msfstats.netlify.com/', -->
+									<!-- requireInteraction: true, -->
+									<!-- timeout: 5000,               // Timeout before notification closes automatically. -->
+									<!-- vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices. -->
+									<!-- onClick: function() { -->
+										<!-- // Callback for when the notification is clicked.  -->
+										<!-- console.log(this); -->
+									<!-- }   -->
+								<!-- }); -->
+	<!-- </script> -->
 	
 	<script>
 	//git command to update repo --> git commit -am "update" && git push
