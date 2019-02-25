@@ -25,6 +25,14 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<!-- Push API notification -->
+	<script type="text/javascript" src="scripts/push.min.js"></script>
+	<!-- <script> -->
+	<!-- //Push.Permission.request(); -->
+	
+
+	<!-- </script> -->
+	
 	<script>
 	//git command to update repo --> git commit -am "update" && git push
 
@@ -254,7 +262,6 @@
       			
       			var retrieved_LastBlitz = BlitzData.LastBlitz;
       			var LastBlitzNumber = retrieved_LastBlitz; 
-	  
 	  
 
       //Saving Teams Times
@@ -538,7 +545,21 @@
       						
       						if(CurrentBlitzNumber > LastBlitzNumber){
       							console.log("New Data.");//true
-      			
+								
+								var Pushnow = moment().format('LT');
+								//Send Push Notification
+									Push.create('Blitz Stats', {
+									body: 'Blitz started at ' + Pushnow,
+									icon: 'https://i.downloadatoz.com/upload/android/icon/9/4/2/b309883028c52ccb740f3d49bcbc2823.jpg',
+									link: 'https://msfstats.netlify.com/',
+									requireInteraction: true,
+									timeout: 5000,               // Timeout before notification closes automatically.
+									vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
+									onClick: function() {
+										// Callback for when the notification is clicked. 
+										console.log(this);
+									}  
+								});
       							
 								
       								//localStorage.setItem('LastBlitz', CurrentBlitzNumber);
@@ -1521,7 +1542,7 @@
 					setTimeout(function(){ 
 						firebaseLive.innerHTML = "Uhhmmmm...";
 						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
-					}, 300000);	//5 min
+					}, 180000);	//3 min
 					break;					
 		  default:
 			$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
@@ -1529,17 +1550,17 @@
 		
 	});
 	//if firebaseLive doesnt change for a while change to error with bot
-	<!-- $("body").on('DOMSubtreeModified', "#firebaseLive", function() { -->
-		<!-- var firebaseLiveChanged = true; -->
-			<!-- setTimeout(function(){  -->
-				<!-- firebaseLiveChanged = false; -->
-				<!-- if(firebaseLive.innerHTML) !== 'Uhhmmmm...'){ -->
-					<!-- if(firebaseLiveChanged == false){ -->
-						<!-- firebaseLive.innerHTML = "Somthing Wrong"; -->
-					<!-- } -->
-				<!-- } -->
-      		<!-- }, 310000);			 -->
-	<!-- }); -->
+	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
+		var firebaseLiveChanged = true;
+			setTimeout(function(){ 
+				firebaseLiveChanged = false;
+				if(snapshot.val() !== 'Uhhmmmm...'){
+					if(firebaseLiveChanged == false){
+						firebaseLive.innerHTML = "Somthing Wrong";
+					}
+				}
+      		}, 300000);			
+	});
 	
 	
 </script>
