@@ -1591,10 +1591,11 @@
 					}, 180000);	//3 min
 					break;					
 		  default:
-			$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
 		}		
 		
-	});
+		
+		
 	//if firebaseLive doesnt change for a while change to error with bot
 	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
 		var firebaseLiveChanged = true;
@@ -1608,6 +1609,10 @@
 				}
       		}, 300000);			
 	});
+		
+		
+});
+	
 	
 	
 </script>
