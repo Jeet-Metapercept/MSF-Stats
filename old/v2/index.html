@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+   <title>Blitz statistics | amCharts</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="scripts/sb-admin-2.css" rel="stylesheet">
+      <!-- amCharts javascript sources -->
+    <script type="text/javascript" src="scripts/amcharts.js"></script>
+    <script type="text/javascript" src="scripts/serial.js"></script>
+    <script type="text/javascript" src="scripts/light.js"></script>
+    <script type="text/javascript" src="scripts/download2.js"></script>
+    <script type="text/javascript" src="scripts/moment.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
+    <link href="scripts/BlitzStats.css" rel="stylesheet">
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<script>
+	//git command to update repo --> git commit -am "update" && git push
+
+      //get data from firebase
+      	$.ajax({
+      		url: "https://msf-stats.firebaseio.com/.json",
+      		type: 'GET',
+      		contentType: "application/json; charset=utf-8",
+      		dataType: "json",
+      		success: function(res) {
+      			var BlitzData = res;
+      			//console.log(BlitzData);
+				
+				var NewBlitzCheck =  BlitzData.NewBlitz;
+				if(NewBlitzCheck === 'true'){
+					var i;
+					for(i = 1; i<12; i++){
+						$.ajax({
+						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+							"live" : "W L"
+							}),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+						});
+					}
+				}
+				
+				
+				var isLive = BlitzData.Live.status; console.log(isLive);
+				if(isLive === 'true'){
+					var liveStatus = document.getElementById("running");
+							liveStatus.innerHTML = "<span class='badge badge-danger'>Live!</span>";
+					 $("#liveSignal").addClass("live-dot");
+				}else if(isLive === 'false'){
+							var liveStatus = document.getElementById("running");
+							liveStatus.innerHTML = "<span class='badge badge-secondary'>Offline</span>";
+					 $("#liveSignal").removeClass("live-dot");
+				}
+			
+				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
+			
+      			var BlitzAllTime = {
+      				battles: BlitzData.BlitzTotalBattles,
+      				win: BlitzData.BlitzTotalBattlesWon,
+      				lose: BlitzData.BlitzTotalBattlesLost,
+      			}
+      			var BlitzLive = {
+      				battles: BlitzData.CurrentBattlesBlitz,
+      				win: BlitzData.CurrentBattlesWon,
+      				lose: BlitzData.CurrentBattlesLost,
+      			}
+      			var T1 = BlitzData.team1;
+      			var T2 = BlitzData.team2;
+      			var T3 = BlitzData.team3;
+      			var T4 = BlitzData.team4;
+      			var T5 = BlitzData.team5;
+      			var T6 = BlitzData.team6;
+      			var T7 = BlitzData.team7;
+      			var T8 = BlitzData.team8;
+      			var T9 = BlitzData.team9;
+      			var T10 = BlitzData.team10;
+      			var T11 = BlitzData.team11;
+      			var T12 = BlitzData.team12;
+      
+      			//Overall Statcounter
+      			var BlitzTotalBattlesWon = T1.alltime.match(/W/gi).length + T2.alltime.match(/W/gi).length + T3.alltime.match(/W/gi).length + T4.alltime.match(/W/gi).length+T5.alltime.match(/W/gi).length+T6.alltime.match(/W/gi).length+T7.alltime.match(/W/gi).length+T8.alltime.match(/W/gi).length+T9.alltime.match(/W/gi).length+T10.alltime.match(/W/gi).length+T11.alltime.match(/W/gi).length + T12.alltime.match(/W/gi).length;
+      			
+      			var BlitzTotalBattlesLost = T1.alltime.match(/L/gi).length + T2.alltime.match(/L/gi).length + T3.alltime.match(/L/gi).length + T4.alltime.match(/L/gi).length+T5.alltime.match(/L/gi).length+T6.alltime.match(/L/gi).length+T7.alltime.match(/L/gi).length+T8.alltime.match(/L/gi).length+T9.alltime.match(/L/gi).length+T10.alltime.match(/L/gi).length+T11.alltime.match(/L/gi).length + T12.alltime.match(/L/gi).length;
+      			
+      			var BlitzTotalBattles = parseInt(BlitzTotalBattlesLost) + parseInt(BlitzTotalBattlesWon); 
+      			
+      			var BlitzBattleRatio = ((BlitzTotalBattlesWon*100)/BlitzTotalBattles).toFixed(2);
+      			
+      			//Current wins/losses this Blitz
+      			var CurrentBattlesWon = T1.live.match(/W/gi).length + T2.live.match(/W/gi).length + T3.live.match(/W/gi).length + T4.live.match(/W/gi).length+T5.live.match(/W/gi).length+T6.live.match(/W/gi).length+T7.live.match(/W/gi).length+T8.live.match(/W/gi).length+T9.live.match(/W/gi).length+T10.live.match(/W/gi).length+T11.live.match(/W/gi).length + T12.live.match(/W/gi).length;
+      	
+      			
+      			var CurrentBattlesLost = T1.live.match(/L/gi).length + T2.live.match(/L/gi).length + T3.live.match(/L/gi).length + T4.live.match(/L/gi).length+T5.live.match(/L/gi).length+T6.live.match(/L/gi).length+T7.live.match(/L/gi).length+T8.live.match(/L/gi).length+T9.live.match(/L/gi).length+T10.live.match(/L/gi).length+T11.live.match(/L/gi).length + T12.live.match(/L/gi).length;
+      		
+      			
+      			var CurrentBattlesBlitz = CurrentBattlesWon + CurrentBattlesLost;
+      		
+      			
+      			var TotalBattlesBlitzRate = ((CurrentBattlesWon*100)/CurrentBattlesBlitz).toFixed(2);
+      			
+      //send live and alltime data
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "BlitzTotalBattles" : BlitzTotalBattles,
+      "BlitzTotalBattlesLost" : BlitzTotalBattlesLost,
+      "BlitzTotalBattlesWon" : BlitzTotalBattlesWon,
+      "CurrentBattlesBlitz" : CurrentBattlesBlitz,
+      "CurrentBattlesLost" : CurrentBattlesLost,
+      "CurrentBattlesWon" : CurrentBattlesWon
+      }),
+      success: function(res) {
+        //console.log(res);
+      }
+      });
+      			
+      			//retrive live blitz result
+      			var retrieved_Team1_Results = T1.live;
+      			var Team_1 = retrieved_Team1_Results;
+      			
+      			var retrieved_Team2_Results = T2.live;
+      			var Team_2 = retrieved_Team2_Results;
+      			
+      			var retrieved_Team3_Results = T3.live;
+      			var Team_3 = retrieved_Team3_Results;
+      			
+      			var retrieved_Team4_Results = T4.live;
+      			var Team_4 = retrieved_Team4_Results;
+      			
+      			var retrieved_Team5_Results = T5.live;
+      			var Team_5 = retrieved_Team5_Results;
+      			
+      			var retrieved_Team6_Results = T6.live;
+      			var Team_6 = retrieved_Team6_Results;
+      			
+      			var retrieved_Team7_Results = T7.live;
+      			var Team_7 = retrieved_Team7_Results;
+      			
+      			var retrieved_Team8_Results = T8.live;
+      			var Team_8 = retrieved_Team8_Results;
+      			
+      			var retrieved_Team9_Results = T9.live;
+      			var Team_9 = retrieved_Team9_Results;
+      			
+      			var retrieved_Team10_Results = T10.live;
+      			var Team_10 = retrieved_Team10_Results;
+      			
+      			var retrieved_Team11_Results = T11.live;
+      			var Team_11 = retrieved_Team11_Results;
+      			
+      			var retrieved_Team12_Results = T12.live;
+      			var Team_12 = retrieved_Team11_Results;
+      			
+      			//retrive blitz all time results
+      			var Team_1_alltime = T1.alltime;
+      			var Team_2_alltime = T2.alltime;
+      			var Team_3_alltime = T3.alltime;
+      			var Team_4_alltime = T4.alltime;
+      			var Team_5_alltime = T5.alltime;
+      			var Team_6_alltime = T6.alltime;
+      			var Team_7_alltime = T7.alltime;
+      			var Team_8_alltime = T8.alltime;
+      			var Team_9_alltime = T9.alltime;
+      			var Team_10_alltime = T10.alltime;
+      			var Team_11_alltime = T11.alltime;
+      			var Team_12_alltime = T12.alltime;
+      			
+      			// Retrieve the Times object from storage
+      			var retrieved_Team1_Time = T1.lastbattle;
+      			var Team_1_time = retrieved_Team1_Time ;
+      			
+      			var retrieved_Team2_Time = T2.lastbattle;
+      			var Team_2_time = retrieved_Team2_Time ;
+      			
+      			var retrieved_Team3_Time = T3.lastbattle;
+      			var Team_3_time = retrieved_Team3_Time;
+      			
+      			var retrieved_Team4_Time = T4.lastbattle;
+      			var Team_4_time = retrieved_Team4_Time; 
+      			
+      			var retrieved_Team5_Time = T5.lastbattle;
+      			var Team_5_time = retrieved_Team5_Time; 
+      			
+      			var retrieved_Team6_Time = T6.lastbattle;
+      			var Team_6_time = retrieved_Team6_Time; 
+      			
+      			var retrieved_Team7_Time = T7.lastbattle;
+      			var Team_7_time = retrieved_Team7_Time; 
+      			
+      			var retrieved_Team8_Time = T8.lastbattle;
+      			var Team_8_time = retrieved_Team8_Time; 
+      			
+      			var retrieved_Team9_Time = T9.lastbattle;
+      			var Team_9_time = retrieved_Team9_Time; 
+      			
+      			var retrieved_Team10_Time = T10.lastbattle;
+      			var Team_10_time = retrieved_Team10_Time; 
+      			
+      			var retrieved_Team11_Time = T11.lastbattle;
+      			var Team_11_time = retrieved_Team11_Time; 
+      			
+      			var retrieved_Team12_Time = T12.lastbattle;
+      			var Team_12_time = retrieved_Team12_Time; 
+      			
+      			//Graph work
+      			var Team1 = Team_1.match(/W/gi).length;
+      			var Team2 = Team_2.match(/W/gi).length;  		
+      			var Team3 = Team_3.match(/W/gi).length;
+      			var Team4 = Team_4.match(/W/gi).length;	
+      			var Team5 = Team_5.match(/W/gi).length;	
+      			var Team6 = Team_6.match(/W/gi).length;	
+      			var Team7 = Team_7.match(/W/gi).length;	
+      			var Team8 = Team_8.match(/W/gi).length;	
+      			var Team9 = Team_9.match(/W/gi).length;	
+      			var Team10 = Team_10.match(/W/gi).length;	
+      			var Team11 = Team_11.match(/W/gi).length;	
+      			
+      			//Count wins/losses
+      			var total_teams = 11;
+      			var wins = 0;
+      			if (retrieved_Team1_Results[retrieved_Team1_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team2_Results[retrieved_Team2_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team3_Results[retrieved_Team3_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team4_Results[retrieved_Team4_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team5_Results[retrieved_Team5_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team6_Results[retrieved_Team6_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team7_Results[retrieved_Team7_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team8_Results[retrieved_Team8_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team9_Results[retrieved_Team9_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team10_Results[retrieved_Team10_Results.length -1] ===  'W'){ wins++; };
+      			if (retrieved_Team11_Results[retrieved_Team11_Results.length -1] ===  'W'){ wins++; };
+      			//console.log(wins);
+      			var losses = total_teams - wins;
+      			
+      			var retrieved_LastBlitz = BlitzData.LastBlitz;
+      			var LastBlitzNumber = retrieved_LastBlitz; 
+	  
+	  
+
+      //Saving Teams Times
+      function readTimesTextFile(sfile){	 
+	  
+      			$.get(sfile, function(data) {
+				//sfile = sfile.split('/').pop();
+				
+				//console.log('222222222222222222222----'+sfile);
+      				var allTimes = data;
+      				//console.log(allTimes +" -- "+ new Date(allTimes).getTime() / 1000);
+	  
+	  
+      var battletime = new Date(allTimes).getTime() / 1000; 
+	
+      switch (sfile)  
+      { 
+      case 'Team1LastBlitz.txt': 
+	  console.log(Team_1_time, battletime);
+      if(battletime > Team_1_time){
+      readTextFile("Team1.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team1.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log('res');
+      	 
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team2LastBlitz.txt': 
+      if(battletime > Team_2_time){
+      readTextFile("Team2.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team2.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		    
+      	}
+      
+      });
+      
+      }
+       break; 
+      case 'Team3LastBlitz.txt': 
+       if(battletime > Team_3_time){
+       readTextFile("Team3.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team3.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		  // console.log(res);
+      		  
+      	}
+        
+      });
+       
+      }
+       break;
+      case 'Team4LastBlitz.txt': 
+      if(battletime > Team_4_time){
+      readTextFile("Team4.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team4.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		   
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team5LastBlitz.txt': 
+      if(battletime > Team_5_time){
+      readTextFile("Team5.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team5.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		  
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team6LastBlitz.txt': 
+      if(battletime > Team_6_time){
+      readTextFile("Team6.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team6.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		  // console.log(res);
+      		  
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team7LastBlitz.txt': 
+      if(battletime > Team_7_time){
+      readTextFile("Team7.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team7.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		   
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team8LastBlitz.txt': 
+      if(battletime > Team_8_time){
+      readTextFile("Team8.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team8.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		  // console.log(res);
+      		 
+      	}
+        
+      });
+       
+      }
+       break; 
+      case 'Team9LastBlitz.txt': 
+      if(battletime > Team_9_time){
+      readTextFile("Team9.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team9.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team10LastBlitz.txt': 
+      if(battletime > Team_10_time){
+      readTextFile("Team10.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team10.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team11LastBlitz.txt': 
+      if(battletime > Team_11_time){
+      readTextFile("Team11.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team11.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      		
+      	}
+        
+      });
+      
+      }
+       break; 
+      case 'Team12LastBlitz.txt': 
+      if(battletime > Team_12_time){
+      readTextFile("Team12.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team12.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break; 	
+      default: 
+       console.log('errrrror'); 
+      } 
+      
+      
+      			}, 'text');
+      			
+      		}
+      function readLastBlitzFile(files){
+      	$.get(files, function(data) {
+			//files = files.split('/').pop();
+			//console.log('222222222222222222222----'+files);
+      		var allTexts = data;
+      						//console.log(files + '         ' +allTexts); //Current Blitz Time
+      						var myDate = new Date(allTexts).getTime(); //1440516958;
+      						
+      						var CurrentBlitzNumber = myDate; 
+      						
+      						//Blitz Time Stamp
+      						
+      						document.getElementById("stamp").innerHTML = new Date(allTexts).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + "  ";
+      						
+      						//Next Blitz timer
+      						var d1 = new Date(); //"now"
+      						var d2 = new Date(allTexts); // some date
+      						var diff = moment.utc(moment(d1,"DD/MM/YYYY HH:mm:ss").diff(moment(d2,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");  // difference in milliseconds
+      						var diffSec = moment.duration(diff).asSeconds()
+      						//console.log(moment.duration(diff).asSeconds());
+														
+      						var count = (7200+480+300) - parseInt(diffSec);
+      						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+      
+      						function timer() {
+      							count = count - 1;
+      							if (count == -1) {
+      								clearInterval(counter);
+      								return;
+      							}
+      
+      							var seconds = count % 60;
+      							var minutes = Math.floor(count / 60);
+      							var hours = Math.floor(minutes / 60);
+      							minutes %= 60;
+      							hours %= 60;
+      
+      							document.getElementById("timer").innerHTML = hours + ": " + minutes + ": " + seconds; // watch for spelling
+      						}
+      						
+      						if(CurrentBlitzNumber > LastBlitzNumber){
+      							console.log("New Data.");//true
+      			
+      							document.getElementById("new").innerHTML = " New!";
+								
+      								//localStorage.setItem('LastBlitz', CurrentBlitzNumber);
+      								$.ajax({
+									url: "https://msf-stats.firebaseio.com/.json",
+									type: 'PATCH',
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									data: JSON.stringify({"LastBlitz" : CurrentBlitzNumber}),
+									   success: function(res) {
+										   //console.log(res);
+									}
+								  
+									});
+								
+    						}
+      						else{
+      							console.log("Previous Data.");//false
+      						}
+							
+								
+      	}, 'text');
+      	
+      }
+      <!-- readLastBlitzFile("LastBlitz.txt"); -->
+     
+	  <!-- Suicide Squad Usage -->
+	  function readTierCheckFile(tier){
+      	$.get(tier, function(data) {
+			
+      		var tierResult = parseInt(data);
+		
+      						$.ajax({
+									url: "https://msf-stats.firebaseio.com/.json",
+									type: 'PATCH',
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
+									   success: function(res) {
+										   //console.log(res);
+									}
+								  
+							});
+				
+      	}, 'text');
+      	
+      }
+      readTierCheckFile("SuicideSquad.txt");
+	  
+      //Saving Teams Results
+      function readTextFile(file){
+	  
+      	$.get(file, function(data) {
+		//file = file.split('/').pop();
+		//console.log(file);
+      	   var allText = data;
+      	   //console.log(allText);
+      	   var valueCheck = parseInt(allText);
+      						//console.log(file + '         ' +allText + "adn" + ());
+      		if(valueCheck == 1){
+      var match_result = ' W';
+      		}else{
+      var match_result = ' L';
+      		}
+      
+      switch (file)  
+      { 
+      case 'Team1.txt': 
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team1.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T1.alltime + match_result,
+      "live" : T1.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      }); 
+      break; 
+      case 'Team2.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team2.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T2.alltime + match_result,
+      "live" : T2.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team3.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team3.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T3.alltime + match_result,
+      "live" : T3.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team4.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team4.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T4.alltime + match_result,
+      "live" : T4.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team5.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team5.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T5.alltime + match_result,
+      "live" : T5.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team6.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team6.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T6.alltime + match_result,
+      "live" : T6.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team7.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team7.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T7.alltime + match_result,
+      "live" : T7.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team8.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team8.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T8.alltime + match_result,
+      "live" : T8.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team9.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team9.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T9.alltime + match_result,
+      "live" : T9.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team10.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team10.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T10.alltime + match_result,
+      "live" : T10.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team11.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team11.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T11.alltime + match_result,
+      "live" : T11.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      case 'Team12.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team12.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T12.alltime + match_result,
+      "live" : T12.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break; 
+      default: 
+      console.log("eerrrrrorrr"); 
+      } 
+      						
+      	}, 'text');	
+      
+      }
+      		//retrive Last Blitz times
+      		readTimesTextFile("Team1LastBlitz.txt");
+      	    readTimesTextFile("Team2LastBlitz.txt");
+      		readTimesTextFile("Team3LastBlitz.txt");
+      		readTimesTextFile("Team4LastBlitz.txt");
+      		readTimesTextFile("Team5LastBlitz.txt");
+      		readTimesTextFile("Team6LastBlitz.txt");
+      		readTimesTextFile("Team7LastBlitz.txt");
+      		readTimesTextFile("Team8LastBlitz.txt");
+      		readTimesTextFile("Team9LastBlitz.txt");
+      		readTimesTextFile("Team10LastBlitz.txt");
+      		readTimesTextFile("Team11LastBlitz.txt");
+      
+      		readLastBlitzFile("LastBlitz.txt");
+      		
+			
+			
+			//reload after all functions
+			//Reload page after function work done	
+      		
+      		setTimeout(function(){ 
+      		var maincontent = document.getElementById("winss");
+      		maincontent.innerHTML = "Won: " +  "<span style='color: #28a745'>" + wins + "</span>" +", Lost : " + "<span style='color: #c82121'>" + losses + "</span>";
+      
+      		var thisBlitz = document.getElementById("ThisBlitz");
+      		thisBlitz.innerHTML = "Won: " +  "<span style='color: #28a745'>" + CurrentBattlesWon + "</span>" + " , Lost : " + "<span style='color: #c82121'>" + CurrentBattlesLost + "</span>" + " , " +  TotalBattlesBlitzRate + " <span style='font-size:1rem'>%</span>";
+      		
+      		//update html fields
+      		var blitzTotalcontent = document.getElementById("totalblitz");
+      			blitzTotalcontent.innerHTML = BlitzTotalBattles;
+      
+      		var blitzRate = document.getElementById("wr");
+      			blitzRate.innerHTML = BlitzBattleRatio + " <span style='font-size:1rem'>%</span>";
+      			
+      		var blitzResults = document.getElementById("wl");
+      			blitzResults.innerHTML =  " W " + BlitzTotalBattlesWon + " , L " + BlitzTotalBattlesLost;
+				
+			<!-- var battlesplayed =	document.getElementById("battlesplayed"); -->
+      			<!-- battlesplayed.innerHTML =  CurrentBattlesWon + CurrentBattlesLost; -->
+				
+			var tierChecker = document.getElementById("tierChecker");
+      			tierChecker.innerHTML =  "Suicide Squad Used : " + SuicideSquadUsed;
+			SuicideSquadUsed	
+				
+			//ALL teams last results
+			var T1_lastround = document.getElementById("T1_lastround");
+				if(retrieved_Team1_Results[retrieved_Team1_Results.length -1] == 'W'){
+					T1_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "</span>";
+				}else{
+					T1_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team1_Results[retrieved_Team1_Results.length -1] + "</span>";
+				}
+			var T2_lastround = document.getElementById("T2_lastround");
+				if(retrieved_Team2_Results[retrieved_Team2_Results.length -1] == 'W'){
+					T2_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team2_Results[retrieved_Team2_Results.length -1] + "</span>";
+				}else{
+					T2_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team2_Results[retrieved_Team2_Results.length -1] + "</span>";
+				}
+			var T3_lastround = document.getElementById("T3_lastround");
+				if(retrieved_Team3_Results[retrieved_Team3_Results.length -1] == 'W'){
+					T3_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team3_Results[retrieved_Team3_Results.length -1] + "</span>";
+				}else{
+					T3_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team3_Results[retrieved_Team3_Results.length -1] + "</span>";
+				}
+			var T4_lastround = document.getElementById("T4_lastround");
+				if(retrieved_Team4_Results[retrieved_Team4_Results.length -1] == 'W'){
+					T4_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team4_Results[retrieved_Team4_Results.length -1] + "</span>";
+				}else{
+					T4_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team4_Results[retrieved_Team4_Results.length -1] + "</span>";
+				}
+			var T5_lastround = document.getElementById("T5_lastround");
+				if(retrieved_Team5_Results[retrieved_Team5_Results.length -1] == 'W'){
+					T5_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team5_Results[retrieved_Team5_Results.length -1] + "</span>";
+				}else{
+					T5_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team5_Results[retrieved_Team5_Results.length -1] + "</span>";
+				}
+			var T6_lastround = document.getElementById("T6_lastround");
+				if(retrieved_Team6_Results[retrieved_Team6_Results.length -1] == 'W'){
+					T6_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team6_Results[retrieved_Team6_Results.length -1] + "</span>";
+				}else{
+					T6_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team6_Results[retrieved_Team6_Results.length -1] + "</span>";
+				}
+			var T7_lastround = document.getElementById("T7_lastround");
+			if(retrieved_Team7_Results[retrieved_Team7_Results.length -1] == 'W'){
+					T7_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team7_Results[retrieved_Team7_Results.length -1] + "</span>";
+				}else{
+					T7_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team7_Results[retrieved_Team7_Results.length -1] + "</span>";
+				}
+			var T8_lastround = document.getElementById("T8_lastround");
+			if(retrieved_Team8_Results[retrieved_Team8_Results.length -1] == 'W'){
+					T8_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
+				}else{
+					T8_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team8_Results[retrieved_Team8_Results.length -1] + "</span>";
+				}
+			var T9_lastround = document.getElementById("T9_lastround");
+			if(retrieved_Team9_Results[retrieved_Team9_Results.length -1] == 'W'){
+					T9_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team9_Results[retrieved_Team9_Results.length -1] + "</span>";
+				}else{
+					T9_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team9_Results[retrieved_Team9_Results.length -1] + "</span>";
+				}
+			var T10_lastround = document.getElementById("T10_lastround");
+			if(retrieved_Team10_Results[retrieved_Team10_Results.length -1] == 'W'){
+					T10_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team10_Results[retrieved_Team10_Results.length -1] + "</span>";
+				}else{
+					T10_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team10_Results[retrieved_Team10_Results.length -1] + "</span>";
+				}
+			var T11_lastround = document.getElementById("T11_lastround");
+			if(retrieved_Team11_Results[retrieved_Team11_Results.length -1] == 'W'){
+					T11_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "</span>";
+				}else{
+					T11_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "</span>";
+				}
+			<!-- var T12_lastround = document.getElementById("T12_lastround"); -->
+			<!-- if(retrieved_Team12_Results[retrieved_Team12_Results.length -1] == 'W'){ -->
+					<!-- T12_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>"; -->
+				<!-- }else{ -->
+					<!-- T12_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>"; -->
+				<!-- } -->
+			
+	
+				
+      		}, 100);
+      		
+      		
+      		
+      		
+      		
+      		setTimeout(function(){ 
+      
+      AmCharts.makeChart("chartdiv",
+      		{
+      			"dataProvider": [
+      				{
+      					"Teams": "Team 1" +  "\n" + "Battles : " + retrieved_Team1_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team1_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team1_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_1_time*1000).fromNow(),
+      					"WinRate" : (Team1*100/(Team_1.split(" ").length)).toFixed(2),
+      					"Results" : Team_1
+      				},
+      				{
+      					"Teams": "Team 2" +  "\n" + "Battles : " + retrieved_Team2_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team2_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team2_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_2_time*1000).fromNow(),
+      					"WinRate" : (Team2*100/(Team_2.split(" ").length)).toFixed(2),
+      					"Results" : Team_2
+      				},
+      				{
+      					"Teams": "Team 3" + "\n" + "Battles : " + retrieved_Team3_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team3_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team3_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_3_time*1000).fromNow(),
+      					"WinRate" : (Team3*100/(Team_3.split(" ").length)).toFixed(2),
+      					"Results" : Team_3
+      				},
+      				{
+      					"Teams": "Team 4" + "\n" + "Battles : " + retrieved_Team4_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team4_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team4_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_4_time*1000).fromNow(),
+      					"WinRate" : (Team4*100/(Team_4.split(" ").length)).toFixed(2),
+      					"Results" : Team_4
+      				},
+      				{
+      					"Teams": "Team 5" + "\n" + "Battles : " + retrieved_Team5_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team5_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team5_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_5_time*1000).fromNow(),
+      					"WinRate" : (Team5*100/(Team_5.split(" ").length )).toFixed(2),
+      					"Results" : Team_5
+      				},
+      				{
+      					"Teams": "Team 6" + "\n" + "Battles : " + retrieved_Team6_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team6_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team6_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_6_time*1000).fromNow(),
+      					"WinRate" : (Team6*100/(Team_6.split(" ").length )).toFixed(2),
+      					"Results" : Team_6
+      				},
+      				{
+      					"Teams": "Team 7" + "\n" + "Battles : " + retrieved_Team7_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team7_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team7_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_7_time*1000).fromNow(),
+      					"WinRate" : (Team7*100/(Team_7.split(" ").length )).toFixed(2),
+      					"Results" : Team_7
+      				},
+      				{
+      					"Teams": "Team 8" + "\n" + "Battles : " + retrieved_Team8_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team8_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team8_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_8_time*1000).fromNow(),
+      					"WinRate" : (Team8*100/(Team_8.split(" ").length )).toFixed(2),
+      					"Results" : Team_8
+      				},
+      				{
+      					"Teams": "Team 9" + "\n" + "Battles : " + retrieved_Team9_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team9_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team9_Results.match(new RegExp('L','g')).length + " )"+ "\n" + moment(Team_9_time*1000).fromNow(),
+      					"WinRate" : (Team9*100/(Team_9.split(" ").length )).toFixed(2),
+      					"Results" : Team_9
+      				},
+      				{
+      					"Teams": "Team 10" + "\n" + "Battles : " + retrieved_Team10_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team10_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team10_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_10_time*1000).fromNow(),
+      					"WinRate" : (Team10*100/(Team_10.split(" ").length )).toFixed(2),
+      					"Results" : Team_10
+      				},
+      				{
+      					"Teams": "Team 11" + "\n" + "Battles : " + retrieved_Team11_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team11_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team11_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_11_time*1000).fromNow(),
+      					"WinRate" : (Team11*100/(Team_11.split(" ").length )).toFixed(2),
+      					"Results" : Team_11
+      				}
+      			],
+      			"type": "serial",
+      			"categoryField": "Teams", 
+      			//"fontSize": 15,
+      			"columnSpacing": 12,
+      			"columnWidth": 0.53,
+      			"rotate": false,
+      			"startDuration": 1,
+      			"startEffect": "easeOutSine",
+      			"classNamePrefix": "msf",
+      			"creditsPosition": "top-right",
+      			"panEventsEnabled": false,
+      			"percentPrecision": 1,
+      			"theme": "light",
+      			"graphs": [
+      				{
+      					"title": "Blitz Live",
+      					"balloonText": "[[value]]% : [[Results]]",
+						"fillAlphas": 0.85,
+						"lineAlpha": 0.1,
+						"topRadius": 1,
+      					//"gapPeriod": 15,
+      					"id": "AmGraph-1",
+      					"tabIndex": 0,
+      					"title": "MSF",
+      					"type": "column",
+      					"valueField": "WinRate"
+      				}
+      			],
+      			//"depth3D": 1,
+      			"angle": 5,
+      			"export": {
+      				"enabled": false
+      			},
+      			"valueAxes": [
+      				{
+      					"id": "ValueAxis-1",
+      					"position": "bottom",
+      					//"title": "Win Rate %",
+      					//"titleFontSize": 20,
+      					"maximum": 100,
+      					"minimum": 0
+      				}
+      			]
+      			<!-- ,"titles": [ -->
+      				<!-- { -->
+      					<!-- "id": "Live Blitz Statistics", -->
+      					<!-- "size": 25, -->
+      					<!-- "text": "Live Blitz Statistics" -->
+      				<!-- } -->
+      			<!-- ] -->
+      		}
+      	);
+      	
+      	AmCharts.makeChart("chartdiv1",
+      		{
+      			"dataProvider": [
+      				{
+      					"Teams": "Team 1" + "\n" + "Battles : " + Team_1_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_1_alltime.match(new RegExp('W','g')).length + " / L " + Team_1_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_1_alltime.match(/W/gi).length)*100/(Team_1_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_1_alltime.match(/W/gi).length)*100/(Team_1_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_1_alltime
+      				},
+      				{
+      					"Teams": "Team 2" + "\n" + "Battles : " + Team_2_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_2_alltime.match(new RegExp('W','g')).length + " / L " + Team_2_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_2_alltime.match(/W/gi).length)*100/(Team_2_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_2_alltime.match(/W/gi).length)*100/(Team_2_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_2_alltime
+      				},
+      				{
+      					"Teams": "Team 3" + "\n" + "Battles : " + Team_3_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_3_alltime.match(new RegExp('W','g')).length + " / L " + Team_3_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_3_alltime.match(/W/gi).length)*100/(Team_3_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_3_alltime.match(/W/gi).length)*100/(Team_3_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_3_alltime
+      				},
+      				{
+      					"Teams": "Team 4" + "\n" + "Battles : " + Team_4_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_4_alltime.match(new RegExp('W','g')).length + " / L " + Team_4_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_4_alltime.match(/W/gi).length)*100/(Team_4_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_4_alltime.match(/W/gi).length)*100/(Team_4_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_4_alltime
+      				},
+      				{
+      					"Teams": "Team 5" + "\n" + "Battles : " + Team_5_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_5_alltime.match(new RegExp('W','g')).length + " / L " + Team_5_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_5_alltime.match(/W/gi).length)*100/(Team_5_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_5_alltime.match(/W/gi).length)*100/(Team_5_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_5_alltime
+      				},
+      				{
+      					"Teams": "Team 6" + "\n" + "Battles : " + Team_6_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_6_alltime.match(new RegExp('W','g')).length + " / L " + Team_6_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_6_alltime.match(/W/gi).length)*100/(Team_6_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_6_alltime.match(/W/gi).length)*100/(Team_6_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_6_alltime
+      				},
+      				{
+      					"Teams": "Team 7" + "\n" + "Battles : " + Team_7_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_7_alltime.match(new RegExp('W','g')).length + " / L " + Team_7_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_7_alltime.match(/W/gi).length)*100/(Team_7_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_7_alltime.match(/W/gi).length)*100/(Team_7_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_7_alltime
+      				},
+      				{
+      					"Teams": "Team 8" + "\n" + "Battles : " + Team_8_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_8_alltime.match(new RegExp('W','g')).length + " / L " + Team_8_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_8_alltime.match(/W/gi).length)*100/(Team_8_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_8_alltime.match(/W/gi).length)*100/(Team_8_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_8_alltime
+      				},
+      				{
+      					"Teams": "Team 9" + "\n" + "Battles : " + Team_9_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_9_alltime.match(new RegExp('W','g')).length + " / L " + Team_9_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_9_alltime.match(/W/gi).length)*100/(Team_9_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_9_alltime.match(/W/gi).length)*100/(Team_9_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_9_alltime
+      				},
+      				{
+      					"Teams": "Team 10" + "\n" + "Battles : " + Team_10_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_10_alltime.match(new RegExp('W','g')).length + " / L " + Team_10_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_10_alltime.match(/W/gi).length)*100/(Team_10_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_10_alltime.match(/W/gi).length)*100/(Team_10_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_10_alltime
+      				},
+      				{
+      					"Teams": "Team 11" + "\n" + "Battles : " + Team_11_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_11_alltime.match(new RegExp('W','g')).length + " / L " + Team_11_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_11_alltime.match(/W/gi).length)*100/(Team_11_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_11_alltime.match(/W/gi).length)*100/(Team_11_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_11_alltime
+      				},
+      			],
+      			"type": "serial",
+      			"categoryField": "Teams", 
+      			//"fontSize": 15,
+      			"columnSpacing": 12,
+      			"columnWidth": 0.53,
+      			"rotate": false,
+      			"startDuration": 1,
+      			"startEffect": "easeOutSine",
+      			"classNamePrefix": "msf",
+      			"creditsPosition": "top-right",
+      			"panEventsEnabled": false,
+      			"percentPrecision": 1,
+      			"theme": "none",
+      			"graphs": [
+      				{
+      					"title": "Blitz Live",
+      					"balloonText": "[[value]]% : [[Results]]",
+      					"fillAlphas": 0.85,
+						"lineAlpha": 0.1,
+						"topRadius": 1,
+      					//"gapPeriod": 15,
+      					"id": "AmGraph-2",
+      					"tabIndex": 0,
+      					"title": "MSF",
+      					"type": "column",
+      					"valueField": "WinRate"
+      				}
+      			],
+      			//"depth3D": 0,
+      			"angle": 5,
+      			"export": {
+      				"enabled": false
+      			},
+      			"valueAxes": [
+      				{
+      					"id": "ValueAxis-1",
+      					"position": "bottom",
+      					//"title": "Win Rate %",
+      					//"titleFontSize": 20,
+      					"maximum": 100,
+      					"minimum": 0
+      				}
+      			]
+      			<!-- ,"titles": [ -->
+      				<!-- { -->
+      					<!-- "id": "Blitz Statistics", -->
+      					<!-- "size": 25, -->
+      					<!-- "text": "Blitz All Statistics" -->
+      				<!-- } -->
+      			<!-- ] -->
+      		}
+      	);
+      			
+      	
+		//previous scores
+		$.ajax({
+      		url: "https://msf-stats.firebaseio.com/BlitzScore.json",
+      		type: 'GET',
+      		contentType: "application/json; charset=utf-8",
+      		dataType: "json",
+      		success: function(res) {
+      			var BlitzScore = res;
+				AmCharts.makeChart("chartdivscore",
+			{
+				"theme": "none",
+				"type": "serial",
+				"startDuration": 1,
+				"columnSpacing": 12,
+      			"columnWidth": 0.53,
+				"startEffect": "easeOutSine",
+				"creditsPosition": "top-right",
+				"dataProvider": BlitzScore,
+				"valueAxes": [{
+					"position": "left",
+					"axisAlpha":0,
+					"gridAlpha":0
+				}],
+				"graphs": [{
+					"balloonText": "<b>Rank : [[rank]]</b>" + "\n" + "[[category]]: [[value]]" + "\n" + "[[date]]",
+					"colorField": "color",
+					"fillAlphas": 0.85,
+					"lineAlpha": 0.1,
+					"type": "column",
+					"topRadius":1,
+					"valueField": "AvgScorePerDay"
+				}],
+      			//"depth3D": 1,
+      			"angle": 5,
+				<!-- "chartCursor": { -->
+					<!-- "categoryBalloonEnabled": false, -->
+					<!-- "cursorAlpha": 0, -->
+					<!-- "zoomable": false -->
+				<!-- }, -->
+				"categoryField": "Blitz",
+				"categoryAxis": {
+					"gridPosition": "start",
+					"axisAlpha":0,
+					"gridAlpha":0
+
+				},
+				"valueAxes": [
+      				{
+      					"id": "ValueAxis-1",
+      					"position": "bottom",
+      					//"title": "Score"
+      				}
+      			]
+
+			}, 0);
+			}
+		});
+		
+      }, 500);
+      		
+      
+      		}
+      			
+      	});
+		window.onload = function() {
+				if(!window.location.hash) {
+					window.location = window.location + '#loaded';
+					window.location.reload();
+				}
+			}
+      		
+    </script>
+    <script type="text/javascript">
+      moment.updateLocale('en', {
+      	relativeTime: {
+      	  future: 'in %s',
+      	  past: '%s ago',
+      	  s:  'seconds',
+      	  ss: '%ss',
+      	  m:  'a minute',
+      	  mm: '%dm',
+      	  h:  '1 hr',
+      	  hh: '%dh',
+      	  d:  'a day',
+      	  dd: '%dd',
+      	  M:  'a month',
+      	  MM: '%dM',
+      	  y:  'a year',
+      	  yy: '%dY'
+      	}
+        });
+    </script>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+      
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid" style="padding: 0.5rem;">
+
+          <!-- Content Row -->
+          <div class="row">
+		  
+            <!-- Earnings (Monthly) Card Example --> 
+            <div class="col-xl-6 col-md-6 mb-1" >
+              <div class="card border-left-primary shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-70 mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
+                      <div class="h5 mb-0  text-gray-800" id="running">-</div>
+                    </div>
+					
+					<div id="liveSignal" class="live-dot" style="position: absolute;left: 0;right: 0;margin: auto"></div>	
+                    <div class="col pull-right text-right">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Step</div>
+                      <div class="text-s mb-0 text-gray-800" id="firebaseLive">-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-6 col-md-6 mb-1 ">
+              <div class="card border-left-success shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Update</div>
+                      <div class="h5 mb-0  text-gray-800" id="stamp">-</div>
+                    </div>
+                     <div class="col pull-right text-right">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next Blitz</div>
+                      <div class="h5 mb-0  text-gray-800" id="timer">-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+			<!-- Last round Requests Card Example -->
+            <div class="col-xl-12 col-xs-12 mb-1">
+              <div class="card border-left-danger shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2 ">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+						<span>Last Round Results</span>
+						<span style="float: right;" class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="tierChecker"></span>	
+					  </div>
+
+						  <div class="row no-gutters align-items-center">
+							<div class="col-auto">
+							<div class="Row">
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T1_lastround" data-tip="Team 1"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T2_lastround" data-tip="Team 2"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T3_lastround" data-tip="Team 3"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T4_lastround" data-tip="Team 4"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T5_lastround" data-tip="Team 5"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T6_lastround" data-tip="Team 6"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T7_lastround" data-tip="Team 7"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T8_lastround" data-tip="Team 8"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T9_lastround" data-tip="Team 9"> - </div>
+								<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_lastround" data-tip="Team 10"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_lastround" data-tip="Team 11"> - </div>
+								<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div> -->
+							</div>
+							</div>
+			 
+						  </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+		  
+          </div>
+		  <div class="progress progress-sm mb-2 mt-1">
+                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+		  
+		  
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-12 mb-1">
+              <div class="card shadow " style="min-height: 50vh;">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header  d-flex flex-row align-items-center ">
+                  <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-area" >
+                    <div id="chartdiv" style="min-height: 33vh"></div>
+                  </div>
+				  
+                </div>
+				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
+						
+					  <div class="stat">
+						<h4>Last Round</h4>
+						<p id="winss">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Current Blitz</h4>
+						<p id="ThisBlitz">---</p>
+					  </div>
+					
+                </div>
+              </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-12 col-lg-12">
+              <div class="card shadow " style="min-height: 50vh;">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-bold text-primary">Blitz All time</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-pie pt-4 pb-2">
+                    <div id="chartdiv1" style="min-height: 33vh;"></div>
+                  </div>
+                </div>
+				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
+				  
+					  <div class="stat">
+						<h4>Total Battles</h4>
+						<p id="totalblitz">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Win Rate</h4>
+						<p id="wr">---</p>
+					  </div>
+					  <div class="stat">
+						<h4>Results</h4>
+						<p id="wl">---</p>
+					  </div>
+					
+                </div>
+              </div>
+            </div>
+			
+			<!-- previous ranking -->
+            <div class="col-xl-12 col-lg-12">
+              <div class="card shadow " style="min-height: 50vh;">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h5 class="m-0 font-weight-bold text-primary">Blitz Scores</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="chart-pie pt-4 pb-2">
+                    <div id="chartdivscore" style="min-height: 33vh;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+<!--Firebase -->
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA0urZjaAX-PjTAtww4BXsa00ciFACiln4",
+    authDomain: "msf-stats.firebaseapp.com",
+    databaseURL: "https://msf-stats.firebaseio.com",
+    projectId: "msf-stats",
+    storageBucket: "msf-stats.appspot.com",
+    messagingSenderId: "373368426587"
+  };
+  firebase.initializeApp(config);
+  
+	var ref = firebase.database().ref('/Live/step');                           
+		ref.on("value", function(snapshot){
+		firebaseLive.innerHTML = snapshot.val();
+		//progressbas
+		//$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
+		switch (snapshot.val()) {
+		  case 'Starting...':
+			$('.progress-bar').css('width', '1%').attr('aria-valuenow', 1); 
+			break;
+		  case 'Launching Nox':
+			$('.progress-bar').css('width', '5%').attr('aria-valuenow', 5); 
+			break;
+		  case 'Playing Marvel Strike Force':
+			$('.progress-bar').css('width', '8%').attr('aria-valuenow', 8); 
+			break;
+		  case 'Checking Main Screen':
+			$('.progress-bar').css('width', '10%').attr('aria-valuenow', 10); 
+			break;
+		  case 'Home Screen':
+			$('.progress-bar').css('width', '12%').attr('aria-valuenow', 12); 
+			break;
+		   case 'Basic Orb Available?':
+			$('.progress-bar').css('width', '15%').attr('aria-valuenow', 15); 
+			break;
+		   case 'Complete Daily Objectives':
+			$('.progress-bar').css('width', '18%').attr('aria-valuenow', 18); 
+			break;
+		  case 'Checking Energy':
+			$('.progress-bar').css('width', '20%').attr('aria-valuenow', 20); 
+			break;
+		   case 'Checking Event Energy':
+			$('.progress-bar').css('width', '22%').attr('aria-valuenow', 22); 
+			break;
+		  case 'Looking for Blitz':
+			$('.progress-bar').css('width', '25%').attr('aria-valuenow', 25); 
+			break;
+		  case 'Team 1 Blitzing':
+			$('.progress-bar').css('width', '30%').attr('aria-valuenow', 30); 
+			break;
+		  case 'Team 2 Blitzing':
+			$('.progress-bar').css('width', '35%').attr('aria-valuenow', 35); 
+			break;
+		  case 'Team 3 Blitzing':
+			$('.progress-bar').css('width', '40%').attr('aria-valuenow', 40); 
+			break;
+		  case 'Team 4 Blitzing':
+			$('.progress-bar').css('width', '45%').attr('aria-valuenow', 45); 
+			break;
+		  case 'Team 5 Blitzing':
+					$('.progress-bar').css('width', '50%').attr('aria-valuenow', 50); 
+			break;
+		  case 'Team 6 Blitzing':
+					$('.progress-bar').css('width', '55%').attr('aria-valuenow', 55); 
+					break;
+		  case 'Team 7 Blitzing':
+					$('.progress-bar').css('width', '60%').attr('aria-valuenow', 60); 
+					break;
+		  case 'Team 8 Blitzing':
+					$('.progress-bar').css('width', '65%').attr('aria-valuenow', 65); 
+					break;
+		  case 'Team 9 Blitzing':
+					$('.progress-bar').css('width', '70%').attr('aria-valuenow', 70); 
+					break;
+		  case 'Team 10 Blitzing':
+					$('.progress-bar').css('width', '75%').attr('aria-valuenow', 75); 
+					break;
+	      case 'Team 11 Blitzing':
+					$('.progress-bar').css('width', '80%').attr('aria-valuenow', 80); 
+					break;
+		  case 'Updating Files':
+					$('.progress-bar').css('width', '85%').attr('aria-valuenow', 85); 
+					break;
+		  case 'Closing Nox Player':
+					$('.progress-bar').css('width', '90%').attr('aria-valuenow', 90); 
+					break;	
+		  case 'Complete':
+					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
+					setTimeout(function(){ 
+						firebaseLive.innerHTML = "Uhhmmmm...";
+						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+					}, 300000);	//5 min
+					break;					
+		  default:
+			$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+		}		
+		
+	});
+	//if firebaseLive doesnt change for a while change to error with bot
+	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
+		var firebaseLiveChanged = true;
+			setTimeout(function(){ 
+				firebaseLiveChanged = false;
+				if(snapshot.val() !== 'Uhhmmmm...'){
+					if(firebaseLiveChanged == false){
+						firebaseLive.innerHTML = "Somthing Wrong";
+					}
+				}
+      		}, 310000);			
+	});
+	
+	
+</script>
+
+
+</body>
+
+</html>
