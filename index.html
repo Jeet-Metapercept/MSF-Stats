@@ -1597,18 +1597,18 @@
 		
 		
 	//if firebaseLive doesnt change for a while change to error with bot
-	$("body").on('DOMSubtreeModified', "#firebaseLive", function() {
-		var firebaseLiveChanged = true;
-		var snap = snapshot.val();
-			setTimeout(function(){ 
-				firebaseLiveChanged = false;
-				if(snap !== 'Uhhmmmm...'){
-					if(firebaseLiveChanged == false){
-						firebaseLive.innerHTML = "Somthing Wrong";
-					}
-				}
-      		}, 300000);			
-	});
+	<!-- $("body").on('DOMSubtreeModified', "#firebaseLive", function() { -->
+		<!-- var firebaseLiveChanged = true; -->
+		<!-- var snap = snapshot.val(); -->
+			<!-- setTimeout(function(){  -->
+				<!-- firebaseLiveChanged = false; -->
+				<!-- if(snap !== 'Uhhmmmm...'){ -->
+					<!-- if(firebaseLiveChanged == false){ -->
+						<!-- firebaseLive.innerHTML = "Somthing Wrong"; -->
+					<!-- } -->
+				<!-- } -->
+      		<!-- }, 300000);			 -->
+	<!-- }); -->
 		
 		
 });
