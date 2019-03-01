@@ -1577,11 +1577,12 @@
 
 	  var refScore = firebase.database().ref('/ExpectedScore/CurrentRoundScore');                           
 		refScore.on("value", function(snapshot){
-		CurrentRoundScore.innerHTML = snapshot.val();
+			CurrentRoundScore.innerHTML = snapshot.val();
+		});
 	 var refTScore = firebase.database().ref('/ExpectedScore/TotalScore');                           
 		refTScore.on("value", function(snapshot){
-		TotalScore.innerHTML = snapshot.val();
-		
+			TotalScore.innerHTML = snapshot.val();
+		});
 	  
 	  var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
