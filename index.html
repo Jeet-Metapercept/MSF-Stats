@@ -54,6 +54,11 @@
       			var BlitzData = res;
       			//console.log(BlitzData);
 				
+				
+				//Score Calculate
+				var TotalScore = BlitzData.ExpectedScore.TotalScore;
+				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
+				
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
@@ -71,6 +76,20 @@
 							   }
 						});
 					}
+					//reset TotalScore
+						$.ajax({
+						  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+						  "CurrentRoundScore" : 0,
+						  "TotalScore" : 0
+						  }),
+						  success: function(res) {
+							//console.log(res);
+						  }
+					   });
 				}
 				
 				
@@ -271,6 +290,7 @@
       			var retrieved_LastBlitz = BlitzData.LastBlitz;
       			var LastBlitzNumber = retrieved_LastBlitz; 
 	  
+
 
       //Saving Teams Times
       function readTimesTextFile(sfile){	 
@@ -582,6 +602,20 @@
 									}
 								  
 									});
+									
+									//Reset Score System
+									$.ajax({
+									  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+									  type: 'PATCH',
+									  contentType: "application/json; charset=utf-8",
+									  dataType: "json",
+									  data: JSON.stringify({
+									  "CurrentRoundScore" : 0
+									  }),
+									  success: function(res) {
+										//console.log(res);
+									  }
+								   });
 								
     						}
       						else{
@@ -617,6 +651,9 @@
       }
       readTierCheckFile("SuicideSquad.txt");
 	  
+	  <!-- Expected Score -->
+		
+	  
       //Saving Teams Results
       function readTextFile(file){
 	  
@@ -645,9 +682,9 @@
       "alltime" : T1.alltime + match_result,
       "live" : T1.live + match_result}),
       success: function(res) {
-      //console.log(res);
       }					  
       }); 
+
       break; 
       case 'Team2.txt':  
       $.ajax({
@@ -845,6 +882,12 @@
       			
       		var blitzResults = document.getElementById("wl");
       			blitzResults.innerHTML =  " W " + BlitzTotalBattlesWon + " , L " + BlitzTotalBattlesLost;
+				
+			var crScore = document.getElementById("CurrentRoundScore");
+      			crScore.innerHTML =  CurrentRoundScore;
+				
+			var tScore = document.getElementById("TotalScore");
+      			tScore.innerHTML =  TotalScore;
 				
 			<!-- var battlesplayed =	document.getElementById("battlesplayed"); -->
       			<!-- battlesplayed.innerHTML =  CurrentBattlesWon + CurrentBattlesLost; -->
@@ -1314,7 +1357,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Last Round Score</div>
-                      <div class="h5 mb-0  text-gray-800" id="LastScore">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="CurrentRoundScore">-</div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Score</div>
@@ -1517,13 +1560,33 @@
             <!-- console.log("Message received. ", payload); -->
             <!-- NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)  -->
         <!-- }); -->
-  
+  	  
+	  //Estimated Scores at 3.10x to 3.40x (can be changed)
+	  var Team1AvgScore = 28000;
+	  var Team2AvgScore = 29000;
+	  var Team3AvgScore = 31000;
+	  var Team4AvgScore = 22000;
+	  var Team5AvgScore = 23000;
+	  var Team6AvgScore = 24000;
+	  var Team7AvgScore = 25000;
+	  var Team8AvgScore = 19000;
+	  var Team9AvgScore = 17000;
+	  var Team10AvgScore = 21000;
+	  var Team11AvgScore = 19000;
+	  var Team12AvgScore = 0;
 
-	var ref = firebase.database().ref('/Live/step');                           
+	  var refScore = firebase.database().ref('/ExpectedScore/CurrentRoundScore');                           
+		refScore.on("value", function(snapshot){
+		CurrentRoundScore.innerHTML = snapshot.val();
+	 var refTScore = firebase.database().ref('/ExpectedScore/TotalScore');                           
+		refTScore.on("value", function(snapshot){
+		TotalScore.innerHTML = snapshot.val();
+		
+	  
+	  var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
 		firebaseLive.innerHTML = snapshot.val();
 		//progressbas
-		//$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
 		switch (snapshot.val()) {
 		  case 'Starting...':
 			$('.progress-bar').css('width', '1%').attr('aria-valuenow', 1); 
@@ -1605,22 +1668,192 @@
 			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
 		}		
 		
-		
-		
-	//if firebaseLive doesnt change for a while change to error with bot
-	<!-- $("body").on('DOMSubtreeModified', "#firebaseLive", function() { -->
-		<!-- var firebaseLiveChanged = true; -->
-		<!-- var snap = snapshot.val(); -->
-			<!-- setTimeout(function(){  -->
-				<!-- firebaseLiveChanged = false; -->
-				<!-- if(snap !== 'Uhhmmmm...'){ -->
-					<!-- if(firebaseLiveChanged == false){ -->
-						<!-- firebaseLive.innerHTML = "Somthing Wrong"; -->
-					<!-- } -->
-				<!-- } -->
-      		<!-- }, 300000);			 -->
-	<!-- }); -->
-		
+		//Points System Exeperiment
+		switch (snapshot.val()) {
+		  case 'Team 1 Won!':
+			  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team1AvgScore,
+			  "TotalScore" : TotalScore + Team1AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;	
+		  case 'Team 2 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team2AvgScore,
+			  "TotalScore" : TotalScore + Team2AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+			case 'Team 3 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team3AvgScore,
+			  "TotalScore" : TotalScore + Team3AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+				case 'Team 4 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team4AvgScore,
+			  "TotalScore" : TotalScore + Team4AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+			case 'Team 5 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team5AvgScore,
+			  "TotalScore" : TotalScore + Team5AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+			case 'Team 6 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team6AvgScore,
+			  "TotalScore" : TotalScore + Team6AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+		case 'Team 7 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team7AvgScore,
+			  "TotalScore" : TotalScore + Team7AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+		case 'Team 8 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team8AvgScore,
+			  "TotalScore" : TotalScore + Team8AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;	
+		case 'Team 9 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
+			  "TotalScore" : TotalScore + Team9AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+			case 'Team 10 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team10AvgScore,
+			  "TotalScore" : TotalScore + Team10AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+			case 'Team 11 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team11AvgScore,
+			  "TotalScore" : TotalScore + Team11AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;
+		case 'Team 12 Won!':
+		  $.ajax({
+			  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			  type: 'PATCH',
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json",
+			  data: JSON.stringify({
+			  "CurrentRoundScore" : CurrentRoundScore + Team12AvgScore,
+			  "TotalScore" : TotalScore + Team12AvgScore
+			  }),
+			  success: function(res) {
+				//console.log(res);
+			  }
+			  });
+			break;					
+		  default:
+			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+		}
+
 		
 });
 	
