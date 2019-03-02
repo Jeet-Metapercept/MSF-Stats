@@ -1889,19 +1889,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : TotalScore + Team9AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
+				    refScore.update({'/TotalScore': TotalScore + Team1AvgScore});
 			}					  
 			});
 			break;
