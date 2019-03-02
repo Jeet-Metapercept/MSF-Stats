@@ -1843,8 +1843,8 @@
 			success: function( ) {
 				   //console.log(res);
 				  // CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				  refScore.update({'/CurrentRoundScore': "Active"});
-				  refScore.update({'/CurrentRoundScore': "Active"});
+				  refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team7AvgScore});
+				  refScore.update({'/TotalScore': res.TotalScore + Team7AvgScore});
 				    <!-- $.ajax({ -->
 					  <!-- url: "https://msf-stats.firebaseio.com/ExpectedScore.json", -->
 					  <!-- type: 'PATCH', -->
@@ -1871,19 +1871,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team8AvgScore,
-					  "TotalScore" : res.TotalScore + Team8AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team8AvgScore});
+				  refScore.update({'/TotalScore': res.TotalScore + Team8AvgScore});
 			}					  
 			});
 			break;	
