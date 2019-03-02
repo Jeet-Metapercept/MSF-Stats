@@ -1580,18 +1580,13 @@
 				  var CurrentRoundScore = res.CurrentRoundScore;
 				  var TotalScore = res.TotalScore;
 				  
-				  	  var refScore = firebase.database().ref('/ExpectedScore');                           
-		refScore.on("value", function(snapshot){
-			crs.innerHTML = snapshot.val().CurrentRoundScore;
-			ts.innerHTML = snapshot.val().TotalScore;
-		});
-
-	  
-	  
-
-	  
-	  
-	  var ref = firebase.database().ref('/Live/step');                           
+				   var refScore = firebase.database().ref('/ExpectedScore');                           
+					refScore.on("value", function(snapshot){
+						crs.innerHTML = snapshot.val().CurrentRoundScore;
+						ts.innerHTML = snapshot.val().TotalScore;
+					});
+					
+				  var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
 		firebaseLive.innerHTML = snapshot.val();
 		//progressbas
@@ -1995,15 +1990,20 @@
 		  default:
 			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
 		}
-				  
-				  
-				}					  
-			});		
-
-
 
 		
 });
+		}					  
+	});		
+
+	 
+
+	  
+	  
+
+	  
+	  
+	  
 	
 	
 	
