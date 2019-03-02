@@ -1579,10 +1579,8 @@
 				   console.log(res);
 				  var CurrentRoundScore = res.CurrentRoundScore;
 				  var TotalScore = res.TotalScore;
-				}					  
-			});		
-
-	  var refScore = firebase.database().ref('/ExpectedScore');                           
+				  
+				  	  var refScore = firebase.database().ref('/ExpectedScore');                           
 		refScore.on("value", function(snapshot){
 			crs.innerHTML = snapshot.val().CurrentRoundScore;
 			ts.innerHTML = snapshot.val().TotalScore;
@@ -1690,8 +1688,19 @@
 			success: function(res) {
 				   //console.log(res);
 				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    refScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
-				    refTScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
+				    $.ajax({
+					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+					  type: 'PATCH',
+					  contentType: "application/json; charset=utf-8",
+					  dataType: "json",
+					  data: JSON.stringify({
+					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : TotalScore + Team9AvgScore
+					  }),
+					  success: function(res) {
+						//console.log(res);
+					  }
+					  });
 				}					  
 			});		  
 		  
@@ -1889,8 +1898,19 @@
 			success: function( ) {
 				   //console.log(res);
 				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    refScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
-				    refScore.update({'/TotalScore': TotalScore + Team1AvgScore});
+				    $.ajax({
+					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+					  type: 'PATCH',
+					  contentType: "application/json; charset=utf-8",
+					  dataType: "json",
+					  data: JSON.stringify({
+					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : TotalScore + Team9AvgScore
+					  }),
+					  success: function(res) {
+						//console.log(res);
+					  }
+					  });
 			}					  
 			});
 			break;
@@ -1975,6 +1995,12 @@
 		  default:
 			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
 		}
+				  
+				  
+				}					  
+			});		
+
+
 
 		
 });
