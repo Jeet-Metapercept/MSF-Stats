@@ -55,9 +55,7 @@
       			//console.log(BlitzData);
 				
 				
-				//Score Calculate
-				var TotalScore = BlitzData.ExpectedScore.TotalScore;
-				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
+
 				
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
@@ -1352,11 +1350,11 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Last Round Score</div>
-                      <div class="h5 mb-0  text-gray-800" id="CurrentRoundScore">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="crs">-</div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Score</div>
-                      <div class="h5 mb-0  text-gray-800" id="TotalScore">-</div>
+                      <div class="h5 mb-0  text-gray-800" id="ts">-</div>
                     </div>
                   </div>
                 </div>
@@ -1570,30 +1568,30 @@
 	  var Team11AvgScore = 19000;
 	  var Team12AvgScore = 0;
 
+	  //Score Calculate 
+		$.ajax({
+			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+			type: 'GET',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
+			success: function(res) {
+				   console.log(res);
+				  var CurrentRoundScore = res.CurrentRoundScore;
+				  var TotalScore = res.TotalScore;
+				}					  
+			});		
+
+	  var refScore = firebase.database().ref('/ExpectedScore');                           
+		refScore.on("value", function(snapshot){
+			crs.innerHTML = snapshot.val().CurrentRoundScore;
+			ts.innerHTML = snapshot.val().TotalScore;
+		});
+
 	  
-	  <!-- $.ajax({ -->
-			<!-- url: "https://msf-stats.firebaseio.com/ExpectedScore.json", -->
-			<!-- type: 'GET', -->
-			<!-- contentType: "application/json; charset=utf-8", -->
-			<!-- dataType: "json", -->
-			<!-- //data: JSON.stringify({"SuicideSquadUsed" : tierResult}), -->
-			<!-- success: function(res) { -->
-				   <!-- console.log(res); -->
-				   
-				  
-				<!-- }					   -->
-			<!-- });		 -->
 	  
 
-	  var refScore = firebase.database().ref('/ExpectedScore/CurrentRoundScore');                           
-		refScore.on("value", function(snapshot){
-			CurrentRoundScore.innerHTML = snapshot.val();
-			//console.log(snapshot.val());
-		});
-	 var refTScore = firebase.database().ref('/ExpectedScore/TotalScore');                           
-		refTScore.on("value", function(snapshot){
-			TotalScore.innerHTML = snapshot.val();
-		});
+	  
 	  
 	  var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
@@ -1689,22 +1687,11 @@
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
+			success: function(res) {
 				   //console.log(res);
 				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				   $.ajax({
-				  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-				  type: 'PATCH',
-				  contentType: "application/json; charset=utf-8",
-				  dataType: "json",
-				  data: JSON.stringify({
-				  "CurrentRoundScore" : CurrentRoundScore + Team1AvgScore,
-				  "TotalScore" : TotalScore + Team1AvgScore
-				  }),
-				  success: function(res) {
-					//console.log(res);
-				  }
-				  });
+				    refScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
+				    refTScore.update({'/CurrentRoundScore': CurrentRoundScore + Team1AvgScore});
 				}					  
 			});		  
 		  
@@ -1830,10 +1817,10 @@
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
-					  data: {
+					  data: JSON.stringify({
 					  "CurrentRoundScore" : CurrentRoundScore + Team6AvgScore,
 					  "TotalScore" : TotalScore + Team6AvgScore
-					  },
+					  }),
 					  success: function(res) {
 						//console.log(res);
 					  }
