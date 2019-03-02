@@ -1683,19 +1683,8 @@
 			success: function(res) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team1AvgScore,
-					  "TotalScore" : res.TotalScore + Team1AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team1AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team1AvgScore});
 				}					  
 			});		  
 		  
@@ -1712,19 +1701,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team2AvgScore,
-					  "TotalScore" : res.TotalScore + Team2AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team2AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team2AvgScore});
 			}					  
 			});	
 		 
@@ -1739,19 +1717,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team3AvgScore,
-					  "TotalScore" : res.TotalScore + Team3AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				   refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team3AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team3AvgScore});
 			}					  
 			});
 			break;
@@ -1765,19 +1732,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team4AvgScore,
-					  "TotalScore" : res.TotalScore + Team4AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				   refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team4AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team4AvgScore});
 			}					  
 			});
 			break;
@@ -1791,19 +1747,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team5AvgScore,
-					  "TotalScore" : res.TotalScore + Team5AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team5AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team5AvgScore});
 			}					  
 			});
 			break;
@@ -1817,19 +1762,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team6AvgScore,
-					  "TotalScore" : res.TotalScore + Team6AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team6AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team6AvgScore});
 			}					  
 			});
 			break;
@@ -1872,7 +1806,7 @@
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team8AvgScore});
-				  refScore.update({'/TotalScore': res.TotalScore + Team8AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team8AvgScore});
 			}					  
 			});
 			break;	
@@ -1886,19 +1820,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : res.TotalScore + Team9AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				   refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team9AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team9AvgScore});
 			}					  
 			});
 			break;
@@ -1912,19 +1835,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					 "CurrentRoundScore" : res.CurrentRoundScore + Team10AvgScore,
-					  "TotalScore" : res.TotalScore + Team10AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team10AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team10AvgScore});
 			}					  
 			});
 			break;
@@ -1938,19 +1850,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team11AvgScore,
-					  "TotalScore" : res.TotalScore + Team11AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				   refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team11AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team11AvgScore});
 			}					  
 			});
 			break;
@@ -1964,19 +1865,8 @@
 			success: function( ) {
 				   //console.log(res);
 				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					 "CurrentRoundScore" : res.CurrentRoundScore + Team12AvgScore,
-					  "TotalScore" : res.TotalScore + Team12AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				    refScore.update({'/CurrentRoundScore': res.CurrentRoundScore + Team12AvgScore});
+					refScore.update({'/TotalScore': res.TotalScore + Team12AvgScore});
 			}					  
 			});
 			break;					
