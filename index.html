@@ -1570,6 +1570,21 @@
 	  var Team11AvgScore = 19000;
 	  var Team12AvgScore = 0;
 
+	  
+	  <!-- $.ajax({ -->
+			<!-- url: "https://msf-stats.firebaseio.com/ExpectedScore.json", -->
+			<!-- type: 'GET', -->
+			<!-- contentType: "application/json; charset=utf-8", -->
+			<!-- dataType: "json", -->
+			<!-- //data: JSON.stringify({"SuicideSquadUsed" : tierResult}), -->
+			<!-- success: function(res) { -->
+				   <!-- console.log(res); -->
+				   
+				  
+				<!-- }					   -->
+			<!-- });		 -->
+	  
+
 	  var refScore = firebase.database().ref('/ExpectedScore/CurrentRoundScore');                           
 		refScore.on("value", function(snapshot){
 			CurrentRoundScore.innerHTML = snapshot.val();
@@ -1815,10 +1830,10 @@
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
-					  data: JSON.stringify({
+					  data: {
 					  "CurrentRoundScore" : CurrentRoundScore + Team6AvgScore,
 					  "TotalScore" : TotalScore + Team6AvgScore
-					  }),
+					  },
 					  success: function(res) {
 						//console.log(res);
 					  }
