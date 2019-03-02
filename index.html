@@ -1587,9 +1587,8 @@
 					});
 					
 				  var ref = firebase.database().ref('/Live/step');                           
-		ref.on("value", function(snapshot){
-		firebaseLive.innerHTML = snapshot.val();
-		
+						ref.on("value", function(snapshot){
+						firebaseLive.innerHTML = snapshot.val();
 		//progressbas
 		switch (snapshot.val()) {
 		  case 'Starting...':
@@ -1844,19 +1843,21 @@
 			success: function( ) {
 				   //console.log(res);
 				  // CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : res.CurrentRoundScore + Team7AvgScore,
-					  "TotalScore" : res.TotalScore + Team7AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
+				  refScore.update({'/CurrentRoundScore': "Active"});
+				  refScore.update({'/CurrentRoundScore': "Active"});
+				    <!-- $.ajax({ -->
+					  <!-- url: "https://msf-stats.firebaseio.com/ExpectedScore.json", -->
+					  <!-- type: 'PATCH', -->
+					  <!-- contentType: "application/json; charset=utf-8", -->
+					  <!-- dataType: "json", -->
+					  <!-- data: JSON.stringify({ -->
+					  <!-- "CurrentRoundScore" : res.CurrentRoundScore + Team7AvgScore, -->
+					  <!-- "TotalScore" : res.TotalScore + Team7AvgScore -->
+					  <!-- }), -->
+					  <!-- success: function(res) { -->
+						<!-- //console.log(res); -->
+					  <!-- } -->
+					  <!-- }); -->
 			}					  
 			});
 			break;
