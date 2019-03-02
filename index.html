@@ -1682,15 +1682,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function(res) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : TotalScore + Team9AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1711,15 +1711,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team2AvgScore,
-					  "TotalScore" : TotalScore + Team2AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1738,15 +1738,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team3AvgScore,
-					  "TotalScore" : TotalScore + Team3AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1764,15 +1764,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team4AvgScore,
-					  "TotalScore" : TotalScore + Team4AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1789,15 +1789,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team5AvgScore,
-					  "TotalScore" : TotalScore + Team5AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1815,15 +1815,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team6AvgScore,
-					  "TotalScore" : TotalScore + Team6AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1841,15 +1841,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				  // CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team7AvgScore,
-					  "TotalScore" : TotalScore + Team7AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1866,15 +1866,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team8AvgScore,
-					  "TotalScore" : TotalScore + Team8AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1892,15 +1892,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : TotalScore + Team9AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1918,15 +1918,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team10AvgScore,
-					  "TotalScore" : TotalScore + Team10AvgScore
+					 "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1944,15 +1944,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team11AvgScore,
-					  "TotalScore" : TotalScore + Team11AvgScore
+					  "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
@@ -1970,15 +1970,15 @@
 			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
 			success: function( ) {
 				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
+				   //CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
 				    $.ajax({
 					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 					  type: 'PATCH',
 					  contentType: "application/json; charset=utf-8",
 					  dataType: "json",
 					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team12AvgScore,
-					  "TotalScore" : TotalScore + Team12AvgScore
+					 "CurrentRoundScore" : res.CurrentRoundScore + Team9AvgScore,
+					  "TotalScore" : res.TotalScore + Team9AvgScore
 					  }),
 					  success: function(res) {
 						//console.log(res);
