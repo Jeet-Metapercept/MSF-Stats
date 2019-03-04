@@ -608,7 +608,7 @@
 									});
 									
 									//Reset Score System
-									var addScore = TotalScore + CurrentRoundScore;
+									var addScore = parseInt(TotalScore) + parseInt(CurrentRoundScore);
 									var TotalScore = addScore;
 
 									$.ajax({
@@ -1537,7 +1537,7 @@
   
 	 var refScore = firebase.database().ref('/ExpectedScore');                           
 	 refScore.on("value", function(snapshot){
-		crs.innerHTML = Number(snapshot.val().CurrentRoundScore).toLocaleString('en');
+		crs.innerHTML = snapshot.val().CurrentRoundScore;
 		ts.innerHTML = snapshot.val().TotalScore;
 	 });
   	  
