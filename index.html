@@ -25,7 +25,9 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
-	<!-- <script type="text/javascript" src="scripts/countUp.js"></script> -->
+	<script type="text/javascript" src="scripts/odometer.min.js"></script>
+
+	
 	<!-- Push API notification -->
 	<!-- <script type="text/javascript" src="scripts/push.min.js"></script> -->
 	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
@@ -1291,6 +1293,7 @@
       	  yy: '%dY'
       	}
         });
+
     </script>
 </head>
 
@@ -1358,11 +1361,11 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
-                      <div class="h5 mb-0  text-gray-800" id="crs">-</div>
+                      <div class="h5 mb-0  text-gray-800 odometer" id="crs">-</div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
-                      <div class="h5 mb-0  text-gray-800" id="ts">-</div>
+                      <div class="h5 mb-0  text-gray-800 odometer" id="ts">-</div>
                     </div>
                   </div>
                 </div>
