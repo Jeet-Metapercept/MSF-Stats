@@ -1317,7 +1317,7 @@
 		  
             <!-- Earnings (Monthly) Card Example --> 
             <div class="col-xl-6 col-md-6 mb-1" >
-              <div class="card border-left-primary shadow h-60 py-2 blinkGreen">
+              <div class="card border-left-primary shadow h-60 py-2" id="firecard">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
                     <div class="col-70 mr-2">
@@ -1553,6 +1553,9 @@
 	   var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
 		firebaseLive.innerHTML = snapshot.val();
+		
+		if(snapshot.val().includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
+		if(snapshot.val().includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
 		//progressbas
 		switch (snapshot.val()) {
 		  case 'Starting...':
