@@ -201,13 +201,12 @@
 }        
 @keyframes animationFramesGreen{
   50% {
-   background-color: #17a673;
+   background-color: #1cc88a;
   }
 }
 @keyframes animationFramesRed{
   50% {
-   background-color: #e02d1b;
-   color: #fff;
+   background-color: #e74a3b;
   }
 }
 
