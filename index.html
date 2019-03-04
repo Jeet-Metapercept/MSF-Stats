@@ -1537,7 +1537,7 @@
   
 	 var refScore = firebase.database().ref('/ExpectedScore');                           
 	 refScore.on("value", function(snapshot){
-		crs.innerHTML = snapshot.val().CurrentRoundScore;
+		crs.innerHTML = Number(snapshot.val().CurrentRoundScore).toLocaleString('en');
 		ts.innerHTML = snapshot.val().TotalScore;
 	 });
   	  
