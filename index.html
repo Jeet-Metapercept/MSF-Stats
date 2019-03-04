@@ -13,7 +13,7 @@
 
   <!-- Custom fonts for this template-->
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- Custom styles for this template-->
   <link href="scripts/sb-admin-2.css" rel="stylesheet">
       <!-- amCharts javascript sources -->
@@ -107,6 +107,7 @@
 				//console.log(CurrentRoundScore);
 				var TotalScore = BlitzData.ExpectedScore.TotalScore;
 				//console.log(TotalScore);
+				var LastRoundScore = BlitzData.ExpectedScore.LastRoundScore;
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
 			
@@ -616,7 +617,6 @@
 									  contentType: "application/json; charset=utf-8",
 									  dataType: "json",
 									  data: JSON.stringify({
-									  "CurrentRoundScore" : 0,
 									  "TotalScore" : addScore
 									  }),
 									  success: function(res) {
@@ -1317,7 +1317,7 @@
 		  
             <!-- Earnings (Monthly) Card Example --> 
             <div class="col-xl-6 col-md-6 mb-1" >
-              <div class="card border-left-primary shadow h-60 py-2">
+              <div class="card border-left-primary shadow h-60 py-2 blinkGreen">
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
                     <div class="col-70 mr-2">
@@ -1326,8 +1326,8 @@
                     </div>
 					
 					<div id="liveSignal" class="live-dot" style="position: absolute;left: 0;right: 0;margin: auto"></div>	
-                    <div class="col pull-right text-right">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Step</div>
+                    <div class="col pull-right text-right ">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 ">Step</div>
                       <div class="text-s mb-0 text-gray-800" id="firebaseLive">-</div>
                     </div>
                   </div>
@@ -1360,7 +1360,10 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
-                      <div class="h5 mb-0  text-gray-800 odometer" id="crs">-</div>
+                      <div class="h5 mb-0  text-gray-800 ">
+							<span class="odometer" id="crs">-</span>
+							<span><i class="fas fa-caret-up text-success" id="score_up"></i><i id="score_down" class="fas fa-caret-down text-danger"></i></span>
+					  </div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
@@ -1377,7 +1380,7 @@
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2 ">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1" >
 						<span>Last Round Results</span>
 						<span style="float: right;" class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="tierChecker"></span>	
 					  </div>
@@ -1402,9 +1405,9 @@
 			 
 						  </div>
                     </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
+                    <!-- <div class="col-auto"> -->
+                      <!-- <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> -->
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
@@ -1437,7 +1440,7 @@
                 </div>
 				<div style="text-align: center; margin-bottom: 0rem; padding-bottom: 0rem;" class="card-footer  align-items-center justify-content-between stats">
 						
-					  <div class="stat">
+					  <div class="stat" >
 						<h4>Last Round</h4>
 						<p id="winss">---</p>
 					  </div>
@@ -1538,6 +1541,13 @@
 	 refScore.on("value", function(snapshot){
 		crs.innerHTML = snapshot.val().CurrentRoundScore;
 		ts.innerHTML = snapshot.val().TotalScore;
+		$("#score_up").hide();
+		$("#score_down").show();
+		if(snapshot.val().CurrentRoundScore > snapshot.val().LastRoundScore){
+		  //$("#score_up").show();
+		  $('#score_up').fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+		  $("#score_down").hide();
+		}
 	 });
   	  
 	   var ref = firebase.database().ref('/Live/step');                           

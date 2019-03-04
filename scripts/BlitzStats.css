@@ -183,6 +183,29 @@
     }
 }
 
+.blinkGreen {
+   
+   background: white;
+        -webkit-animation-name: animationFramesGreen;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-delay: 0s;
+}
+        
+@keyframes animationFramesGreen{
+  50% {
+   background-color: #17a673;
+   color: #fff;
+  }
+}
+@keyframes animationFramesRed{
+  50% {
+   background-color: #e02d1b;
+  }
+}
+
+
 .odometer.odometer-auto-theme, .odometer.odometer-theme-minimal {
   display: inline-block;
   vertical-align: middle;
