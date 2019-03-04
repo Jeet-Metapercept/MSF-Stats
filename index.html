@@ -25,9 +25,11 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="scripts/countUp.js"></script> -->
 	<!-- Push API notification -->
 	<!-- <script type="text/javascript" src="scripts/push.min.js"></script> -->
 	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+	
 	<script>
 	  var OneSignal = window.OneSignal || [];
 	  OneSignal.push(function() {
@@ -52,9 +54,7 @@
       			var BlitzData = res;
       			//console.log(BlitzData);
 				
-				
 
-				
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
@@ -99,6 +99,12 @@
 							liveStatus.innerHTML = "<span class='badge badge-secondary'>Offline</span>";
 					 $("#liveSignal").removeClass("live-dot");
 				}
+			
+				//Score
+				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
+				console.log(CurrentRoundScore);
+				var TotalScore = BlitzData.ExpectedScore.TotalScore;
+				console.log(TotalScore);
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
 			
@@ -304,7 +310,7 @@
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	  console.log(Team_1_time, battletime);
+	 // console.log(Team_1_time, battletime);
       if(battletime > Team_1_time){
       readTextFile("Team1.txt");
       $.ajax({
@@ -600,13 +606,17 @@
 									});
 									
 									//Reset Score System
+									var addScore = TotalScore + CurrentRoundScore;
+									var TotalScore = addScore;
+
 									$.ajax({
 									  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 									  type: 'PATCH',
 									  contentType: "application/json; charset=utf-8",
 									  dataType: "json",
 									  data: JSON.stringify({
-									  "CurrentRoundScore" : 0
+									  "CurrentRoundScore" : 0,
+									  "TotalScore" : TotalScore
 									  }),
 									  success: function(res) {
 										//console.log(res);
@@ -1342,22 +1352,22 @@
             </div>
 			
 			 <!-- Expected points -->
-            <!-- <div class="col-xl-12 col-md-12 mb-1 "> -->
-              <!-- <div class="card border-left-info shadow h-60 py-2"> -->
-                <!-- <div class="card-body" style="padding: 0 1.25rem;"> -->
-                  <!-- <div class="row no-gutters align-items-center"> -->
-                    <!-- <div class="col mr-2"> -->
-                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Last Round Score</div> -->
-                      <!-- <div class="h5 mb-0  text-gray-800" id="crs">-</div> -->
-                    <!-- </div> -->
-                     <!-- <div class="col pull-right text-right"> -->
-                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Score</div> -->
-                      <!-- <div class="h5 mb-0  text-gray-800" id="ts">-</div> -->
-                    <!-- </div> -->
-                  <!-- </div> -->
-                <!-- </div> -->
-              <!-- </div> -->
-            <!-- </div> -->
+            <div class="col-xl-12 col-md-12 mb-1 ">
+              <div class="card border-left-info shadow h-60 py-2">
+                <div class="card-body" style="padding: 0 1.25rem;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
+                      <div class="h5 mb-0  text-gray-800" id="crs">-</div>
+                    </div>
+                     <div class="col pull-right text-right">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
+                      <div class="h5 mb-0  text-gray-800" id="ts">-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 			
 			<!-- Last round Requests Card Example -->
             <div class="col-xl-12 col-xs-12 mb-1">
@@ -1508,7 +1518,6 @@
 <!--Firebase -->
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-messaging.js"></script>
 
 
 <script>
@@ -1523,34 +1532,11 @@
   };
   firebase.initializeApp(config);
   
-  //FCM notification
-		<!-- MsgElem = document.getElementById("msg") -->
-        <!-- TokenElem = document.getElementById("token") -->
-        <!-- NotisElem = document.getElementById("notis") -->
-        <!-- ErrElem = document.getElementById("err") -->
-		
-  <!-- const messaging = firebase.messaging(); -->
-  <!-- messaging -->
-            <!-- .requestPermission() -->
-            <!-- .then(function () { -->
-                <!-- MsgElem.innerHTML = "Notification permission granted."  -->
-                <!-- console.log("Notification permission granted."); -->
-                
-                <!-- // get the token in the form of promise -->
-                <!-- return messaging.getToken() -->
-            <!-- }) -->
-            <!-- .then(function(token) { -->
-                <!-- TokenElem.innerHTML = "token is : " + token -->
-            <!-- }) -->
-            <!-- .catch(function (err) { -->
-                <!-- ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err -->
-                <!-- console.log("Unable to get permission to notify.", err); -->
-            <!-- }); -->
-
-        <!-- messaging.onMessage(function(payload) { -->
-            <!-- console.log("Message received. ", payload); -->
-            <!-- NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)  -->
-        <!-- }); -->
+	 var refScore = firebase.database().ref('/ExpectedScore');                           
+	 refScore.on("value", function(snapshot){
+		crs.innerHTML = snapshot.val().CurrentRoundScore;
+		ts.innerHTML = snapshot.val().TotalScore;
+	 });
   	  
 	   var ref = firebase.database().ref('/Live/step');                           
 		ref.on("value", function(snapshot){
@@ -1637,375 +1623,10 @@
 			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
 		}		
 		
-		//Points System Exeperiment
-		switch (snapshot.val()) {
-		  case 'Team 1 Won!':
-			$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function(res) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : TotalScore + Team9AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-				}					  
-			});		  
-		  
-		  
-			  
-			break;	
-		  case 'Team 2 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team2AvgScore,
-					  "TotalScore" : TotalScore + Team2AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});	
-		 
-			break;
-			case 'Team 3 Won!':
-			$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team3AvgScore,
-					  "TotalScore" : TotalScore + Team3AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-				case 'Team 4 Won!':
-			$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team4AvgScore,
-					  "TotalScore" : TotalScore + Team4AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-			$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team5AvgScore,
-					  "TotalScore" : TotalScore + Team5AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-			case 'Team 6 Won!':
-			$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team6AvgScore,
-					  "TotalScore" : TotalScore + Team6AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-		case 'Team 7 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team7AvgScore,
-					  "TotalScore" : TotalScore + Team7AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-		$.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team8AvgScore,
-					  "TotalScore" : TotalScore + Team8AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;	
-		case 'Team 9 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team9AvgScore,
-					  "TotalScore" : TotalScore + Team9AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-			case 'Team 10 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team10AvgScore,
-					  "TotalScore" : TotalScore + Team10AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-			case 'Team 11 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team11AvgScore,
-					  "TotalScore" : TotalScore + Team11AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;
-		case 'Team 12 Won!':
-		  $.ajax({
-			url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-			type: 'GET',
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			//data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-			success: function( ) {
-				   //console.log(res);
-				   CurrentRoundScore = CurrentRoundScore + res.CurrentRoundScore;
-				    $.ajax({
-					  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-					  type: 'PATCH',
-					  contentType: "application/json; charset=utf-8",
-					  dataType: "json",
-					  data: JSON.stringify({
-					  "CurrentRoundScore" : CurrentRoundScore + Team12AvgScore,
-					  "TotalScore" : TotalScore + Team12AvgScore
-					  }),
-					  success: function(res) {
-						//console.log(res);
-					  }
-					  });
-			}					  
-			});
-			break;					
-		  default:
-			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
-		}
-
 		
-});
+       });
 	  
 	  
-	  //Estimated Scores at 3.10x to 3.40x (can be changed)
-	  <!-- var Team1AvgScore = 28000; -->
-	  <!-- var Team2AvgScore = 29000; -->
-	  <!-- var Team3AvgScore = 31000; -->
-	  <!-- var Team4AvgScore = 22000; -->
-	  <!-- var Team5AvgScore = 23000; -->
-	  <!-- var Team6AvgScore = 24000; -->
-	  <!-- var Team7AvgScore = 25000; -->
-	  <!-- var Team8AvgScore = 19000; -->
-	  <!-- var Team9AvgScore = 17000; -->
-	  <!-- var Team10AvgScore = 21000; -->
-	  <!-- var Team11AvgScore = 19000; -->
-	  <!-- var Team12AvgScore = 0; -->
-
-	  //Score Calculate 
-		<!-- $.ajax({ -->
-			<!-- url: "https://msf-stats.firebaseio.com/ExpectedScore.json", -->
-			<!-- type: 'GET', -->
-			<!-- contentType: "application/json; charset=utf-8", -->
-			<!-- dataType: "json", -->
-			<!-- //data: JSON.stringify({"SuicideSquadUsed" : tierResult}), -->
-			<!-- success: function(res) { -->
-				   <!-- console.log(res); -->
-				  <!-- var CurrentRoundScore = res.CurrentRoundScore; -->
-				  <!-- var TotalScore = res.TotalScore; -->
-				  
-				   <!-- var refScore = firebase.database().ref('/ExpectedScore');                            -->
-					<!-- refScore.on("value", function(snapshot){ -->
-						<!-- crs.innerHTML = snapshot.val().CurrentRoundScore; -->
-						<!-- ts.innerHTML = snapshot.val().TotalScore; -->
-					<!-- }); -->
-		<!-- }					   -->
-	<!-- });		 -->
-
-	 
-
-	  
-	  
-
-	  
-	  
-	  
-	
-	
-	
 </script>
 
 
