@@ -104,9 +104,9 @@
 			
 				//Score
 				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
-				console.log(CurrentRoundScore);
+				//console.log(CurrentRoundScore);
 				var TotalScore = BlitzData.ExpectedScore.TotalScore;
-				console.log(TotalScore);
+				//console.log(TotalScore);
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
 			
@@ -609,7 +609,6 @@
 									
 									//Reset Score System
 									var addScore = parseInt(TotalScore) + parseInt(CurrentRoundScore);
-									var TotalScore = addScore;
 
 									$.ajax({
 									  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
@@ -618,7 +617,7 @@
 									  dataType: "json",
 									  data: JSON.stringify({
 									  "CurrentRoundScore" : 0,
-									  "TotalScore" : TotalScore
+									  "TotalScore" : addScore
 									  }),
 									  success: function(res) {
 										//console.log(res);
