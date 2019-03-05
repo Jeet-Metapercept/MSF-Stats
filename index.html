@@ -1629,8 +1629,7 @@
 					break;	
 		  case 'Complete':
 					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
-					$("#score_up").hide();
-					$("#score_down").hide();
+					
 					setTimeout(function(){ 
 						firebaseLive.innerHTML = "Uhhmmmm...";
 						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
