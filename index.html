@@ -109,6 +109,39 @@
 				//console.log(TotalScore);
 				var LastRoundScore = BlitzData.ExpectedScore.LastRoundScore;
 				var AllScores = BlitzData.ExpectedScore.Scores;
+				
+				
+				//timestamp & score system
+				var TimeStamp = BlitzData.Live.begintime;
+				var EndTimeStamp = BlitzData.Live.endtime;
+
+				var beginTime = moment(new Date(TimeStamp)).format("YYYY-MM-DD HH:mm:ss");
+				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss")
+				if(endTime > beginTime){
+					console.log('Data Update')
+					
+					//Push current score to all scores
+						AllScores.push(CurrentRoundScore);
+						var addScore = parseInt(TotalScore) + parseInt(CurrentRoundScore);	
+					  $.ajax({
+						 url: "https://msf-stats.firebaseio.com/Live.json",
+						 type: 'PATCH',
+						 contentType: "application/json; charset=utf-8",
+						 dataType: "json",
+						 data: JSON.stringify({
+							"TotalScore" : addScore,
+							"LastRoundScore" : LastRoundScore,
+							"Scores" : AllScores
+						 }),
+						 success: function(res) {
+						console.log('Data Updated');
+						 }
+					   });									
+
+					
+				}else(console.log('No new data'));
+				
+				
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
 			
@@ -609,25 +642,7 @@
 								  
 									});
 									
-									//Push current score to all scores
-									AllScores.push(CurrentRoundScore);
-									//Reset Score System
-									var addScore = parseInt(TotalScore) + parseInt(CurrentRoundScore);
-
-									$.ajax({
-									  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-									  type: 'PATCH',
-									  contentType: "application/json; charset=utf-8",
-									  dataType: "json",
-									  data: JSON.stringify({
-									  "TotalScore" : addScore,
-									  "LastRoundScore" : LastRoundScore,
-									  "Scores" : AllScores
-									  }),
-									  success: function(res) {
-										//console.log(res);
-									  }
-								   });
+									
 								
     						}
       						else{
@@ -1289,7 +1304,7 @@
 			AmCharts.makeChart("chartdivscores", {
 				"type": "serial",
 				"theme": "none",
-				"marginRight": 80,
+				//"marginRight": 80,
 				"startEffect": "easeOutSine",
 				"creditsPosition": "top-right",
 				"dataProvider": chartDataScores,
@@ -1335,6 +1350,7 @@
 		 refScore.on("value", function(snapshot){
 		 //console.log(LastRoundScore);
 			crs.innerHTML = snapshot.val().CurrentRoundScore;
+			lrs.innerHTML = snapshot.val().LastRoundScore;
 			ts.innerHTML = snapshot.val().TotalScore;
 			if(snapshot.val().CurrentRoundScore > LastRoundScore){
 			  //$("#score_up").show();
@@ -1345,18 +1361,20 @@
 			  $("#score_down").show();
 			}
 		 });
-	    var ref = firebase.database().ref('/Live/step');                           
+	    var ref = firebase.database().ref('/Live');                           
 		ref.on("value", function(snapshot){
-		firebaseLive.innerHTML = snapshot.val();
+		firebaseLive.innerHTML = snapshot.val().step;
+		
+		
 		var timeouttime = 300000;//5 min
 		setTimeout(function(){ 
 			firebaseLive.innerHTML = "Error";
 		}, timeouttime);	
 		
-		if(snapshot.val().includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
-		if(snapshot.val().includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
+		if(snapshot.val().step.includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
+		if(snapshot.val().step.includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
 		//progressbas
-		switch (snapshot.val()) {
+		switch (snapshot.val().step) {
 		  case 'Starting...':
 			$('.progress-bar').css('width', '1%').attr('aria-valuenow', 1); 
 			break;
@@ -1538,6 +1556,7 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
                       <div class="h5 mb-0  text-gray-800 ">
 							<span class="odometer" id="crs">-</span>
+							<small> (<span class="odometer" id="lrs">-</span>)</small>
 							<span><i class="fas fa-caret-up text-success" id="score_up"></i><i id="score_down" class="fas fa-caret-down text-danger"></i></span>
 					  </div>
                     </div>
@@ -1605,12 +1624,12 @@
               <div class="card shadow " style="min-height: 50vh;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header  d-flex flex-row align-items-center ">
-                  <h5 class="m-0 font-weight-bold text-primary">Blitz Scores</h5>
+                  <h5 class="m-0 font-weight-bold text-primary">Blitz Round Points</h5>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body" style="padding: 0 1.25rem;">
                   <div class="chart-area" >
-                    <div id="chartdivscores" style="min-height: 34vh"></div>
+                    <div id="chartdivscores" style="min-height: 40vh"></div>
                   </div>
 				  
                 </div>
