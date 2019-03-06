@@ -1267,10 +1267,119 @@
 		
       }, 500);
       		
-      
-      		}
-      			
-      	});
+      //Firebase
+	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
+		 refScore.on("value", function(snapshot){
+		 console.log(LastRoundScore);
+			crs.innerHTML = snapshot.val().CurrentRoundScore;
+			ts.innerHTML = snapshot.val().TotalScore;
+			if(snapshot.val().CurrentRoundScore > LastRoundScore){
+			  //$("#score_up").show();
+			  $('#score_up').fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
+			  $("#score_down").hide();
+			}else{
+			  $("#score_up").hide();
+			  $("#score_down").show();
+			}
+		 });
+	    var ref = firebase.database().ref('/Live/step');                           
+		ref.on("value", function(snapshot){
+		firebaseLive.innerHTML = snapshot.val();
+		
+		if(snapshot.val().includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
+		if(snapshot.val().includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
+		//progressbas
+		switch (snapshot.val()) {
+		  case 'Starting...':
+			$('.progress-bar').css('width', '1%').attr('aria-valuenow', 1); 
+			break;
+		  case 'Launching Nox':
+			$('.progress-bar').css('width', '5%').attr('aria-valuenow', 5); 
+			break;
+		  case 'Playing Marvel Strike Force':
+			$('.progress-bar').css('width', '8%').attr('aria-valuenow', 8); 
+			break;
+		  case 'Checking Main Screen':
+			$('.progress-bar').css('width', '10%').attr('aria-valuenow', 10); 
+			break;
+		  case 'Home Screen':
+			$('.progress-bar').css('width', '12%').attr('aria-valuenow', 12); 
+			break;
+		   case 'Basic Orb Available?':
+			$('.progress-bar').css('width', '15%').attr('aria-valuenow', 15); 
+			break;
+		   case 'Complete Daily Objectives':
+			$('.progress-bar').css('width', '18%').attr('aria-valuenow', 18); 
+			break;
+		  case 'Checking Energy':
+			$('.progress-bar').css('width', '20%').attr('aria-valuenow', 20); 
+			break;
+		   case 'Checking Event Energy':
+			$('.progress-bar').css('width', '22%').attr('aria-valuenow', 22); 
+			break;
+		  case 'Looking for Blitz':
+			$('.progress-bar').css('width', '25%').attr('aria-valuenow', 25); 
+			break;
+		  case 'Team 1 Blitzing':
+			$('.progress-bar').css('width', '30%').attr('aria-valuenow', 30); 
+			break;
+		  case 'Team 2 Blitzing':
+			$('.progress-bar').css('width', '35%').attr('aria-valuenow', 35); 
+			break;
+		  case 'Team 3 Blitzing':
+			$('.progress-bar').css('width', '40%').attr('aria-valuenow', 40); 
+			break;
+		  case 'Team 4 Blitzing':
+			$('.progress-bar').css('width', '45%').attr('aria-valuenow', 45); 
+			break;
+		  case 'Team 5 Blitzing':
+					$('.progress-bar').css('width', '50%').attr('aria-valuenow', 50); 
+			break;
+		  case 'Team 6 Blitzing':
+					$('.progress-bar').css('width', '55%').attr('aria-valuenow', 55); 
+					break;
+		  case 'Team 7 Blitzing':
+					$('.progress-bar').css('width', '60%').attr('aria-valuenow', 60); 
+					break;
+		  case 'Team 8 Blitzing':
+					$('.progress-bar').css('width', '65%').attr('aria-valuenow', 65); 
+					break;
+		  case 'Team 9 Blitzing':
+					$('.progress-bar').css('width', '70%').attr('aria-valuenow', 70); 
+					break;
+		  case 'Team 10 Blitzing':
+					$('.progress-bar').css('width', '75%').attr('aria-valuenow', 75); 
+					break;
+	      case 'Team 11 Blitzing':
+					$('.progress-bar').css('width', '80%').attr('aria-valuenow', 80); 
+					break;
+		  case 'Updating Files':
+					$('.progress-bar').css('width', '85%').attr('aria-valuenow', 85); 
+					break;
+		  case 'Closing Nox Player':
+					$('.progress-bar').css('width', '90%').attr('aria-valuenow', 90); 
+					break;	
+		  case 'Complete':
+					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
+					
+					setTimeout(function(){ 
+						firebaseLive.innerHTML = "Uhhmmmm...";
+						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+					}, 180000);	//3 min
+					break;					
+		  default:
+			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
+		}		
+		
+		
+       });
+	  
+	  
+	  
+	  
+  }
+      		
+ });
     </script>
 	
     <script type="text/javascript">
@@ -1535,113 +1644,7 @@
     storageBucket: "msf-stats.appspot.com",
     messagingSenderId: "373368426587"
   };
-  firebase.initializeApp(config);
-  
-	 var refScore = firebase.database().ref('/ExpectedScore');                           
-	 refScore.on("value", function(snapshot){
-		crs.innerHTML = snapshot.val().CurrentRoundScore;
-		ts.innerHTML = snapshot.val().TotalScore;
-		$("#score_up").hide();
-		$("#score_down").show();
-		if(snapshot.val().CurrentRoundScore > snapshot.val().LastRoundScore){
-		  //$("#score_up").show();
-		  $('#score_up').fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
-		  $("#score_down").hide();
-		}
-	 });
-  	  
-	   var ref = firebase.database().ref('/Live/step');                           
-		ref.on("value", function(snapshot){
-		firebaseLive.innerHTML = snapshot.val();
-		
-		if(snapshot.val().includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
-		if(snapshot.val().includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
-		//progressbas
-		switch (snapshot.val()) {
-		  case 'Starting...':
-			$('.progress-bar').css('width', '1%').attr('aria-valuenow', 1); 
-			break;
-		  case 'Launching Nox':
-			$('.progress-bar').css('width', '5%').attr('aria-valuenow', 5); 
-			break;
-		  case 'Playing Marvel Strike Force':
-			$('.progress-bar').css('width', '8%').attr('aria-valuenow', 8); 
-			break;
-		  case 'Checking Main Screen':
-			$('.progress-bar').css('width', '10%').attr('aria-valuenow', 10); 
-			break;
-		  case 'Home Screen':
-			$('.progress-bar').css('width', '12%').attr('aria-valuenow', 12); 
-			break;
-		   case 'Basic Orb Available?':
-			$('.progress-bar').css('width', '15%').attr('aria-valuenow', 15); 
-			break;
-		   case 'Complete Daily Objectives':
-			$('.progress-bar').css('width', '18%').attr('aria-valuenow', 18); 
-			break;
-		  case 'Checking Energy':
-			$('.progress-bar').css('width', '20%').attr('aria-valuenow', 20); 
-			break;
-		   case 'Checking Event Energy':
-			$('.progress-bar').css('width', '22%').attr('aria-valuenow', 22); 
-			break;
-		  case 'Looking for Blitz':
-			$('.progress-bar').css('width', '25%').attr('aria-valuenow', 25); 
-			break;
-		  case 'Team 1 Blitzing':
-			$('.progress-bar').css('width', '30%').attr('aria-valuenow', 30); 
-			break;
-		  case 'Team 2 Blitzing':
-			$('.progress-bar').css('width', '35%').attr('aria-valuenow', 35); 
-			break;
-		  case 'Team 3 Blitzing':
-			$('.progress-bar').css('width', '40%').attr('aria-valuenow', 40); 
-			break;
-		  case 'Team 4 Blitzing':
-			$('.progress-bar').css('width', '45%').attr('aria-valuenow', 45); 
-			break;
-		  case 'Team 5 Blitzing':
-					$('.progress-bar').css('width', '50%').attr('aria-valuenow', 50); 
-			break;
-		  case 'Team 6 Blitzing':
-					$('.progress-bar').css('width', '55%').attr('aria-valuenow', 55); 
-					break;
-		  case 'Team 7 Blitzing':
-					$('.progress-bar').css('width', '60%').attr('aria-valuenow', 60); 
-					break;
-		  case 'Team 8 Blitzing':
-					$('.progress-bar').css('width', '65%').attr('aria-valuenow', 65); 
-					break;
-		  case 'Team 9 Blitzing':
-					$('.progress-bar').css('width', '70%').attr('aria-valuenow', 70); 
-					break;
-		  case 'Team 10 Blitzing':
-					$('.progress-bar').css('width', '75%').attr('aria-valuenow', 75); 
-					break;
-	      case 'Team 11 Blitzing':
-					$('.progress-bar').css('width', '80%').attr('aria-valuenow', 80); 
-					break;
-		  case 'Updating Files':
-					$('.progress-bar').css('width', '85%').attr('aria-valuenow', 85); 
-					break;
-		  case 'Closing Nox Player':
-					$('.progress-bar').css('width', '90%').attr('aria-valuenow', 90); 
-					break;	
-		  case 'Complete':
-					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
-					
-					setTimeout(function(){ 
-						firebaseLive.innerHTML = "Uhhmmmm...";
-						$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
-					}, 180000);	//3 min
-					break;					
-		  default:
-			//$('.progress-bar').css('width', '0%').attr('aria-valuenow', 0); 
-		}		
-		
-		
-       });
-	  
+  firebase.initializeApp(config);	  
 	  
 </script>
 
