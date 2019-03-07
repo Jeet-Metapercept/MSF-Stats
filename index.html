@@ -25,8 +25,7 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
     <link href="scripts/BlitzStats.css" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/odometer.min.js"></script>
-
+	<!-- <script type="text/javascript" src="scripts/numscroller.js"></script> -->
 	
 	<!-- Push API notification -->
 	<!-- <script type="text/javascript" src="scripts/push.min.js"></script> -->
@@ -116,7 +115,11 @@
 				var EndTimeStamp = BlitzData.Live.endtime;
 
 				var beginTime = moment(new Date(TimeStamp)).format("YYYY-MM-DD HH:mm:ss");
-				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss")
+				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss");
+				var a = moment(beginTime);console.log(beginTime, endTime);
+				var b = moment(endTime);
+				console.log(a.diff(b, 'seconds'));
+				//console.log(beginTime.diff(endTime, 'seconds'));
 				if(endTime > beginTime){
 					//console.log('Data Update')
 					
@@ -1356,7 +1359,7 @@
 			{
 				if(value>=1000000)
 				{
-					value=(value/1000000).toFixed(1)+"M"
+					value=(value/1000000).toFixed(2)+"M"
 				}
 				else if(value>=1000)
 				{
@@ -1571,7 +1574,7 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
                       <div class="h5 mb-0  text-gray-800 ">
 							<span class="" id="crs">-</span>
-							<small> (<span class="" id="lrs">-</span>)</small>
+							<small> (<span class="" id="lrs" >-</span>)</small>
 							<span><i class="fas fa-caret-up text-success" id="score_up"></i><i id="score_down" class="fas fa-caret-down text-danger"></i></span>
 					  </div>
                     </div>
@@ -1642,7 +1645,7 @@
                   <h5 class="m-0 font-weight-bold text-primary">Blitz Round Points</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25rem;">
+                <div class="card-body" style="padding: 0">
                   <div class="chart-area" >
                     <div id="chartdivscores" style="min-height: 40vh"></div>
                   </div>
@@ -1659,7 +1662,7 @@
                   <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25rem;">
+                <div class="card-body" style="">
                   <div class="chart-area" >
                     <div id="chartdiv" style="min-height: 34vh"></div>
                   </div>
@@ -1688,7 +1691,7 @@
                   <h5 class="m-0 font-weight-bold text-primary">Blitz All time</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25rem;">
+                <div class="card-body" style="">
                   <div class="chart-pie pt-4 pb-2">
                     <div id="chartdiv1" style="min-height: 33vh;"></div>
                   </div>
@@ -1720,7 +1723,7 @@
                   <h5 class="m-0 font-weight-bold text-primary">Blitz Scores</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25rem;">
+                <div class="card-body" style="">
                   <div class="chart-pie pt-4 pb-2">
                     <div id="chartdivscore" style="min-height: 33vh;"></div>
                   </div>
