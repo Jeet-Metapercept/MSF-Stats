@@ -118,7 +118,7 @@
 				var beginTime = moment(new Date(TimeStamp)).format("YYYY-MM-DD HH:mm:ss");
 				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss")
 				if(endTime > beginTime){
-					console.log('Data Update')
+					//console.log('Data Update')
 					
 					//Push current score to all scores
 						AllScores.push(CurrentRoundScore);
@@ -134,7 +134,7 @@
 							"Scores" : AllScores
 						 }),
 						 success: function(res) {
-						console.log('Data Updated');
+						//console.log('Data Updated');
 						 }
 					   });									
 
