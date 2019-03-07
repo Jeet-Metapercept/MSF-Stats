@@ -124,7 +124,7 @@
 						AllScores.push(CurrentRoundScore);
 						var addScore = parseInt(TotalScore) + parseInt(CurrentRoundScore);	
 					  $.ajax({
-						 url: "https://msf-stats.firebaseio.com/Live.json",
+						 url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
 						 type: 'PATCH',
 						 contentType: "application/json; charset=utf-8",
 						 dataType: "json",
@@ -1101,7 +1101,8 @@
       					//"title": "Win Rate %",
       					//"titleFontSize": 20,
       					"maximum": 100,
-      					"minimum": 0
+      					"minimum": 0,
+						"labelsEnabled": false
       				}
       			]
       			<!-- ,"titles": [ -->
@@ -1120,57 +1121,57 @@
       				{
       					"Teams": "Team 1" + "\n" + "Battles : " + Team_1_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_1_alltime.match(new RegExp('W','g')).length + " / L " + Team_1_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_1_alltime.match(/W/gi).length)*100/(Team_1_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_1_alltime.match(/W/gi).length)*100/(Team_1_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_1_alltime.slice(-20)
+      					"Results" : Team_1_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 2" + "\n" + "Battles : " + Team_2_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_2_alltime.match(new RegExp('W','g')).length + " / L " + Team_2_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_2_alltime.match(/W/gi).length)*100/(Team_2_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_2_alltime.match(/W/gi).length)*100/(Team_2_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_2_alltime.slice(-20)
+      					"Results" : Team_2_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 3" + "\n" + "Battles : " + Team_3_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_3_alltime.match(new RegExp('W','g')).length + " / L " + Team_3_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_3_alltime.match(/W/gi).length)*100/(Team_3_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_3_alltime.match(/W/gi).length)*100/(Team_3_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_3_alltime.slice(-20)
+      					"Results" : Team_3_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 4" + "\n" + "Battles : " + Team_4_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_4_alltime.match(new RegExp('W','g')).length + " / L " + Team_4_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_4_alltime.match(/W/gi).length)*100/(Team_4_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_4_alltime.match(/W/gi).length)*100/(Team_4_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_4_alltime.slice(-20)
+      					"Results" : Team_4_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 5" + "\n" + "Battles : " + Team_5_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_5_alltime.match(new RegExp('W','g')).length + " / L " + Team_5_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_5_alltime.match(/W/gi).length)*100/(Team_5_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_5_alltime.match(/W/gi).length)*100/(Team_5_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_5_alltime.slice(-20)
+      					"Results" : Team_5_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 6" + "\n" + "Battles : " + Team_6_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_6_alltime.match(new RegExp('W','g')).length + " / L " + Team_6_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_6_alltime.match(/W/gi).length)*100/(Team_6_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_6_alltime.match(/W/gi).length)*100/(Team_6_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_6_alltime.slice(-20)
+      					"Results" : Team_6_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 7" + "\n" + "Battles : " + Team_7_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_7_alltime.match(new RegExp('W','g')).length + " / L " + Team_7_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_7_alltime.match(/W/gi).length)*100/(Team_7_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_7_alltime.match(/W/gi).length)*100/(Team_7_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_7_alltime.slice(-20)
+      					"Results" : Team_7_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 8" + "\n" + "Battles : " + Team_8_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_8_alltime.match(new RegExp('W','g')).length + " / L " + Team_8_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_8_alltime.match(/W/gi).length)*100/(Team_8_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_8_alltime.match(/W/gi).length)*100/(Team_8_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_8_alltime.slice(-20)
+      					"Results" : Team_8_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 9" + "\n" + "Battles : " + Team_9_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_9_alltime.match(new RegExp('W','g')).length + " / L " + Team_9_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_9_alltime.match(/W/gi).length)*100/(Team_9_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_9_alltime.match(/W/gi).length)*100/(Team_9_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_9_alltime.slice(-20)
+      					"Results" : Team_9_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 10" + "\n" + "Battles : " + Team_10_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_10_alltime.match(new RegExp('W','g')).length + " / L " + Team_10_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_10_alltime.match(/W/gi).length)*100/(Team_10_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_10_alltime.match(/W/gi).length)*100/(Team_10_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_10_alltime.slice(-20)
+      					"Results" : Team_10_alltime.slice(-40)
       				},
       				{
       					"Teams": "Team 11" + "\n" + "Battles : " + Team_11_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_11_alltime.match(new RegExp('W','g')).length + " / L " + Team_11_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_11_alltime.match(/W/gi).length)*100/(Team_11_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_11_alltime.match(/W/gi).length)*100/(Team_11_alltime.split(" ").length)).toFixed(2),
-      					"Results" : Team_11_alltime.slice(-20)
+      					"Results" : Team_11_alltime.slice(-40)
       				},
       			],
       			"type": "serial",
@@ -1213,7 +1214,8 @@
       					//"title": "Win Rate %",
       					//"titleFontSize": 20,
       					"maximum": 100,
-      					"minimum": 0
+      					"minimum": 0,
+						"labelsEnabled": false
       				}
       			]
       			<!-- ,"titles": [ -->
@@ -1350,9 +1352,21 @@
 	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
 		 refScore.on("value", function(snapshot){
 		 //console.log(LastRoundScore);
-			crs.innerHTML = snapshot.val().CurrentRoundScore;
-			lrs.innerHTML = snapshot.val().LastRoundScore;
-			ts.innerHTML = snapshot.val().TotalScore;
+		 function convert(value)
+			{
+				if(value>=1000000)
+				{
+					value=(value/1000000).toFixed(1)+"M"
+				}
+				else if(value>=1000)
+				{
+					value=(value/1000).toFixed(1)+"K";
+				}
+				return value;
+			}
+			crs.innerHTML = convert(snapshot.val().CurrentRoundScore);
+			lrs.innerHTML = convert(snapshot.val().LastRoundScore);
+			ts.innerHTML = convert(snapshot.val().TotalScore);
 			if(snapshot.val().CurrentRoundScore > LastRoundScore){
 			  //$("#score_up").show();
 			  $('#score_up').fadeIn(400).fadeOut(400).fadeIn(400).fadeOut(400).fadeIn(400);
@@ -1556,14 +1570,14 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points</div>
                       <div class="h5 mb-0  text-gray-800 ">
-							<span class="odometer" id="crs">-</span>
-							<small> (<span class="odometer" id="lrs">-</span>)</small>
+							<span class="" id="crs">-</span>
+							<small> (<span class="" id="lrs">-</span>)</small>
 							<span><i class="fas fa-caret-up text-success" id="score_up"></i><i id="score_down" class="fas fa-caret-down text-danger"></i></span>
 					  </div>
                     </div>
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
-                      <div class="h5 mb-0  text-gray-800 odometer" id="ts">-</div>
+                      <div class="h5 mb-0  text-gray-800 " id="ts">-</div>
                     </div>
                   </div>
                 </div>
