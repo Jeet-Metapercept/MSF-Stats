@@ -1342,7 +1342,7 @@
 					"axisColor": "#555555",
 					"gridAlpha": 0,
 					"gridCount": 50,
-					//"labelsEnabled": false
+					"labelsEnabled": false
 				}
 			});
 			
@@ -1384,10 +1384,10 @@
 		firebaseLive.innerHTML = snapshot.val().step;
 		
 		
-		var timeouttime = 300000;//5 min
-		setTimeout(function(){ 
-			firebaseLive.innerHTML = "Error";
-		}, timeouttime);	
+		<!-- var timeouttime = 300000;//5 min -->
+		<!-- setTimeout(function(){  -->
+			<!-- firebaseLive.innerHTML = "Error"; -->
+		<!-- }, timeouttime);	 -->
 		
 		if(snapshot.val().step.includes("Won")){ $("#firecard").addClass("blinkGreen"); $("#firecard").removeClass("blinkRed");}
 		if(snapshot.val().step.includes("Lost")){ $("#firecard").addClass("blinkRed"); $("#firecard").removeClass("blinkGreen");}
