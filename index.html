@@ -73,20 +73,6 @@
 							   }
 						});
 					}
-					//reset TotalScore
-						$.ajax({
-						  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-						  type: 'PATCH',
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json",
-						  data: JSON.stringify({
-						  "CurrentRoundScore" : 0,
-						  "TotalScore" : 0
-						  }),
-						  success: function(res) {
-							//console.log(res);
-						  }
-					   });
 				}
 				
 				
