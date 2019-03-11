@@ -658,27 +658,27 @@
       <!-- readLastBlitzFile("LastBlitz.txt"); -->
      
 	  <!-- Suicide Squad Usage -->
-	  function readTierCheckFile(tier){
-      	$.get(tier, function(data) {
+	  <!-- function readTierCheckFile(tier){ -->
+      	<!-- $.get(tier, function(data) { -->
 			
-      		var tierResult = data;
+      		<!-- var tierResult = data; -->
 		
-      						$.ajax({
-									url: "https://msf-stats.firebaseio.com/.json",
-									type: 'PATCH',
-									contentType: "application/json; charset=utf-8",
-									dataType: "json",
-									data: JSON.stringify({"SuicideSquadUsed" : tierResult}),
-									   success: function(res) {
-										   //console.log(res);
-									}
+      						<!-- $.ajax({ -->
+									<!-- url: "https://msf-stats.firebaseio.com/.json", -->
+									<!-- type: 'PATCH', -->
+									<!-- contentType: "application/json; charset=utf-8", -->
+									<!-- dataType: "json", -->
+									<!-- data: JSON.stringify({"SuicideSquadUsed" : tierResult}), -->
+									   <!-- success: function(res) { -->
+										   <!-- //console.log(res); -->
+									<!-- } -->
 								  
-							});
+							<!-- }); -->
 				
-      	}, 'text');
+      	<!-- }, 'text'); -->
       	
-      }
-      readTierCheckFile("SuicideSquad.txt");
+      <!-- } -->
+      <!-- readTierCheckFile("SuicideSquad.txt"); -->
 	  
 	  <!-- Expected Score -->
 		
@@ -916,9 +916,6 @@
 			<!-- var battlesplayed =	document.getElementById("battlesplayed"); -->
       			<!-- battlesplayed.innerHTML =  CurrentBattlesWon + CurrentBattlesLost; -->
 				
-			var tierChecker = document.getElementById("tierChecker");
-      			tierChecker.innerHTML =  "Suicide Squad Used : " + SuicideSquadUsed;
-			SuicideSquadUsed	
 				
 			//ALL teams last results
 			var T1_lastround = document.getElementById("T1_lastround");
@@ -1321,6 +1318,7 @@
 					"id": "ValueAxis-1",
       				"position": "bottom",
 					"axisAlpha": 0,
+					"minimum": 0,
 					"labelsEnabled": false
 				}],
 				"graphs": [{
@@ -1367,6 +1365,11 @@
       }, 500);
       		
       //Firebase
+	  var refTier = firebase.database().ref('/');                           
+		 refTier.on("value", function(snapshot){
+			tierChecker.innerHTML =  "Suicide Squad Used : " + snapshot.val().SuicideSquadUsed;
+		 });
+	  
 	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
 		 refScore.on("value", function(snapshot){
 		 //console.log(LastRoundScore);
@@ -1671,7 +1674,7 @@
 		  
             <!-- Area Chart -->
             <div class="col-xl-12 col-lg-12 mb-1">
-              <div class="card shadow " style="min-height: 50vh;">
+              <div class="card shadow " style="min-height: 52vh;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header  d-flex flex-row align-items-center ">
                   <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
