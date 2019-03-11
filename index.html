@@ -108,6 +108,19 @@
 				//console.log(TotalScore);
 				var LastRoundScore = BlitzData.ExpectedScore.LastRoundScore;
 				var AllScores = BlitzData.ExpectedScore.Scores;
+				//console.log(AllScores);
+				//Average
+				if (AllScores.length)
+				{
+					var sumofscore = 0;
+					for (i=1; i<AllScores.length; i++){
+						sumofscore = sumofscore + parseInt(AllScores[i]);
+						//console.log(parseInt(AllScores[i]));
+					}
+					var AvgRoundScore = sumofscore / AllScores.length;
+					//console.log(AvgRoundScore);
+				}
+
 				
 				
 				//timestamp & score system
@@ -118,7 +131,7 @@
 				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss");
 				var a = moment(beginTime);console.log(beginTime, endTime);
 				var b = moment(endTime);
-				console.log(a.diff(b, 'seconds'));
+				//console.log(a.diff(b, 'seconds'));
 				//console.log(beginTime.diff(endTime, 'seconds'));
 				if(endTime > beginTime){
 					//console.log('Data Update')
@@ -133,7 +146,7 @@
 						 dataType: "json",
 						 data: JSON.stringify({
 							"TotalScore" : addScore,
-							"LastRoundScore" : LastRoundScore,
+							"LastRoundScore" : AvgRoundScore,
 							"Scores" : AllScores
 						 }),
 						 success: function(res) {
@@ -1081,8 +1094,8 @@
       				{
       					"title": "Blitz Live",
       					"balloonText": "[[value]]% : [[Results]]",
-						"fillAlphas": 0.85,
-						"lineAlpha": 0.1,
+						"fillAlphas": 0.5,
+						"lineAlpha": 1,
 						"topRadius": 1,
       					//"gapPeriod": 15,
       					"id": "AmGraph-1",
@@ -1194,8 +1207,8 @@
       				{
       					"title": "Blitz Live",
       					"balloonText": "[[value]]% : [[Results]]",
-      					"fillAlphas": 0.85,
-						"lineAlpha": 0.1,
+      					"fillAlphas": 0.5,
+						"lineAlpha": 1,
 						"topRadius": 1,
       					//"gapPeriod": 15,
       					"id": "AmGraph-2",
@@ -1258,7 +1271,7 @@
 				"graphs": [{
 					"balloonText": "<b>Rank : [[rank]]</b>" + "\n" + "[[category]]: [[value]]" + "\n" + "[[date]]",
 					"colorField": "color",
-					"fillAlphas": 0.85,
+					"fillAlphas": 0.5,
 					"lineAlpha": 0.1,
 					"type": "column",
 					"topRadius":1,
@@ -1325,9 +1338,11 @@
 					"labelsEnabled": false
 				}],
 				"graphs": [{
+					"id": "g1",
 					"bullet": "round",
 					"bulletBorderAlpha": 1,
 					"bulletBorderThickness": 1,
+					"hideBulletsCount": 20,
 					"fillAlphas": 0.3,
 					//"fillColorsField": "lineColor",
 					"legendValueText": "[[score]]",
@@ -1335,13 +1350,27 @@
 					"title": "Score",
 					"valueField": "score"
 				}],
+				"chartScrollbar": {
+					"autoGridCount": false,
+					"graph": "g1",
+					"oppositeAxis": false,
+					"dragIcon": "dragIconRectBigBlack",
+					"scrollbarHeight": 40
+				},
+			  "listeners": [{
+				event: "init",
+				method: function(e) {
+				  e.chart.zoomToIndexes((e.chart.endIndex - 10), e.chart.endIndex); //set default zoom
+				  //console.log('Start zoom index: ', e.chart.startIndex,  'End zoom index: ', e.chart.endIndex);
+			   }
+			  }],
 				"categoryField": "score",
 				"categoryAxis": {
 					//"parseDates": true,
 					"autoGridCount": false,
 					"axisColor": "#555555",
 					"gridAlpha": 0,
-					"gridCount": 50,
+					//"gridCount": 50,
 					"labelsEnabled": false
 				}
 			});
@@ -1368,7 +1397,7 @@
 				return value;
 			}
 			crs.innerHTML = convert(snapshot.val().CurrentRoundScore);
-			lrs.innerHTML = convert(snapshot.val().LastRoundScore);
+			lrs.innerHTML = convert(AvgRoundScore);
 			ts.innerHTML = convert(snapshot.val().TotalScore);
 			if(snapshot.val().CurrentRoundScore > LastRoundScore){
 			  //$("#score_up").show();
