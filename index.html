@@ -54,8 +54,7 @@
       		success: function(res) {
       			var BlitzData = res;
       			//console.log(BlitzData);
-				
-
+		
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
@@ -1318,8 +1317,15 @@
 					"id": "ValueAxis-1",
       				"position": "bottom",
 					"axisAlpha": 0,
-					//"minimum": 0,
-					"labelsEnabled": false
+					"minimum": 100000,
+					"labelsEnabled": false,
+					"guides": [{
+						"dashLength": 6,
+						"inside": true,
+						"label": "Average : " + Math.round(AvgRoundScore),
+						"lineAlpha": 0.5,
+						"value": AvgRoundScore
+					}],
 				}],
 				"graphs": [{
 					"id": "g1",
@@ -1327,7 +1333,10 @@
 					"bulletBorderAlpha": 1,
 					//"bulletColor": "#FFFFFF",
 					"useLineColorForBulletBorder": true,
-					"bulletBorderThickness": 1,
+					"bulletColor": "#FFFFFF",
+					"bulletSize": 12,
+					"lineThickness": 1,
+					"bulletBorderThickness": 2,
 					//"bulletSize": 12,
 					"hideBulletsCount": 20,
 					"fillAlphas": 0.3,
@@ -1621,7 +1630,7 @@
 
 						  <div class="row no-gutters align-items-center">
 							<div class="col-auto">
-							<div class="Row">
+							  <div class="Row">
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T1_lastround" data-tip="Team 1"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T2_lastround" data-tip="Team 2"> - </div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T3_lastround" data-tip="Team 3"> - </div>
@@ -1634,9 +1643,8 @@
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_lastround" data-tip="Team 10"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_lastround" data-tip="Team 11"> - </div>
 								<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div> -->
+							  </div>
 							</div>
-							</div>
-			 
 						  </div>
                     </div>
                     <!-- <div class="col-auto"> -->
