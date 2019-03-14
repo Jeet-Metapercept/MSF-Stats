@@ -1431,6 +1431,12 @@
 		generateChartData();
       }, 500);
       		
+	   //toggle live & previous scores
+		//$('#result_last').slideToggle('fast');
+			$('#result_live').on('click', function(){
+			$('#result_last').slideToggle('slow');   //this will set display:block   
+			//$('#dispPackages').slideToggle('slow').css("display","inline-block");
+		});	   
       //Firebase
 	  var refTier = firebase.database().ref('/');                           
 		 refTier.on("value", function(snapshot){
@@ -1438,11 +1444,6 @@
 			tierChecker.innerHTML =  "Suicide Squad Used : " + snapshot.val().SuicideSquadUsed;
 			
 			//previousBlitz snapshot
-			//$('#result_last').slideToggle('fast');
-			$('#result_live').on('click', function(){
-			$('#result_last').slideToggle('slow');   //this will set display:block   
-			//$('#dispPackages').slideToggle('slow').css("display","inline-block");
-			});
 			
 			//team 1 live
 			if(snapshot.val().team1.previousBlitz == "W"){
