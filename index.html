@@ -161,12 +161,43 @@
 						 success: function(res) {
 						//console.log('Data Updated');
 						 }
-					   });									
+					   });
+
+					 //Reset live results
+					var i;
+					for(i = 1; i<12; i++){
+						$.ajax({
+						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+							"previousBlitz" : "?"
+							}),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+						});
+					}
 
 					
 				}else(console.log('No new data'));
 				
-				
+				var i;
+					for(i = 1; i<12; i++){
+						$.ajax({
+						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+							"previousBlitz" : "T"+[i]
+							}),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+						});
+					}
 			
 				var SuicideSquadUsed = BlitzData.SuicideSquadUsed;
 			
@@ -1407,6 +1438,7 @@
 			tierChecker.innerHTML =  "Suicide Squad Used : " + snapshot.val().SuicideSquadUsed;
 			
 			//previousBlitz snapshot
+			//$('#result_last').slideToggle('fast');
 			$('#result_live').on('click', function(){
 			$('#result_last').slideToggle('slow');   //this will set display:block   
 			//$('#dispPackages').slideToggle('slow').css("display","inline-block");
@@ -1415,78 +1447,100 @@
 			//team 1 live
 			if(snapshot.val().team1.previousBlitz == "W"){
 				T1_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team1.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team1.previousBlitz == "L"){
 				T1_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team1.previousBlitz + "</span>";
+			}else{
+				T1_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team1.previousBlitz + "</span>";
 			}
 			
 			//team 2 live
 			if(snapshot.val().team2.previousBlitz == "W"){
 				T2_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team2.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team2.previousBlitz == "L"){
 				T2_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team2.previousBlitz + "</span>";
+			}else{
+				T2_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team2.previousBlitz + "</span>";
 			}
 			
 			//team 3 live
 			if(snapshot.val().team3.previousBlitz == "W"){
 				T3_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team3.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team3.previousBlitz == "L"){
 				T3_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team3.previousBlitz + "</span>";
+			}else{
+				T3_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team3.previousBlitz + "</span>";
 			}
 			
 			//team 4 live
 			if(snapshot.val().team4.previousBlitz == "W"){
 				T4_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team4.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team4.previousBlitz == "L"){
 				T4_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team4.previousBlitz + "</span>";
+			}else{
+				T4_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team4.previousBlitz + "</span>";
 			}
 			
 			//team 5 live
 			if(snapshot.val().team5.previousBlitz == "W"){
 				T5_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team5.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team5.previousBlitz == "L"){
 				T5_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team5.previousBlitz + "</span>";
+			}else{
+				T5_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team5.previousBlitz + "</span>";
 			}
 			
 			//team 6 live
 			if(snapshot.val().team6.previousBlitz == "W"){
 				T6_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team6.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team6.previousBlitz == "L"){
 				T6_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team6.previousBlitz + "</span>";
+			}else{
+				T6_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team6.previousBlitz + "</span>";
 			}
 			
 			//team 7 live
 			if(snapshot.val().team7.previousBlitz == "W"){
 				T7_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team7.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team7.previousBlitz == "L"){
 				T7_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team7.previousBlitz + "</span>";
+			}else{
+				T7_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team7.previousBlitz + "</span>";
 			}
 			
 			//team 8 live
 			if(snapshot.val().team8.previousBlitz == "W"){
 				T8_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team8.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team8.previousBlitz == "L"){
 				T8_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team8.previousBlitz + "</span>";
+			}else{
+				T8_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team8.previousBlitz + "</span>";
 			}
 			
 			//team 9 live
 			if(snapshot.val().team9.previousBlitz == "W"){
 				T9_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team9.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team9.previousBlitz == "L"){
 				T9_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team9.previousBlitz + "</span>";
+			}else{
+				T9_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team9.previousBlitz + "</span>";
 			}
 			
 			//team 10 live
 			if(snapshot.val().team10.previousBlitz == "W"){
 				T10_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team10.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team10.previousBlitz == "L"){
 				T10_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team10.previousBlitz + "</span>";
+			}else{
+				T10_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team10.previousBlitz + "</span>";
 			}
 			
 			//team 11 live
 			if(snapshot.val().team11.previousBlitz == "W"){
 				T11_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team11.previousBlitz + "</span>";
-			}else{
+			}else if(snapshot.val().team11.previousBlitz == "L"){
 				T11_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team11.previousBlitz + "</span>";
+			}else{
+				T11_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team11.previousBlitz + "</span>";
 			}
 		 });
 	  
@@ -1740,37 +1794,37 @@
 							<div class="col-auto">
 							  <div class="Row">
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T1_live" data-tip="Team 1">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T1</span>
 								</div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T2_live" data-tip="Team 2">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T2</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T3_live" data-tip="Team 3">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T3</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T4_live" data-tip="Team 4">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T4</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T5_live" data-tip="Team 5">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T5</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T6_live" data-tip="Team 6">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T6</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T7_live" data-tip="Team 7">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T7</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T8_live" data-tip="Team 8">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T8</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T9_live" data-tip="Team 9">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T9</span>
 								</div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_live" data-tip="Team 10">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T10</span>
 								</div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_live" data-tip="Team 11">
-									<span class="btn btn-secondary btn-circle btn-lg">?</span>
+									<span class="btn btn-secondary btn-circle btn-lg">T11</span>
 								</div>
 								<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div> -->
 							  </div>
@@ -1782,12 +1836,12 @@
 			   
 			   
 			  
-                <div id="result_last" class="card-body" style="padding: 0 1.25rem; margin-top: 10px; border-top: solid #f1f2f6 3px; ">
+                <div id="result_last" class="card-body" style="padding: 0 1.25rem; padding-top: 0.5rem; margin-top: 10px; border-top: solid #f1f2f6 3px; display: none;">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2 ">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1" >
 						<span>Last Round Results</span>
-						<span style="float: right;" class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="tierChecker"></span>	
+						<!-- <span style="float: right;" class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="tierChecker1"></span>	 -->
 					  </div>
 						  <div class="row no-gutters align-items-center">
 							<div class="col-auto">
