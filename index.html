@@ -55,6 +55,15 @@
       			var BlitzData = res;
       			//console.log(BlitzData);
 		
+				//Score
+				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
+				//console.log(CurrentRoundScore);
+				var TotalScore = BlitzData.ExpectedScore.TotalScore;
+				//console.log(TotalScore);
+				var LastRoundScore = BlitzData.ExpectedScore.LastRoundScore;
+				var AllScores = BlitzData.ExpectedScore.Scores;
+				//console.log(AllScores);
+		
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
@@ -72,6 +81,26 @@
 							   }
 						});
 					}
+					
+					//Push to blitzScore
+					$.ajax({
+						  url: "https://msf-stats.firebaseio.com/BlitzScore.json",
+						  type: 'POST',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+							"AvgScorePerDay" : TotalScore/3,
+							"Blitz" : "Blitz : " + moment().format('MM/DD/YYYY'),
+							"Score" : TotalScore,
+							"color" : "#0D52D1",
+							"date" : moment().format('MM/DD/YYYY'),
+							"days" : 3,
+							"rank" : "???"
+							}),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+					});
 				}
 				
 				
@@ -86,14 +115,7 @@
 					 $("#liveSignal").removeClass("live-dot");
 				}
 			
-				//Score
-				var CurrentRoundScore = BlitzData.ExpectedScore.CurrentRoundScore;
-				//console.log(CurrentRoundScore);
-				var TotalScore = BlitzData.ExpectedScore.TotalScore;
-				//console.log(TotalScore);
-				var LastRoundScore = BlitzData.ExpectedScore.LastRoundScore;
-				var AllScores = BlitzData.ExpectedScore.Scores;
-				//console.log(AllScores);
+				
 				//Average
 				if (AllScores.length)
 				{
@@ -1257,7 +1279,7 @@
 					"lineAlpha": 0.1,
 					"type": "column",
 					"topRadius":1,
-					"valueField": "AvgScorePerDay"
+					"valueField": "Score"
 				}],
       			//"depth3D": 1,
       			"angle": 5,
