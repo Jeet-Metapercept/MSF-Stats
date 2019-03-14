@@ -83,12 +83,7 @@
 					}
 					
 					//Push to blitzScore
-					$.ajax({
-						  url: "https://msf-stats.firebaseio.com/BlitzScore.json",
-						  type: 'POST',
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json",
-						  data: JSON.stringify({
+					var newScore = {
 							"AvgScorePerDay" : TotalScore/3,
 							"Blitz" : "Blitz : " + moment().format('MM/DD/YYYY'),
 							"Score" : TotalScore,
@@ -96,13 +91,20 @@
 							"date" : moment().format('MM/DD/YYYY'),
 							"days" : 3,
 							"rank" : "???"
-							}),
+							};
+					BlitzData.BlitzScore.push(newScore);
+					//console.log(BlitzData.BlitzScore);
+					$.ajax({
+						  url: "https://msf-stats.firebaseio.com/BlitzScore.json",
+						  type: 'PUT',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify(BlitzData.BlitzScore),
 							   success: function(res) {
 								   //console.log(res);
 							   }
 					});
 				}
-				
 				
 				var isLive = BlitzData.Live.status; //console.log(isLive);
 				if(isLive === 'true'){
@@ -1279,7 +1281,7 @@
 					"lineAlpha": 0.1,
 					"type": "column",
 					"topRadius":1,
-					"valueField": "Score"
+					"valueField": "AvgScorePerDay"
 				}],
       			//"depth3D": 1,
       			"angle": 5,
