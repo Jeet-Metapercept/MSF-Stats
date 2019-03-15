@@ -1529,11 +1529,11 @@
 			}
 		 });
 	  
-	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
-		 refScore.on("value", function(snapshot){
-		 //console.log(LastRoundScore);
-		 function convert(value)
-			{
+			
+		//function to get added points & convert K,M
+		 
+		function convert(value)
+		{
 				if(value>=1000000)
 				{
 					value=(value/1000000).toFixed(2)+"M"
@@ -1543,7 +1543,36 @@
 					value=(value/1000).toFixed(1)+"K";
 				}
 				return value;
+		}
+			
+		var lastTotalScore = 0;
+		function addScore(value){
+			var addedPoints = value - lastTotalScore;	
+			if(addedPoints != value){
+				$('#addpoints').fadeIn('fast').delay(10000).fadeOut('slow');
+				//confetti animation
+				  new Confetti({
+					width: window.innerWidth,
+					height: window.innerHeight,
+					length: 120,
+					duration: 8000 });
 			}
+			return addedPoints;
+		};
+		
+		
+	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
+		 refScore.on("value", function(snapshot){
+		 //console.log(LastRoundScore);
+		 
+		//addScore(snapshot.val().TotalScore);
+		var pointsUpdate = addScore(snapshot.val().TotalScore);
+		if(pointsUpdate > 0){
+			addpoints.innerHTML = "<span class='text-success'> + " + pointsUpdate + "</span>";
+		}
+		//addpoints.innerHTML = addScore(snapshot.val().TotalScore);
+		lastTotalScore = snapshot.val().TotalScore;
+
 			crs.innerHTML = convert(snapshot.val().CurrentRoundScore);
 			lrs.innerHTML = convert(AvgRoundScore);
 			ts.innerHTML = convert(snapshot.val().TotalScore);
@@ -1756,6 +1785,12 @@
 							<span><i class="fas fa-caret-up text-success" id="score_up"></i><i id="score_down" class="fas fa-caret-down text-danger"></i></span>
 					  </div>
                     </div>
+					
+					 <div class="col text-center">
+                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">add Points</div> -->
+                      <div class="h5 mb-0 text-gray-800" style="display: none;" id="addpoints"></div>
+                    </div>
+					
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
                       <div class="h5 mb-0  text-gray-800 " id="ts">-</div>
@@ -1890,7 +1925,7 @@
                   <h5 class="m-0 font-weight-bold text-primary">Live Blitz</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25">
+                <div class="card-body" style="padding: 0">
                   <div class="chart-area" >
                     <div id="chartdiv" style="min-height: 34vh"></div>
                   </div>
@@ -1919,8 +1954,8 @@
                   <h5 class="m-0 font-weight-bold text-primary">Blitz All time</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25">
-                  <div class="chart-pie pt-4 pb-2">
+                <div class="card-body" style="padding: 0">
+                  <div class="chart-pie pb-2">
                     <div id="chartdiv1" style="min-height: 33vh;"></div>
                   </div>
                 </div>
@@ -1951,8 +1986,8 @@
                   <h5 class="m-0 font-weight-bold text-primary">Blitz Scores</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="padding: 0 1.25">
-                  <div class="chart-pie pt-4 pb-2">
+                <div class="card-body" style="padding: 0">
+                  <div class="chart-pie pb-2">
                     <div id="chartdivscore" style="min-height: 33vh;"></div>
                   </div>
                 </div>
@@ -1977,7 +2012,7 @@
     <!-- End of Content Wrapper -->
 
   <!-- End of Page Wrapper -->
-
+<script  src="scripts/confetti.js"></script>
 <!--Firebase -->
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
@@ -1994,7 +2029,6 @@
     messagingSenderId: "373368426587"
   };
   firebase.initializeApp(config);	  
-	  
 </script>
 
 
