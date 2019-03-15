@@ -132,7 +132,6 @@
 				}
 
 				
-				
 				//timestamp & score system
 				var TimeStamp = BlitzData.Live.begintime;
 				var EndTimeStamp = BlitzData.Live.endtime;
@@ -669,20 +668,6 @@
 										   //console.log(res);
 									}
 								  
-									});
-									
-									//reset total score
-									$.ajax({
-										  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-										  type: 'PATCH',
-										  contentType: "application/json; charset=utf-8",
-										  dataType: "json",
-										  data: JSON.stringify({
-										  "TotalScore" : 0
-										  }),
-											   success: function(res) {
-												   //console.log(res);
-											   }
 									});
 									
 								
