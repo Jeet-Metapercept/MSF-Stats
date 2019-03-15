@@ -81,6 +81,20 @@
 							   }
 						});
 					}
+					//reset total score
+					$.ajax({
+						  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+						  type: 'PATCH',
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json",
+						  data: JSON.stringify({
+						  "TotalScore" : 0;
+						  }),
+							   success: function(res) {
+								   //console.log(res);
+							   }
+					});
+					
 					
 					//Push to blitzScore
 					var newScore = {
