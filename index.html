@@ -123,7 +123,7 @@
 				var isLive = BlitzData.Live.status; //console.log(isLive);
 				if(isLive === 'true'){
 					var liveStatus = document.getElementById("running");
-							liveStatus.innerHTML = "<span class='badge badge-danger'>Live!</span>";
+							liveStatus.innerHTML = "<span class='badge badge-danger pulse'>Live!</span>";
 					 $("#liveSignal").addClass("live-dot");
 				}else if(isLive === 'false'){
 							var liveStatus = document.getElementById("running");
