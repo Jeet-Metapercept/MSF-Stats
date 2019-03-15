@@ -81,19 +81,6 @@
 							   }
 						});
 					}
-					//reset total score
-					$.ajax({
-						  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
-						  type: 'PATCH',
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json",
-						  data: JSON.stringify({
-						  "TotalScore" : 0
-						  }),
-							   success: function(res) {
-								   //console.log(res);
-							   }
-					});
 					
 					
 					//Push to blitzScore
@@ -152,12 +139,13 @@
 
 				var beginTime = moment(new Date(TimeStamp)).format("YYYY-MM-DD HH:mm:ss");
 				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss");
-				var a = moment(beginTime);console.log(beginTime, endTime);
+				var a = moment(beginTime);
 				var b = moment(endTime);
+				//console.log(beginTime, endTime);
 				//console.log(a.diff(b, 'seconds'));
 				//console.log(beginTime.diff(endTime, 'seconds'));
 				if(endTime > beginTime){
-					console.log('Data Update')
+					//console.log('Data Update')
 					
 					//Push current score to all scores
 						AllScores.push(CurrentRoundScore);
@@ -177,26 +165,10 @@
 						 }
 					   });
 
-					 //Reset live results
-					var i;
-					for(i = 1; i<12; i++){
-						$.ajax({
-						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
-						  type: 'PATCH',
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json",
-						  data: JSON.stringify({
-							"previousBlitz" : "T"+[i]
-							}),
-							   success: function(res) {
-								   //console.log(res);
-							   }
-						});
-					}
 					
-
-					
-				}else(console.log('No new data'));
+				}else{
+					console.log('No new data');
+				};
 				
 				
 			
@@ -699,6 +671,19 @@
 								  
 									});
 									
+									//reset total score
+									$.ajax({
+										  url: "https://msf-stats.firebaseio.com/ExpectedScore.json",
+										  type: 'PATCH',
+										  contentType: "application/json; charset=utf-8",
+										  dataType: "json",
+										  data: JSON.stringify({
+										  "TotalScore" : 0
+										  }),
+											   success: function(res) {
+												   //console.log(res);
+											   }
+									});
 									
 								
     						}
