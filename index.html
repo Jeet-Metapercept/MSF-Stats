@@ -1545,18 +1545,23 @@
 				return value;
 		}
 			
-		var lastTotalScore = 0;
+		var lastScore = 0;
 		function addScore(value){
-			var addedPoints = value - lastTotalScore;	
-			if(addedPoints != value){
-				$('#addpoints').fadeIn('fast').delay(10000).fadeOut('slow');
+			var addedPoints = value - lastScore;	
+			if(addedPoints != value && addedPoints > 0){
+				$('#showPoints').fadeIn('fast').delay(10000).fadeOut('slow');
 				//confetti animation
-				  new Confetti({
-					width: window.innerWidth,
-					height: window.innerHeight,
-					length: 120,
-					duration: 8000 });
+				confetti({
+				  particleCount: 100,
+				  startVelocity: 30,
+				  spread: 360,
+				  angle: 90,
+				  origin: {
+					y: 0
+				  }
+				});
 			}
+			//console.log(addedPoints);
 			return addedPoints;
 		};
 		
@@ -1565,13 +1570,17 @@
 		 refScore.on("value", function(snapshot){
 		 //console.log(LastRoundScore);
 		 
-		//addScore(snapshot.val().TotalScore);
-		var pointsUpdate = addScore(snapshot.val().TotalScore);
+		//addScore(snapshot.val().CurrentRoundScore);
+		var pointsUpdate = addScore(snapshot.val().CurrentRoundScore);
 		if(pointsUpdate > 0){
 			addpoints.innerHTML = "<span class='text-success'> + " + pointsUpdate + "</span>";
+			lastScore = snapshot.val().CurrentRoundScore;
+		}else{
+			addpoints.innerHTML = "<span class='text-danger'>" + pointsUpdate + "</span>";
+			lastScore = snapshot.val().CurrentRoundScore;
 		}
-		//addpoints.innerHTML = addScore(snapshot.val().TotalScore);
-		lastTotalScore = snapshot.val().TotalScore;
+		//addpoints.innerHTML = addScore(snapshot.val().CurrentRoundScore);
+		//lastScore = snapshot.val().CurrentRoundScore;
 
 			crs.innerHTML = convert(snapshot.val().CurrentRoundScore);
 			lrs.innerHTML = convert(AvgRoundScore);
@@ -1785,9 +1794,9 @@
 					  </div>
                     </div>
 					
-					 <div class="col text-center">
-                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">add Points</div> -->
-                      <div class="h5 mb-0 text-gray-800" style="display: none;" id="addpoints"></div>
+					 <div class="col text-center" style="display: none;" id="showPoints">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Points</div>
+                      <div class="h5 mb-0 text-gray-800"id="addpoints"></div>
                     </div>
 					
                      <div class="col pull-right text-right">
