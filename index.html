@@ -1580,12 +1580,12 @@
 		 //console.log(LastRoundScore);
 		 
 		//addScore(snapshot.val().CurrentRoundScore);
-		var pointsUpdate = convert(addScore(snapshot.val().CurrentRoundScore));
+		var pointsUpdate = addScore(snapshot.val().CurrentRoundScore);
 		if(pointsUpdate > 0){
-			addpoints.innerHTML = "<span class='text-success'> + " + pointsUpdate + "</span>";
+			addpoints.innerHTML = "<span class='text-success'> + " + convert(pointsUpdate) + "</span>";
 			lastScore = snapshot.val().CurrentRoundScore;
 		}else{
-			addpoints.innerHTML = "<span class='text-danger'>" + pointsUpdate + "</span>";
+			addpoints.innerHTML = "<span class='text-danger'>" + convert(pointsUpdate) + "</span>";
 			lastScore = snapshot.val().CurrentRoundScore;
 		}
 		//addpoints.innerHTML = addScore(snapshot.val().CurrentRoundScore);
