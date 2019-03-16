@@ -1580,7 +1580,7 @@
 		 //console.log(LastRoundScore);
 		 
 		//addScore(snapshot.val().CurrentRoundScore);
-		var pointsUpdate = addScore(snapshot.val().CurrentRoundScore);
+		var pointsUpdate = convert(addScore(snapshot.val().CurrentRoundScore));
 		if(pointsUpdate > 0){
 			addpoints.innerHTML = "<span class='text-success'> + " + pointsUpdate + "</span>";
 			lastScore = snapshot.val().CurrentRoundScore;
