@@ -1552,20 +1552,29 @@
 				$('#showPoints').fadeIn('fast').delay(10000).fadeOut('slow');
 				//confetti animation
 				confetti({
-				  particleCount: 100,
-				  startVelocity: 30,
-				  spread: 360,
-				  angle: 90,
-				  origin: {
-					y: 0
-				  }
+					particleCount: 100,
+					startVelocity: 30,
+					angle: 60,
+					spread: 55,
+					origin: {
+						x: 0
+					}
+				});
+				confetti({
+					particleCount: 100,
+					startVelocity: 30,
+					angle: 120,
+					spread: 55,
+					origin: {
+						x: 1
+					}		
 				});
 			}
 			//console.log(addedPoints);
 			return addedPoints;
 		};
 		
-		
+				
 	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
 		 refScore.on("value", function(snapshot){
 		 //console.log(LastRoundScore);
