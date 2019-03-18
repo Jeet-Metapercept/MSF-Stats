@@ -84,7 +84,7 @@
 					
 					//Push to blitzScore
 					var newScore = {
-							"AvgScorePerDay" : TotalScore/3,
+							"AvgScorePerDay" : Math.round(TotalScore/3),
 							"Blitz" : "Blitz",
 							"Score" : TotalScore,
 							"color" : "#0D52D1",
@@ -92,18 +92,25 @@
 							"days" : 3,
 							"rank" : "???"
 							};
-					BlitzData.BlitzScore.push(newScore);
-					//console.log(BlitzData.BlitzScore);
-					$.ajax({
-						  url: "https://msf-stats.firebaseio.com/BlitzScore.json",
-						  type: 'PUT',
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json",
-						  data: JSON.stringify(BlitzData.BlitzScore),
-							   success: function(res) {
-								   //console.log(res);
-							   }
-					});
+							
+					//Fix for only push once by date check
+					var BlitzEvent = BlitzData.BlitzScore.filter(x => x.date === moment().format('MM/DD/YYYY'));
+					if(BlitzEvent.length == 0){
+						//console.log('yes push')
+						BlitzData.BlitzScore.push(newScore);
+						//console.log(BlitzData.BlitzScore);
+						$.ajax({
+							  url: "https://msf-stats.firebaseio.com/BlitzScore.json",
+							  type: 'PUT',
+							  contentType: "application/json; charset=utf-8",
+							  dataType: "json",
+							  data: JSON.stringify(BlitzData.BlitzScore),
+								   success: function(res) {
+									   //console.log(res);
+								   }
+						});
+					}
+					 					
 					
 					//reset TotalScore
 						$.ajax({
@@ -119,7 +126,7 @@
 						  }
 					   });
 				}
-				
+
 				var isLive = BlitzData.Live.status; //console.log(isLive);
 				if(isLive === 'true'){
 					var liveStatus = document.getElementById("running");
@@ -1361,7 +1368,7 @@
 					"guides": [{
 						"dashLength": 6,
 						"inside": true,
-						"label": "Average : " + Math.round(AvgRoundScore),
+						"label": "Average : " + 200000,
 						"lineAlpha": 0.5,
 						"value": AvgRoundScore
 					}],
