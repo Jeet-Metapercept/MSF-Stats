@@ -355,7 +355,8 @@
       			var Team8 = Team_8.match(/W/gi).length;	
       			var Team9 = Team_9.match(/W/gi).length;	
       			var Team10 = Team_10.match(/W/gi).length;	
-      			var Team11 = Team_11.match(/W/gi).length;	
+      			var Team11 = Team_11.match(/W/gi).length;
+				var Team12 = Team_11.match(/W/gi).length;				
       			
       			//Count wins/losses
       			var total_teams = 11;
@@ -371,6 +372,7 @@
       			if (retrieved_Team9_Results[retrieved_Team9_Results.length -1] ===  'W'){ wins++; };
       			if (retrieved_Team10_Results[retrieved_Team10_Results.length -1] ===  'W'){ wins++; };
       			if (retrieved_Team11_Results[retrieved_Team11_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team12_Results[retrieved_Team12_Results.length -1] ===  'W'){ wins++; };
       			//console.log(wins);
       			var losses = total_teams - wins;
       			
@@ -933,6 +935,7 @@
       		readTimesTextFile("Team9LastBlitz.txt");
       		readTimesTextFile("Team10LastBlitz.txt");
       		readTimesTextFile("Team11LastBlitz.txt");
+			readTimesTextFile("Team12LastBlitz.txt");
       
       		readLastBlitzFile("LastBlitz.txt");
       		
@@ -1029,12 +1032,12 @@
 				}else{
 					T11_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team11_Results[retrieved_Team11_Results.length -1] + "</span>";
 				}
-			<!-- var T12_lastround = document.getElementById("T12_lastround"); -->
-			<!-- if(retrieved_Team12_Results[retrieved_Team12_Results.length -1] == 'W'){ -->
-					<!-- T12_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>"; -->
-				<!-- }else{ -->
-					<!-- T12_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>"; -->
-				<!-- } -->
+			var T12_lastround = document.getElementById("T12_lastround");
+			if(retrieved_Team12_Results[retrieved_Team12_Results.length -1] == 'W'){
+					T12_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>";
+				}else{
+					T12_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>";
+				}
 			
 	
 				
@@ -1103,6 +1106,11 @@
       					"Teams": "Team 11" + "\n" + "Battles : " + retrieved_Team11_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team11_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team11_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_11_time*1000).fromNow(),
       					"WinRate" : (Team11*100/(Team_11.split(" ").length )).toFixed(2),
       					"Results" : Team_11
+      				},
+					{
+      					"Teams": "Team 12" + "\n" + "Battles : " + retrieved_Team12_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team12_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team12_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_12_time*1000).fromNow(),
+      					"WinRate" : (Team12*100/(Team_12.split(" ").length )).toFixed(2),
+      					"Results" : Team_12
       				}
       			],
       			"type": "serial",
@@ -1217,6 +1225,11 @@
       					"WinRate" : ((Team_11_alltime.match(/W/gi).length)*100/(Team_11_alltime.split(" ").length)).toFixed(2),
       					"Results" : Team_11_alltime.slice(-40)
       				},
+      				{
+      					"Teams": "Team 12" + "\n" + "Battles : " + Team_12_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_12_alltime.match(new RegExp('W','g')).length + " / L " + Team_12_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_12_alltime.match(/W/gi).length)*100/(Team_12_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_12_alltime.match(/W/gi).length)*100/(Team_12_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_12_alltime.slice(-40)
+      				}
       			],
       			"type": "serial",
       			"categoryField": "Teams", 
@@ -1872,7 +1885,9 @@
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_live" data-tip="Team 11">
 									<span class="btn btn-secondary btn-circle btn-lg">T11</span>
 								</div>
-								<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div> -->
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T12_live" data-tip="Team 12">
+									<span class="btn btn-secondary btn-circle btn-lg">T12</span>
+								</div>
 							  </div>
 							</div>
 						  </div>
@@ -1903,7 +1918,7 @@
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T9_lastround" data-tip="Team 9"> - </div>
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_lastround" data-tip="Team 10"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_lastround" data-tip="Team 11"> - </div>
-								<!-- <div class="Column h5 mb-0 mr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div> -->
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div>
 							  </div>
 							</div>
 						  </div>
