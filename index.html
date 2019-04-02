@@ -1552,7 +1552,7 @@
 			//team 12 live
 			if(snapshot.val().team12.previousBlitz == "W"){
 				T12_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team12.previousBlitz + "</span>";
-			}else if(snapshot.val().team11.previousBlitz == "L"){
+			}else if(snapshot.val().team12.previousBlitz == "L"){
 				T12_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team12.previousBlitz + "</span>";
 			}else{
 				T12_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team12.previousBlitz + "</span>";
