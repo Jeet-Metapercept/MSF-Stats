@@ -1447,6 +1447,8 @@
 		 refTier.on("value", function(snapshot){
 			//suicide squad snapshot
 			tierChecker.innerHTML =  "Suicide Squad Used : " + snapshot.val().SuicideSquadUsed;
+			//multiplier snapshot
+			multiplier.innerHTML =  snapshot.val().multiplier;
 			
 			//previousBlitz snapshot
 			
@@ -1579,7 +1581,9 @@
 		function addScore(value){
 			var addedPoints = value - lastScore;	
 			if(addedPoints != value && addedPoints > 0){
-				$('#showPoints').fadeIn('fast').delay(10000).fadeOut('slow');
+				$('#showMultiplier').hide();
+				$('#showPoints').fadeIn('fast').delay(9000).fadeOut('slow');
+				$('#showMultiplier').delay(10000).fadeIn('fast');
 				//confetti animation
 				confetti({
 					particleCount: 100,
@@ -1603,7 +1607,7 @@
 			//console.log(addedPoints);
 			return addedPoints;
 		};
-		
+
 				
 	  	 var refScore = firebase.database().ref('/ExpectedScore');                           
 		 refScore.on("value", function(snapshot){
@@ -1811,6 +1815,7 @@
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Update</div>
                       <div class="h5 mb-0  text-gray-800" id="stamp">-</div>
                     </div>
+					
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next Blitz</div>
                       <div class="h5 mb-0  text-gray-800" id="timer">-</div>
@@ -1833,10 +1838,17 @@
 					  </div>
                     </div>
 					
-					 <div class="col text-center" style="display: none;" id="showPoints">
+					
+					<div class="col text-center" style="display: none;" id="showPoints">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Points</div>
-                      <div class="h5 mb-0 text-gray-800"id="addpoints"></div>
+                      <div class="h5 mb-0 text-gray-800" id="addpoints"></div>
                     </div>
+					
+					<div class="col text-center" id="showMultiplier">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Multiplier</div>
+                      <div class="h5 mb-0 text-gray-800" id="multiplier">&nbsp;</div>
+                    </div>
+					
 					
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Points</div>
