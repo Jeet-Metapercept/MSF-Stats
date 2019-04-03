@@ -1581,9 +1581,9 @@
 		function addScore(value){
 			var addedPoints = value - lastScore;	
 			if(addedPoints != value && addedPoints > 0){
-				$('#showMultiplier').hide();
-				$('#showPoints').fadeIn('fast').delay(9000).fadeOut('slow');
-				$('#showMultiplier').delay(10000).fadeIn('fast');
+				//$('#showMultiplier').hide();
+				$('#showPoints').fadeIn('fast').delay(10000).fadeOut('slow');
+				//$('#showMultiplier').delay(10000).fadeIn('fast');
 				//confetti animation
 				confetti({
 					particleCount: 100,
@@ -1839,15 +1839,15 @@
                     </div>
 					
 					
-					<div class="col text-center" style="display: none;" id="showPoints">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Points</div>
-                      <div class="h5 mb-0 text-gray-800" id="addpoints"></div>
+					<div class="col text-center">
+                      <div class="text-md font-weight-bold text-success text-uppercase mb-1" id="multiplier">Multiplier</div>
+                      <div id="showPoints" style="display: none;"><div class="h5 mb-0 text-gray-800" id="addpoints"></div></div>
                     </div>
 					
-					<div class="col text-center" id="showMultiplier">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Multiplier</div>
-                      <div class="h5 mb-0 text-gray-800" id="multiplier">&nbsp;</div>
-                    </div>
+					<!-- <div class="col text-center" id="showMultiplier"> -->
+                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Multiplier</div> -->
+                      <!-- <div class="h5 mb-0 text-gray-800" >&nbsp;</div> -->
+                    <!-- </div> -->
 					
 					
                      <div class="col pull-right text-right">
