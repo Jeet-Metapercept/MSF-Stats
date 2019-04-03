@@ -291,7 +291,7 @@
       			var Team_11 = retrieved_Team11_Results;
       			
       			var retrieved_Team12_Results = T12.live;
-      			var Team_12 = retrieved_Team11_Results;
+      			var Team_12 = retrieved_Team12_Results;
       			
       			//retrive blitz all time results
       			var Team_1_alltime = T1.alltime;
@@ -1583,9 +1583,7 @@
 			if(addedPoints != value && addedPoints > 0){
 				$('#showMultiplier').hide();
 				$('#showPoints').fadeIn('fast').delay(10000).fadeOut('slow');
-				setTimeout(function(){ 
-					$('#showMultiplier').fadeIn('fast');
-				}, 110000); 
+				$('#showMultiplier').delay(12000).fadeIn('fast');
 				
 				//confetti animation
 				confetti({
