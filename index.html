@@ -1438,12 +1438,65 @@
       		
 	   //toggle live & previous scores
 		//$('#result_last').slideToggle('fast');
-			$('#result_live').on('click', function(){
+		$('#result_live').on('click', function(){
 			$('#result_last').slideToggle('slow');   //this will set display:block   
-			//$('#dispPackages').slideToggle('slow').css("display","inline-block");
-		});	   
+		});
+		$('#points_score').on('click', function(){
+			$('#tier_list').slideToggle('slow');   //this will set display:block   
+
+		});	 		
       //Firebase
-	 // var tiers = [];
+	 function snapshotToArray(snapshot) {
+		var returnArr = [];
+
+		snapshot.forEach(function(childSnapshot) {
+			var item = childSnapshot.val();
+			item.key = childSnapshot.key;
+
+			returnArr.push(item);
+		});
+
+		return returnArr;
+	};
+	 var refTierList = firebase.database().ref('/Tier');
+	 refTierList.on('value', function(snapshot) {
+		//console.log(snapshot.val());
+		console.log(snapshotToArray(snapshot));
+		
+		
+		//chart
+		AmCharts.makeChart( "Tierlist", {
+			  "type": "serial",
+			  "dataProvider": snapshotToArray(snapshot),
+			  "categoryField": "tier",
+			  "autoMargins": false,
+			  "marginLeft": 0,
+			  "marginRight": 0,
+			  "marginTop": 0,
+			  "marginBottom": 0,
+			  //"fixedColumnWidth": 15,
+			  //"columnWidth": 1,
+			  "columnSpacing": 0,
+			  "graphs": [ {
+				"valueField": "tier",
+				"type": "column",
+				"fillAlphas": 1,
+				"fillColorsField": "color",
+				"lineAlpha": 0,
+				"showBalloon": false
+			  } ],
+			  "valueAxes": [ {
+				"gridAlpha": 0,
+				"axisAlpha": 0
+			  } ],
+			  "categoryAxis": {
+				"gridAlpha": 0,
+				"axisAlpha": 0
+			  }
+			} );
+
+	 });
+	 
 	  var refTier = firebase.database().ref('/');                           
 		 refTier.on("value", function(snapshot){
 			//suicide squad snapshot
@@ -1451,11 +1504,6 @@
 			//multiplier snapshot
 			multiplier.innerHTML =  snapshot.val().multiplier;
 			
-			//Tier record & chart
-			<!-- console.log(snapshot.val().tier); -->
-				<!-- tiers.push(snapshot.val().multiplier); -->
-				<!-- console.log(tiers); -->
-		
 			
 			
 			//previousBlitz snapshot
@@ -1837,7 +1885,7 @@
 			 <!-- Expected points -->
             <div class="col-xl-12 col-md-12 mb-1 ">
               <div class="card border-left-info shadow h-60 py-2">
-                <div class="card-body" style="padding: 0 1.25rem;">
+                <div class="card-body" id="points_score"  style="padding: 0 1.25rem;">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Points<small>   (<span class="" id="lrs" >-</span>)</small></div>
@@ -1865,6 +1913,22 @@
                     </div>
                   </div>
                 </div>
+				
+				<div id="tier_list" class="card-body" style="padding: 0 1.25rem; padding-top: 0.5rem; margin-top: 10px; border-top: solid #f1f2f6 3px; display: none;">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2 ">
+                
+						  <div class="row no-gutters align-items-center">
+							<div class="col-auto">
+							  <div class="Row">
+								<div id="Tierlist" style="min-height: 50px"></div>
+							  </div>
+							</div>
+						  </div>
+                    </div>
+                  </div>
+                </div>
+				
               </div>
             </div>
 			
@@ -1969,7 +2033,8 @@
           <!-- Content Row -->
 
           <div class="row">
-
+	  
+		  
 		  <!-- Scores Chart -->
             <div class="col-xl-12 col-lg-12 mb-1">
               <div class="card shadow " style="min-height: 50vh;">
