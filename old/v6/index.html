@@ -1443,20 +1443,12 @@
 			//$('#dispPackages').slideToggle('slow').css("display","inline-block");
 		});	   
       //Firebase
-	 // var tiers = [];
 	  var refTier = firebase.database().ref('/');                           
 		 refTier.on("value", function(snapshot){
 			//suicide squad snapshot
 			tierChecker.innerHTML =  "Suicide Squad Used : " + snapshot.val().SuicideSquadUsed;
 			//multiplier snapshot
 			multiplier.innerHTML =  snapshot.val().multiplier;
-			
-			//Tier record & chart
-			<!-- console.log(snapshot.val().tier); -->
-				<!-- tiers.push(snapshot.val().multiplier); -->
-				<!-- console.log(tiers); -->
-		
-			
 			
 			//previousBlitz snapshot
 			
