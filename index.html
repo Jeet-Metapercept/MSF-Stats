@@ -1467,6 +1467,7 @@
 		//chart
 		AmCharts.makeChart( "Tierlist", {
 			  "type": "serial",
+			  "theme": "none",
 			  "dataProvider": snapshotToArray(snapshot),
 			  "categoryField": "tier",
 			  "autoMargins": false,
@@ -1479,7 +1480,7 @@
 			  "columnSpacing": 0,
 			  "graphs": [ {
 				"valueField": "tier",
-				"type": "column",
+				"type": "smoothedLine",
 				"fillAlphas": 1,
 				"fillColorsField": "color",
 				"lineAlpha": 0,
@@ -1914,7 +1915,7 @@
                   </div>
                 </div>
 				
-				<div id="tier_list" class="card-body" style="padding: 0 1.25rem; padding-top: 0.5rem; margin-top: 10px; border-top: solid #f1f2f6 3px; display: none;">
+				<div id="tier_list" class="card-body" style="padding: 0 0.05rem; padding-top: 0.05rem; border-top: solid #f1f2f6 3px; display: none;">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2 ">
                 
