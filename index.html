@@ -641,7 +641,7 @@
       						var diffSec = moment.duration(diff).asSeconds()
       						//console.log(moment.duration(diff).asSeconds());
 														
-      						var count = (7200+480+300-600) - parseInt(diffSec);
+      						var count = (7200+480+300+600) - parseInt(diffSec);
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
       						function timer() {
@@ -1382,9 +1382,9 @@
 					"guides": [{
 						"dashLength": 6,
 						"inside": true,
-						"label": "Average : " + 200000,
+						"label": "Average : " + 250000,
 						"lineAlpha": 0.5,
-						"value": AvgRoundScore
+						"value": 250000//AvgRoundScore
 					}],
 				}],
 				"graphs": [{
