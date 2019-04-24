@@ -67,7 +67,7 @@
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
-					for(i = 1; i<13; i++){
+					for(i = 1; i<15; i++){
 						$.ajax({
 						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
 						  type: 'PATCH',
@@ -215,21 +215,23 @@
       			var T10 = BlitzData.team10;
       			var T11 = BlitzData.team11;
       			var T12 = BlitzData.team12;
+				var T13 = BlitzData.team13;
+				var T14 = BlitzData.team14;
       
       			//Overall Statcounter
-      			var BlitzTotalBattlesWon = T1.alltime.match(/W/gi).length + T2.alltime.match(/W/gi).length + T3.alltime.match(/W/gi).length + T4.alltime.match(/W/gi).length+T5.alltime.match(/W/gi).length+T6.alltime.match(/W/gi).length+T7.alltime.match(/W/gi).length+T8.alltime.match(/W/gi).length+T9.alltime.match(/W/gi).length+T10.alltime.match(/W/gi).length+T11.alltime.match(/W/gi).length + T12.alltime.match(/W/gi).length;
+      			var BlitzTotalBattlesWon = T1.alltime.match(/W/gi).length + T2.alltime.match(/W/gi).length + T3.alltime.match(/W/gi).length + T4.alltime.match(/W/gi).length+T5.alltime.match(/W/gi).length+T6.alltime.match(/W/gi).length+T7.alltime.match(/W/gi).length+T8.alltime.match(/W/gi).length+T9.alltime.match(/W/gi).length+T10.alltime.match(/W/gi).length+T11.alltime.match(/W/gi).length + T12.alltime.match(/W/gi).length + T13.alltime.match(/W/gi).length + T14.alltime.match(/W/gi).length;
       			
-      			var BlitzTotalBattlesLost = T1.alltime.match(/L/gi).length + T2.alltime.match(/L/gi).length + T3.alltime.match(/L/gi).length + T4.alltime.match(/L/gi).length+T5.alltime.match(/L/gi).length+T6.alltime.match(/L/gi).length+T7.alltime.match(/L/gi).length+T8.alltime.match(/L/gi).length+T9.alltime.match(/L/gi).length+T10.alltime.match(/L/gi).length+T11.alltime.match(/L/gi).length + T12.alltime.match(/L/gi).length;
+      			var BlitzTotalBattlesLost = T1.alltime.match(/L/gi).length + T2.alltime.match(/L/gi).length + T3.alltime.match(/L/gi).length + T4.alltime.match(/L/gi).length+T5.alltime.match(/L/gi).length+T6.alltime.match(/L/gi).length+T7.alltime.match(/L/gi).length+T8.alltime.match(/L/gi).length+T9.alltime.match(/L/gi).length+T10.alltime.match(/L/gi).length+T11.alltime.match(/L/gi).length + T12.alltime.match(/L/gi).length + T13.alltime.match(/L/gi).length + T14.alltime.match(/L/gi).length;
       			
       			var BlitzTotalBattles = parseInt(BlitzTotalBattlesLost) + parseInt(BlitzTotalBattlesWon); 
       			
       			var BlitzBattleRatio = ((BlitzTotalBattlesWon*100)/BlitzTotalBattles).toFixed(2);
       			
       			//Current wins/losses this Blitz
-      			var CurrentBattlesWon = T1.live.match(/W/gi).length + T2.live.match(/W/gi).length + T3.live.match(/W/gi).length + T4.live.match(/W/gi).length+T5.live.match(/W/gi).length+T6.live.match(/W/gi).length+T7.live.match(/W/gi).length+T8.live.match(/W/gi).length+T9.live.match(/W/gi).length+T10.live.match(/W/gi).length+T11.live.match(/W/gi).length + T12.live.match(/W/gi).length;
+      			var CurrentBattlesWon = T1.live.match(/W/gi).length + T2.live.match(/W/gi).length + T3.live.match(/W/gi).length + T4.live.match(/W/gi).length+T5.live.match(/W/gi).length+T6.live.match(/W/gi).length+T7.live.match(/W/gi).length+T8.live.match(/W/gi).length+T9.live.match(/W/gi).length+T10.live.match(/W/gi).length+T11.live.match(/W/gi).length + T12.live.match(/W/gi).length + T13.live.match(/W/gi).length + T14.live.match(/W/gi).length;
       	
       			
-      			var CurrentBattlesLost = T1.live.match(/L/gi).length + T2.live.match(/L/gi).length + T3.live.match(/L/gi).length + T4.live.match(/L/gi).length+T5.live.match(/L/gi).length+T6.live.match(/L/gi).length+T7.live.match(/L/gi).length+T8.live.match(/L/gi).length+T9.live.match(/L/gi).length+T10.live.match(/L/gi).length+T11.live.match(/L/gi).length + T12.live.match(/L/gi).length;
+      			var CurrentBattlesLost = T1.live.match(/L/gi).length + T2.live.match(/L/gi).length + T3.live.match(/L/gi).length + T4.live.match(/L/gi).length+T5.live.match(/L/gi).length+T6.live.match(/L/gi).length+T7.live.match(/L/gi).length+T8.live.match(/L/gi).length+T9.live.match(/L/gi).length+T10.live.match(/L/gi).length+T11.live.match(/L/gi).length + T12.live.match(/L/gi).length + T13.live.match(/L/gi).length + T14.live.match(/L/gi).length;
       		
       			
       			var CurrentBattlesBlitz = CurrentBattlesWon + CurrentBattlesLost;
@@ -292,6 +294,12 @@
       			
       			var retrieved_Team12_Results = T12.live;
       			var Team_12 = retrieved_Team12_Results;
+				
+				var retrieved_Team13_Results = T13.live;
+      			var Team_13 = retrieved_Team13_Results;
+				
+				var retrieved_Team14_Results = T14.live;
+      			var Team_14 = retrieved_Team14_Results;
       			
       			//retrive blitz all time results
       			var Team_1_alltime = T1.alltime;
@@ -306,6 +314,8 @@
       			var Team_10_alltime = T10.alltime;
       			var Team_11_alltime = T11.alltime;
       			var Team_12_alltime = T12.alltime;
+				var Team_13_alltime = T13.alltime;
+				var Team_14_alltime = T14.alltime;
 				
       			// Retrieve the Times object from storage
       			var retrieved_Team1_Time = T1.lastbattle;
@@ -343,6 +353,12 @@
       			
       			var retrieved_Team12_Time = T12.lastbattle;
       			var Team_12_time = retrieved_Team12_Time; 
+				
+				var retrieved_Team13_Time = T13.lastbattle;
+      			var Team_13_time = retrieved_Team13_Time; 
+				
+				var retrieved_Team14_Time = T14.lastbattle;
+      			var Team_14_time = retrieved_Team14_Time; 
       			
       			//Graph work
       			var Team1 = Team_1.match(/W/gi).length;
@@ -356,10 +372,12 @@
       			var Team9 = Team_9.match(/W/gi).length;	
       			var Team10 = Team_10.match(/W/gi).length;	
       			var Team11 = Team_11.match(/W/gi).length;
-				var Team12 = Team_12.match(/W/gi).length;				
+				var Team12 = Team_12.match(/W/gi).length;	
+				var Team13 = Team_13.match(/W/gi).length;	
+				var Team14 = Team_14.match(/W/gi).length;					
       			
       			//Count wins/losses
-      			var total_teams = 12;
+      			var total_teams = 14;
       			var wins = 0;
       			if (retrieved_Team1_Results[retrieved_Team1_Results.length -1] ===  'W'){ wins++; };
       			if (retrieved_Team2_Results[retrieved_Team2_Results.length -1] ===  'W'){ wins++; };
@@ -373,6 +391,8 @@
       			if (retrieved_Team10_Results[retrieved_Team10_Results.length -1] ===  'W'){ wins++; };
       			if (retrieved_Team11_Results[retrieved_Team11_Results.length -1] ===  'W'){ wins++; };
 				if (retrieved_Team12_Results[retrieved_Team12_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team13_Results[retrieved_Team13_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team14_Results[retrieved_Team14_Results.length -1] ===  'W'){ wins++; };
       			//console.log(wins);
       			var losses = total_teams - wins;
       			
@@ -612,6 +632,40 @@
       
       }
        break; 	
+	   case 'Team13LastBlitz.txt': 
+      if(battletime > Team_13_time){
+      readTextFile("Team13.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team13.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break; 
+	case 'Team14LastBlitz.txt': 
+      if(battletime > Team_14_time){
+      readTextFile("Team14.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team14.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break; 		   
       default: 
        console.log('errrrror'); 
       } 
@@ -915,7 +969,35 @@
       //console.log(res);
       }					  
       });
-      break; 
+      break;
+	  case 'Team13.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team13.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T13.alltime + match_result,
+      "live" : T13.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break;
+	  case 'Team14.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team14.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T14.alltime + match_result,
+      "live" : T14.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break;	  
       default: 
       console.log("eerrrrrorrr"); 
       } 
@@ -936,6 +1018,8 @@
       		readTimesTextFile("Team10LastBlitz.txt");
       		readTimesTextFile("Team11LastBlitz.txt");
 			readTimesTextFile("Team12LastBlitz.txt");
+			readTimesTextFile("Team13LastBlitz.txt");
+			readTimesTextFile("Team14LastBlitz.txt");
       
       		readLastBlitzFile("LastBlitz.txt");
       		
@@ -1038,6 +1122,18 @@
 				}else{
 					T12_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team12_Results[retrieved_Team12_Results.length -1] + "</span>";
 				}
+			var T13_lastround = document.getElementById("T13_lastround");
+			if(retrieved_Team13_Results[retrieved_Team13_Results.length -1] == 'W'){
+					T13_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team13_Results[retrieved_Team13_Results.length -1] + "</span>";
+				}else{
+					T13_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team13_Results[retrieved_Team13_Results.length -1] + "</span>";
+				}
+			var T14_lastround = document.getElementById("T14_lastround");
+			if(retrieved_Team14_Results[retrieved_Team14_Results.length -1] == 'W'){
+					T14_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team14_Results[retrieved_Team14_Results.length -1] + "</span>";
+				}else{
+					T14_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team14_Results[retrieved_Team14_Results.length -1] + "</span>";
+				}
 			
 	
 				
@@ -1111,6 +1207,16 @@
       					"Teams": "Team 12" + "\n" + "Battles : " + retrieved_Team12_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team12_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team12_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_12_time*1000).fromNow(),
       					"WinRate" : (Team12*100/(Team_12.split(" ").length )).toFixed(2),
       					"Results" : Team_12
+      				},
+					{
+      					"Teams": "Team 13" + "\n" + "Battles : " + retrieved_Team13_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team13_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team13_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_13_time*1000).fromNow(),
+      					"WinRate" : (Team13*100/(Team_13.split(" ").length )).toFixed(2),
+      					"Results" : Team_13
+      				},
+					{
+      					"Teams": "Team 14" + "\n" + "Battles : " + retrieved_Team14_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team14_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team14_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_14_time*1000).fromNow(),
+      					"WinRate" : (Team14*100/(Team_14.split(" ").length )).toFixed(2),
+      					"Results" : Team_14
       				}
       			],
       			"type": "serial",
@@ -1229,6 +1335,16 @@
       					"Teams": "Team 12" + "\n" + "Battles : " + Team_12_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_12_alltime.match(new RegExp('W','g')).length + " / L " + Team_12_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_12_alltime.match(/W/gi).length)*100/(Team_12_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_12_alltime.match(/W/gi).length)*100/(Team_12_alltime.split(" ").length)).toFixed(2),
       					"Results" : Team_12_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 13" + "\n" + "Battles : " + Team_13_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_13_alltime.match(new RegExp('W','g')).length + " / L " + Team_13_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_13_alltime.match(/W/gi).length)*100/(Team_13_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_13_alltime.match(/W/gi).length)*100/(Team_13_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_13_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 14" + "\n" + "Battles : " + Team_14_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_14_alltime.match(new RegExp('W','g')).length + " / L " + Team_14_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_14_alltime.match(/W/gi).length)*100/(Team_14_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_14_alltime.match(/W/gi).length)*100/(Team_14_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_14_alltime.slice(-40)
       				}
       			],
       			"type": "serial",
@@ -1616,6 +1732,24 @@
 			}else{
 				T12_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team12.previousBlitz + "</span>";
 			}
+			
+			//team 13 live
+			if(snapshot.val().team13.previousBlitz == "W"){
+				T13_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team13.previousBlitz + "</span>";
+			}else if(snapshot.val().team13.previousBlitz == "L"){
+				T13_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team13.previousBlitz + "</span>";
+			}else{
+				T13_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team13.previousBlitz + "</span>";
+			}
+			
+			//team 14 live
+			if(snapshot.val().team14.previousBlitz == "W"){
+				T14_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team14.previousBlitz + "</span>";
+			}else if(snapshot.val().team14.previousBlitz == "L"){
+				T14_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team14.previousBlitz + "</span>";
+			}else{
+				T14_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team14.previousBlitz + "</span>";
+			}
 		 });
 	  
 			
@@ -1772,11 +1906,14 @@
 	      case 'Team 11 Blitzing':
 					$('.progress-bar').css('width', '80%').attr('aria-valuenow', 80); 
 					break;
-		  case 'Updating Files':
+		  case 'Team 12 Blitzing':
 					$('.progress-bar').css('width', '85%').attr('aria-valuenow', 85); 
 					break;
-		  case 'Closing Nox Player':
+		  case 'Team 13 Blitzing':
 					$('.progress-bar').css('width', '90%').attr('aria-valuenow', 90); 
+					break;	
+		  case 'Team 14 Blitzing':
+					$('.progress-bar').css('width', '90%').attr('aria-valuenow', 95); 
 					break;	
 		  case 'Complete':
 					$('.progress-bar').css('width', '100%').attr('aria-valuenow', 100); 
@@ -1983,6 +2120,12 @@
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T12_live" data-tip="Team 12">
 									<span class="btn btn-secondary btn-circle btn-lg">T12</span>
 								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T13_live" data-tip="Team 13">
+									<span class="btn btn-secondary btn-circle btn-lg">T13</span>
+								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T14_live" data-tip="Team 14">
+									<span class="btn btn-secondary btn-circle btn-lg">T14</span>
+								</div>
 							  </div>
 							</div>
 						  </div>
@@ -2014,6 +2157,8 @@
 								<div class="Column  mb-0 mr-1 qtip tip-top" id="T10_lastround" data-tip="Team 10"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T11_lastround" data-tip="Team 11"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T13_lastround" data-tip="Team 13"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T14_lastround" data-tip="Team 14"> - </div>
 							  </div>
 							</div>
 						  </div>
