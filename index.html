@@ -155,6 +155,7 @@
 				//timestamp & score system
 				var TimeStamp = BlitzData.Live.begintime;
 				var EndTimeStamp = BlitzData.Live.endtime;
+				var Time2Hr = BlitzData.Live.Timer2hr;
 
 				var beginTime = moment(new Date(TimeStamp)).format("YYYY-MM-DD HH:mm:ss");
 				var endTime = moment(new Date(EndTimeStamp)).format("YYYY-MM-DD HH:mm:ss");
@@ -690,12 +691,16 @@
       						
       						//Next Blitz timer
       						var d1 = new Date(); //"now"
-      						var d2 = new Date(allTexts); // some date
+      						//var d2 = new Date(allTexts); // some date
+							var d2 = new Date(EndTimeStamp);
+							
       						var diff = moment.utc(moment(d1,"DD/MM/YYYY HH:mm:ss").diff(moment(d2,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");  // difference in milliseconds
       						var diffSec = moment.duration(diff).asSeconds()
-      						//console.log(moment.duration(diff).asSeconds());
+      						console.log(moment.duration(diff).asSeconds());
 														
-      						var count = (7200+480+300+600) - parseInt(diffSec);
+      						//var count = (7200) - parseInt(diffSec);
+							var count = (4560) - parseInt(diffSec);
+							
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
       						function timer() {
@@ -1574,10 +1579,12 @@
 
 		return returnArr;
 	};
+		 
+	 
 	 var refTierList = firebase.database().ref('/Tier');
 	 refTierList.on('value', function(snapshot) {
 		//console.log(snapshot.val());
-		console.log(snapshotToArray(snapshot));
+		//console.log(snapshotToArray(snapshot));
 		
 		
 		//chart
@@ -2014,6 +2021,8 @@
                      <div class="col pull-right text-right">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next Blitz</div>
                       <div class="h5 mb-0  text-gray-800" id="timer">-</div>
+					  <div class="h5 mb-0  text-gray-800" id="countdown2hr">-</div>
+					  
                     </div>
                   </div>
                 </div>
