@@ -716,7 +716,12 @@
       							minutes %= 60;
       							hours %= 60;
       
-      							document.getElementById("timer").innerHTML = hours + ": " + minutes + ": " + seconds; // watch for spelling
+								if(count > 0){
+									document.getElementById("timer").innerHTML = hours + ": " + minutes + ": " + seconds; // watch for spelling
+								}else{
+									document.getElementById("timer").innerHTML = "Ready"; // watch for spelling
+								}
+      							
       						}
       						
       						if(CurrentBlitzNumber > LastBlitzNumber){
