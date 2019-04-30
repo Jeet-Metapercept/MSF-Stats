@@ -719,7 +719,12 @@
 								if(count > 0){
 									document.getElementById("timer").innerHTML = hours + ": " + minutes + ": " + seconds; // watch for spelling
 								}else{
-									document.getElementById("timer").innerHTML = "Ready"; // watch for spelling
+									if(isLive === 'true'){
+										document.getElementById("timer").innerHTML = "Blitzing";
+									}else{
+										document.getElementById("timer").innerHTML = "Ready"; // watch for spelling
+									}
+									
 								}
       							
       						}
