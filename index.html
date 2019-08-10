@@ -44,7 +44,8 @@
 
 	
 	<script>
-	//git command to update repo --> git commit -am "update" && git push 
+	//git command to update repo 			  --> git commit -am "update" && git push 
+	//git command to push all untracked files --> git add --all
 
       //get data from firebase
       	$.ajax({
@@ -1486,7 +1487,7 @@
 				adjustPrecision: true,
 				percentPrecision: 0,
 				radius: 80,
-				startEffect: "easeOutSine",
+				startEffect: "easeInSine",
 				innerRadius: "40%",
 				titleField: "team",
 				valueField: "value",
@@ -1497,7 +1498,7 @@
 				//allLabels: [],
 				//balloon: {},
 				legend: {
-				  enabled: false,
+				  enabled: true,
 				  align: "center",
 				  markerType: "circle",
 				  color: "#000000",
@@ -1505,7 +1506,7 @@
 				},
 				titles: [
 				  {
-					text: "Current Blitz Opponents",
+					text: "Blitz Teams Statastics",
 					size: 15,
 					color: "#4e73df"
 				  }
@@ -2189,7 +2190,7 @@
 						  <div class="row no-gutters align-items-center">
 							<div class="col-auto">
 							  <div class="Row">
-								<div id="opponents_current" style="min-height: 400px"></div>
+								<div id="opponents_current" style="min-height: 300px"></div>
 							  </div>
 							</div>
 						  </div>
