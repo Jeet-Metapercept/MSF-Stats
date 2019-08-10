@@ -19,6 +19,7 @@
       <!-- amCharts javascript sources -->
     <script type="text/javascript" src="scripts/amcharts.js"></script>
     <script type="text/javascript" src="scripts/serial.js"></script>
+	<script type="text/javascript" src="scripts/pie.js"></script>
     <script type="text/javascript" src="scripts/light.js"></script>
     <script type="text/javascript" src="scripts/download2.js"></script>
     <script type="text/javascript" src="scripts/moment.min.js"></script>
@@ -54,6 +55,7 @@
       		success: function(res) {
       			var BlitzData = res;
       			//console.log(BlitzData);
+				
 		
 				//Score
 				var CurrentRoundScore = Math.round(BlitzData.ExpectedScore.CurrentRoundScore);
@@ -1415,6 +1417,104 @@
       			<!-- ] -->
       		}
       	);
+		
+		
+		//Opponents teams stats
+		if(BlitzData.OpponentsFound.guardians){
+			var Opponents_Current_gardians = Object.values(BlitzData.OpponentsFound.guardians).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_gardians = []};	
+		if(BlitzData.OpponentsFound.defenders){
+			var Opponents_Current_defenders = Object.values(BlitzData.OpponentsFound.defenders).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_defenders = []};
+		if(BlitzData.OpponentsFound.shield){
+			var Opponents_Current_shield = Object.values(BlitzData.OpponentsFound.shield).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_shield = []};
+		if(BlitzData.OpponentsFound.brotherhood){
+			var Opponents_Current_brotherhood = Object.values(BlitzData.OpponentsFound.brotherhood).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_brotherhood = []};
+		if(BlitzData.OpponentsFound.brawlers){
+			var Opponents_Current_brawlers = Object.values(BlitzData.OpponentsFound.brawlers).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_brawlers = []};
+		if(BlitzData.OpponentsFound.powerarmor){
+			var Opponents_Current_powerarmor = Object.values(BlitzData.OpponentsFound.powerarmor).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_powerarmor = []};
+		if(BlitzData.OpponentsFound.solo_minnerva){
+			var Opponents_Current_solo_minnerva = Object.values(BlitzData.OpponentsFound.solo_minnerva).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_solo_minnerva = []};
+		if(BlitzData.OpponentsFound.solo_ultron){
+			var Opponents_Current_solo_ultron = Object.values(BlitzData.OpponentsFound.solo_ultron).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_solo_ultron = []};
+		if(BlitzData.OpponentsFound.spiderverse){
+			var Opponents_Current_spiderverse = Object.values(BlitzData.OpponentsFound.spiderverse).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_spiderverse = []};
+		if(BlitzData.OpponentsFound.wakanda){
+			var Opponents_Current_wakanda = Object.values(BlitzData.OpponentsFound.wakanda).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_wakanda = []};
+		if(BlitzData.OpponentsFound.xmen){
+			var Opponents_Current_xmen = Object.values(BlitzData.OpponentsFound.xmen).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_xmen = []};
+		if(BlitzData.OpponentsFound.random){
+			var Opponents_Current_random = Object.values(BlitzData.OpponentsFound.random).map(function(obj) {return obj.team;});}
+		else{Opponents_Current_random = []};
+
+		//console.log(Opponents_Current_spiderverse.length);
+		
+		var OpponentsCurrentArray = [
+			{ id: 1, team: "Guardins",     color:"#1cc88a", value: Opponents_Current_gardians.length },
+			{ id: 2, team: "Defenders",    color:"#f6c23e", value: Opponents_Current_defenders.length },
+			{ id: 3, team: "Shield",   	   color:"#4e73df", value: Opponents_Current_shield.length },
+			{ id: 4, team: "Brotherhood",  color:"#e74a3b",	value: Opponents_Current_brotherhood.length },
+			{ id: 5, team: "Brawlers", 	   color:"#36b9cc",	value: Opponents_Current_brawlers.length },
+			{ id: 6, team: "PowerArmor",   color:"#6f42c1",	value: Opponents_Current_powerarmor.length },
+			{ id: 7, team: "Minnerva", 	   color:"#6610f2", value: Opponents_Current_solo_minnerva.length },
+			{ id: 8, team: "Ultron", 	   color:"#5a5c69",value: Opponents_Current_solo_ultron.length },
+			{ id: 9, team: "SpiderVerse",  color:"#20c9a6",value: Opponents_Current_spiderverse.length },
+			{ id: 10, team: "Wakanda",     color:"#858796",value: Opponents_Current_wakanda.length },
+			{ id: 11, team: "Xmen", 	   color:"#fd7e14", value: Opponents_Current_xmen.length },
+			{ id: 12, team: "Randoms", 	   color:"#fd7e14", value: Opponents_Current_random.length }
+		  ];
+		  
+		
+		  console.log(BlitzData.OpponentsFound);
+
+		  AmCharts.makeChart("opponents_current", {
+				type: "pie",
+				angle: 12,
+				balloonText:
+				  "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+				depth3D: 6,
+				adjustPrecision: true,
+				percentPrecision: 0,
+				radius: 80,
+				startEffect: "easeOutSine",
+				innerRadius: "40%",
+				titleField: "team",
+				valueField: "value",
+				color: "#000000",
+				backgroundColor: "#B1B1B1",
+				//colors: ["#4E598C", "#F9C784", "#FCAF58", "#FF8C42"],
+				colorField: "color", 
+				//allLabels: [],
+				//balloon: {},
+				legend: {
+				  enabled: false,
+				  align: "center",
+				  markerType: "circle",
+				  color: "#000000",
+				  valueAlign: "left"
+				},
+				titles: [
+				  {
+					text: "Current Blitz Opponents",
+					size: 15,
+					color: "#4e73df"
+				  }
+				],
+				dataProvider: OpponentsCurrentArray
+			  }
+		  );
+		  
+		   
       			
       	
 		//previous scores
@@ -2083,8 +2183,21 @@
 							</div>
 						  </div>
                     </div>
+				   </div>
+				   <div class="row no-gutters align-items-center mt-1">
+					<div class="col">
+						  <div class="row no-gutters align-items-center">
+							<div class="col-auto">
+							  <div class="Row">
+								<div id="opponents_current" style="min-height: 400px"></div>
+							  </div>
+							</div>
+						  </div>
+                    </div>
                   </div>
                 </div>
+				
+				
 				
               </div>
             </div>
