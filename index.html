@@ -70,7 +70,7 @@
 				var NewBlitzCheck =  BlitzData.NewBlitz;
 				if(NewBlitzCheck === 'true'){
 					var i;
-					for(i = 1; i<15; i++){
+					for(i = 1; i<19; i++){
 						$.ajax({
 						  url: "https://msf-stats.firebaseio.com/team"+[i]+".json",
 						  type: 'PATCH',
@@ -221,21 +221,25 @@
       			var T12 = BlitzData.team12;
 				var T13 = BlitzData.team13;
 				var T14 = BlitzData.team14;
+				var T15 = BlitzData.team15;
+				var T16 = BlitzData.team16;
+				var T17 = BlitzData.team17;
+				var T18 = BlitzData.team18;
       
       			//Overall Statcounter
-      			var BlitzTotalBattlesWon = T1.alltime.match(/W/gi).length + T2.alltime.match(/W/gi).length + T3.alltime.match(/W/gi).length + T4.alltime.match(/W/gi).length+T5.alltime.match(/W/gi).length+T6.alltime.match(/W/gi).length+T7.alltime.match(/W/gi).length+T8.alltime.match(/W/gi).length+T9.alltime.match(/W/gi).length+T10.alltime.match(/W/gi).length+T11.alltime.match(/W/gi).length + T12.alltime.match(/W/gi).length + T13.alltime.match(/W/gi).length + T14.alltime.match(/W/gi).length;
+      			var BlitzTotalBattlesWon = T1.alltime.match(/W/gi).length + T2.alltime.match(/W/gi).length + T3.alltime.match(/W/gi).length + T4.alltime.match(/W/gi).length+T5.alltime.match(/W/gi).length+T6.alltime.match(/W/gi).length+T7.alltime.match(/W/gi).length+T8.alltime.match(/W/gi).length+T9.alltime.match(/W/gi).length+T10.alltime.match(/W/gi).length+T11.alltime.match(/W/gi).length + T12.alltime.match(/W/gi).length + T13.alltime.match(/W/gi).length + T14.alltime.match(/W/gi).length + T15.alltime.match(/W/gi).length + T16.alltime.match(/W/gi).length + T17.alltime.match(/W/gi).length + T18.alltime.match(/W/gi).length;
       			
-      			var BlitzTotalBattlesLost = T1.alltime.match(/L/gi).length + T2.alltime.match(/L/gi).length + T3.alltime.match(/L/gi).length + T4.alltime.match(/L/gi).length+T5.alltime.match(/L/gi).length+T6.alltime.match(/L/gi).length+T7.alltime.match(/L/gi).length+T8.alltime.match(/L/gi).length+T9.alltime.match(/L/gi).length+T10.alltime.match(/L/gi).length+T11.alltime.match(/L/gi).length + T12.alltime.match(/L/gi).length + T13.alltime.match(/L/gi).length + T14.alltime.match(/L/gi).length;
+      			var BlitzTotalBattlesLost = T1.alltime.match(/L/gi).length + T2.alltime.match(/L/gi).length + T3.alltime.match(/L/gi).length + T4.alltime.match(/L/gi).length+T5.alltime.match(/L/gi).length+T6.alltime.match(/L/gi).length+T7.alltime.match(/L/gi).length+T8.alltime.match(/L/gi).length+T9.alltime.match(/L/gi).length+T10.alltime.match(/L/gi).length+T11.alltime.match(/L/gi).length + T12.alltime.match(/L/gi).length + T13.alltime.match(/L/gi).length + T14.alltime.match(/L/gi).length + T15.alltime.match(/L/gi).length + T16.alltime.match(/L/gi).length + T17.alltime.match(/L/gi).length + T18.alltime.match(/L/gi).length;
       			
       			var BlitzTotalBattles = parseInt(BlitzTotalBattlesLost) + parseInt(BlitzTotalBattlesWon); 
       			
       			var BlitzBattleRatio = ((BlitzTotalBattlesWon*100)/BlitzTotalBattles).toFixed(2);
       			
       			//Current wins/losses this Blitz
-      			var CurrentBattlesWon = T1.live.match(/W/gi).length + T2.live.match(/W/gi).length + T3.live.match(/W/gi).length + T4.live.match(/W/gi).length+T5.live.match(/W/gi).length+T6.live.match(/W/gi).length+T7.live.match(/W/gi).length+T8.live.match(/W/gi).length+T9.live.match(/W/gi).length+T10.live.match(/W/gi).length+T11.live.match(/W/gi).length + T12.live.match(/W/gi).length + T13.live.match(/W/gi).length + T14.live.match(/W/gi).length;
+      			var CurrentBattlesWon = T1.live.match(/W/gi).length + T2.live.match(/W/gi).length + T3.live.match(/W/gi).length + T4.live.match(/W/gi).length+T5.live.match(/W/gi).length+T6.live.match(/W/gi).length+T7.live.match(/W/gi).length+T8.live.match(/W/gi).length+T9.live.match(/W/gi).length+T10.live.match(/W/gi).length+T11.live.match(/W/gi).length + T12.live.match(/W/gi).length + T13.live.match(/W/gi).length + T14.live.match(/W/gi).length + T15.live.match(/W/gi).length + T16.live.match(/W/gi).length + T17.live.match(/W/gi).length + T18.live.match(/W/gi).length;
       	
       			
-      			var CurrentBattlesLost = T1.live.match(/L/gi).length + T2.live.match(/L/gi).length + T3.live.match(/L/gi).length + T4.live.match(/L/gi).length+T5.live.match(/L/gi).length+T6.live.match(/L/gi).length+T7.live.match(/L/gi).length+T8.live.match(/L/gi).length+T9.live.match(/L/gi).length+T10.live.match(/L/gi).length+T11.live.match(/L/gi).length + T12.live.match(/L/gi).length + T13.live.match(/L/gi).length + T14.live.match(/L/gi).length;
+      			var CurrentBattlesLost = T1.live.match(/L/gi).length + T2.live.match(/L/gi).length + T3.live.match(/L/gi).length + T4.live.match(/L/gi).length+T5.live.match(/L/gi).length+T6.live.match(/L/gi).length+T7.live.match(/L/gi).length+T8.live.match(/L/gi).length+T9.live.match(/L/gi).length+T10.live.match(/L/gi).length+T11.live.match(/L/gi).length + T12.live.match(/L/gi).length + T13.live.match(/L/gi).length + T14.live.match(/L/gi).length + T15.live.match(/L/gi).length + T16.live.match(/L/gi).length + T17.live.match(/L/gi).length + T18.live.match(/L/gi).length;
       		
       			
       			var CurrentBattlesBlitz = CurrentBattlesWon + CurrentBattlesLost;
@@ -304,6 +308,18 @@
 				
 				var retrieved_Team14_Results = T14.live;
       			var Team_14 = retrieved_Team14_Results;
+				
+				var retrieved_Team15_Results = T15.live;
+      			var Team_15 = retrieved_Team15_Results;
+				
+				var retrieved_Team16_Results = T16.live;
+      			var Team_16 = retrieved_Team16_Results;
+				
+				var retrieved_Team17_Results = T17.live;
+      			var Team_17 = retrieved_Team17_Results;
+				
+				var retrieved_Team18_Results = T18.live;
+      			var Team_18 = retrieved_Team18_Results;
       			
       			//retrive blitz all time results
       			var Team_1_alltime = T1.alltime;
@@ -320,6 +336,10 @@
       			var Team_12_alltime = T12.alltime;
 				var Team_13_alltime = T13.alltime;
 				var Team_14_alltime = T14.alltime;
+				var Team_15_alltime = T15.alltime;
+				var Team_16_alltime = T16.alltime;
+				var Team_17_alltime = T17.alltime;
+				var Team_18_alltime = T18.alltime;
 				
       			// Retrieve the Times object from storage
       			var retrieved_Team1_Time = T1.lastbattle;
@@ -363,6 +383,18 @@
 				
 				var retrieved_Team14_Time = T14.lastbattle;
       			var Team_14_time = retrieved_Team14_Time; 
+				
+				var retrieved_Team15_Time = T15.lastbattle;
+      			var Team_15_time = retrieved_Team15_Time; 
+				
+				var retrieved_Team16_Time = T16.lastbattle;
+      			var Team_16_time = retrieved_Team16_Time; 
+				
+				var retrieved_Team17_Time = T17.lastbattle;
+      			var Team_17_time = retrieved_Team17_Time; 
+				
+				var retrieved_Team18_Time = T18.lastbattle;
+      			var Team_18_time = retrieved_Team18_Time; 
       			
       			//Graph work
       			var Team1 = Team_1.match(/W/gi).length;
@@ -378,7 +410,11 @@
       			var Team11 = Team_11.match(/W/gi).length;
 				var Team12 = Team_12.match(/W/gi).length;	
 				var Team13 = Team_13.match(/W/gi).length;	
-				var Team14 = Team_14.match(/W/gi).length;					
+				var Team14 = Team_14.match(/W/gi).length;	
+				var Team15 = Team_15.match(/W/gi).length;
+				var Team16 = Team_16.match(/W/gi).length;
+				var Team17 = Team_17.match(/W/gi).length;
+				var Team18 = Team_18.match(/W/gi).length;
       			
       			//Count wins/losses
       			var total_teams = 14;
@@ -397,6 +433,10 @@
 				if (retrieved_Team12_Results[retrieved_Team12_Results.length -1] ===  'W'){ wins++; };
 				if (retrieved_Team13_Results[retrieved_Team13_Results.length -1] ===  'W'){ wins++; };
 				if (retrieved_Team14_Results[retrieved_Team14_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team14_Results[retrieved_Team15_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team14_Results[retrieved_Team16_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team14_Results[retrieved_Team17_Results.length -1] ===  'W'){ wins++; };
+				if (retrieved_Team14_Results[retrieved_Team18_Results.length -1] ===  'W'){ wins++; };
       			//console.log(wins);
       			var losses = total_teams - wins;
       			
@@ -669,7 +709,75 @@
       });
       
       }
-       break; 		   
+       break;
+   case 'Team15LastBlitz.txt': 
+      if(battletime > Team_15_time){
+      readTextFile("Team15.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team15.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break;
+   case 'Team16LastBlitz.txt': 
+      if(battletime > Team_16_time){
+      readTextFile("Team16.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team16.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break;
+   case 'Team17LastBlitz.txt': 
+      if(battletime > Team_17_time){
+      readTextFile("Team17.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team17.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break;
+   case 'Team18LastBlitz.txt': 
+      if(battletime > Team_18_time){
+      readTextFile("Team18.txt");
+      $.ajax({
+      	url: "https://msf-stats.firebaseio.com/team18.json",
+      	type: 'PATCH',
+      	contentType: "application/json; charset=utf-8",
+      	dataType: "json",
+      	data: JSON.stringify({"lastbattle" : battletime}),
+      	   success: function(res) {
+      		   //console.log(res);
+      	}
+        
+      });
+      
+      }
+       break;  	   
       default: 
        console.log('errrrror'); 
       } 
@@ -702,7 +810,7 @@
       						console.log(moment.duration(diff).asSeconds());
 														
       						//var count = (7200) - parseInt(diffSec);
-							var count = (4560+55+760) - parseInt(diffSec);
+							var count = (4560+55+760-900) - parseInt(diffSec);
 							
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
@@ -1015,7 +1123,63 @@
       //console.log(res);
       }					  
       });
+      break;
+	  case 'Team15.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team15.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T15.alltime + match_result,
+      "live" : T15.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break;
+	  case 'Team16.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team16.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T16.alltime + match_result,
+      "live" : T16.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+	  case 'Team17.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team17.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T17.alltime + match_result,
+      "live" : T17.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
       break;	  
+	  case 'Team18.txt':  
+      $.ajax({
+      url: "https://msf-stats.firebaseio.com/team18.json",
+      type: 'PATCH',
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+      "alltime" : T18.alltime + match_result,
+      "live" : T18.live + match_result}),
+      success: function(res) {
+      //console.log(res);
+      }					  
+      });
+      break;	  
+      break;	  	  
       default: 
       console.log("eerrrrrorrr"); 
       } 
@@ -1038,6 +1202,10 @@
 			readTimesTextFile("Team12LastBlitz.txt");
 			readTimesTextFile("Team13LastBlitz.txt");
 			readTimesTextFile("Team14LastBlitz.txt");
+			readTimesTextFile("Team15LastBlitz.txt");
+			readTimesTextFile("Team16LastBlitz.txt");
+			readTimesTextFile("Team17LastBlitz.txt");
+			readTimesTextFile("Team18LastBlitz.txt");
       
       		readLastBlitzFile("LastBlitz.txt");
       		
@@ -1152,8 +1320,30 @@
 				}else{
 					T14_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team14_Results[retrieved_Team14_Results.length -1] + "</span>";
 				}
-			
-	
+			var T15_lastround = document.getElementById("T15_lastround");
+			if(retrieved_Team15_Results[retrieved_Team15_Results.length -1] == 'W'){
+					T15_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team15_Results[retrieved_Team15_Results.length -1] + "</span>";
+				}else{
+					T15_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team15_Results[retrieved_Team15_Results.length -1] + "</span>";
+				}			
+			var T16_lastround = document.getElementById("T16_lastround");
+			if(retrieved_Team16_Results[retrieved_Team16_Results.length -1] == 'W'){
+					T16_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team16_Results[retrieved_Team16_Results.length -1] + "</span>";
+				}else{
+					T16_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team16_Results[retrieved_Team16_Results.length -1] + "</span>";
+				}
+			var T17_lastround = document.getElementById("T17_lastround");
+			if(retrieved_Team17_Results[retrieved_Team17_Results.length -1] == 'W'){
+					T17_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team17_Results[retrieved_Team17_Results.length -1] + "</span>";
+				}else{
+					T17_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team17_Results[retrieved_Team17_Results.length -1] + "</span>";
+				}
+			var T18_lastround = document.getElementById("T18_lastround");
+			if(retrieved_Team18_Results[retrieved_Team18_Results.length -1] == 'W'){
+					T18_lastround.innerHTML =  "<span class='btn btn-success btn-circle btn-lg'>" + retrieved_Team18_Results[retrieved_Team18_Results.length -1] + "</span>";
+				}else{
+					T18_lastround.innerHTML =  "<span class='btn btn-danger btn-circle btn-lg'>" + retrieved_Team18_Results[retrieved_Team18_Results.length -1] + "</span>";
+				}
 				
       		}, 100);
       		
@@ -1235,6 +1425,26 @@
       					"Teams": "Team 14" + "\n" + "Battles : " + retrieved_Team14_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team14_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team14_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_14_time*1000).fromNow(),
       					"WinRate" : (Team14*100/(Team_14.split(" ").length )).toFixed(2),
       					"Results" : Team_14
+      				},
+					{
+      					"Teams": "Team 15" + "\n" + "Battles : " + retrieved_Team15_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team15_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team15_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_15_time*1000).fromNow(),
+      					"WinRate" : (Team15*100/(Team_15.split(" ").length )).toFixed(2),
+      					"Results" : Team_15
+      				},
+					{
+      					"Teams": "Team 16" + "\n" + "Battles : " + retrieved_Team16_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team16_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team16_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_16_time*1000).fromNow(),
+      					"WinRate" : (Team16*100/(Team_16.split(" ").length )).toFixed(2),
+      					"Results" : Team_16
+      				},
+					{
+      					"Teams": "Team 17" + "\n" + "Battles : " + retrieved_Team17_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team17_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team17_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_17_time*1000).fromNow(),
+      					"WinRate" : (Team17*100/(Team_17.split(" ").length )).toFixed(2),
+      					"Results" : Team_17
+      				},
+					{
+      					"Teams": "Team 18" + "\n" + "Battles : " + retrieved_Team18_Results.replace(/\s/g, "").length + "\n" + "( W " + retrieved_Team18_Results.match(new RegExp('W','g')).length + " / L " + retrieved_Team18_Results.match(new RegExp('L','g')).length + " )" + "\n" + moment(Team_18_time*1000).fromNow(),
+      					"WinRate" : (Team18*100/(Team_18.split(" ").length )).toFixed(2),
+      					"Results" : Team_18
       				}
       			],
       			"type": "serial",
@@ -1363,6 +1573,26 @@
       					"Teams": "Team 14" + "\n" + "Battles : " + Team_14_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_14_alltime.match(new RegExp('W','g')).length + " / L " + Team_14_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_14_alltime.match(/W/gi).length)*100/(Team_14_alltime.split(" ").length)).toFixed(2) + " %",
       					"WinRate" : ((Team_14_alltime.match(/W/gi).length)*100/(Team_14_alltime.split(" ").length)).toFixed(2),
       					"Results" : Team_14_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 15" + "\n" + "Battles : " + Team_15_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_15_alltime.match(new RegExp('W','g')).length + " / L " + Team_15_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_15_alltime.match(/W/gi).length)*100/(Team_15_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_15_alltime.match(/W/gi).length)*100/(Team_15_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_15_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 16" + "\n" + "Battles : " + Team_16_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_16_alltime.match(new RegExp('W','g')).length + " / L " + Team_16_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_16_alltime.match(/W/gi).length)*100/(Team_16_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_16_alltime.match(/W/gi).length)*100/(Team_16_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_16_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 17" + "\n" + "Battles : " + Team_17_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_17_alltime.match(new RegExp('W','g')).length + " / L " + Team_17_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_17_alltime.match(/W/gi).length)*100/(Team_17_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_17_alltime.match(/W/gi).length)*100/(Team_17_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_17_alltime.slice(-40)
+      				},
+					{
+      					"Teams": "Team 18" + "\n" + "Battles : " + Team_18_alltime.replace(/\s/g, "").length + "\n" + "( W " + Team_18_alltime.match(new RegExp('W','g')).length + " / L " + Team_18_alltime.match(new RegExp('L','g')).length + " )" + "\n" + ((Team_18_alltime.match(/W/gi).length)*100/(Team_18_alltime.split(" ").length)).toFixed(2) + " %",
+      					"WinRate" : ((Team_18_alltime.match(/W/gi).length)*100/(Team_18_alltime.split(" ").length)).toFixed(2),
+      					"Results" : Team_18_alltime.slice(-40)
       				}
       			],
       			"type": "serial",
@@ -1868,6 +2098,42 @@
 			}else{
 				T14_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team14.previousBlitz + "</span>";
 			}
+			
+			//team 15 live
+			if(snapshot.val().team15.previousBlitz == "W"){
+				T15_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team15.previousBlitz + "</span>";
+			}else if(snapshot.val().team15.previousBlitz == "L"){
+				T15_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team15.previousBlitz + "</span>";
+			}else{
+				T15_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team15.previousBlitz + "</span>";
+			}
+			
+			//team 16 live
+			if(snapshot.val().team16.previousBlitz == "W"){
+				T16_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team16.previousBlitz + "</span>";
+			}else if(snapshot.val().team16.previousBlitz == "L"){
+				T16_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team16.previousBlitz + "</span>";
+			}else{
+				T16_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team16.previousBlitz + "</span>";
+			}
+			
+			//team 17 live
+			if(snapshot.val().team17.previousBlitz == "W"){
+				T17_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team17.previousBlitz + "</span>";
+			}else if(snapshot.val().team17.previousBlitz == "L"){
+				T17_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team17.previousBlitz + "</span>";
+			}else{
+				T17_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team17.previousBlitz + "</span>";
+			}
+			
+			//team 18 live
+			if(snapshot.val().team18.previousBlitz == "W"){
+				T18_live.innerHTML = "<span class='btn btn-success btn-circle btn-lg'>" + snapshot.val().team18.previousBlitz + "</span>";
+			}else if(snapshot.val().team18.previousBlitz == "L"){
+				T18_live.innerHTML = "<span class='btn btn-danger btn-circle btn-lg'>" + snapshot.val().team18.previousBlitz + "</span>";
+			}else{
+				T18_live.innerHTML = "<span class='btn btn-secondary btn-circle btn-lg'>" + snapshot.val().team18.previousBlitz + "</span>";
+			}
 		 });
 	  
 			
@@ -2259,6 +2525,18 @@
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T14_live" data-tip="Team 14">
 									<span class="btn btn-secondary btn-circle btn-lg">T14</span>
 								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T15_live" data-tip="Team 15">
+									<span class="btn btn-secondary btn-circle btn-lg">T15</span>
+								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T16_live" data-tip="Team 16">
+									<span class="btn btn-secondary btn-circle btn-lg">T16</span>
+								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T17_live" data-tip="Team 17">
+									<span class="btn btn-secondary btn-circle btn-lg">T17</span>
+								</div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T18_live" data-tip="Team 18">
+									<span class="btn btn-secondary btn-circle btn-lg">T18</span>
+								</div>
 							  </div>
 							</div>
 						  </div>
@@ -2292,6 +2570,10 @@
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T12_lastround" data-tip="Team 12"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T13_lastround" data-tip="Team 13"> - </div>
 								<div class="Column  mb-0 pr-1 qtip tip-top" id="T14_lastround" data-tip="Team 14"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T15_lastround" data-tip="Team 15"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T16_lastround" data-tip="Team 16"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T17_lastround" data-tip="Team 17"> - </div>
+								<div class="Column  mb-0 pr-1 qtip tip-top" id="T18_lastround" data-tip="Team 18"> - </div>
 							  </div>
 							</div>
 						  </div>
