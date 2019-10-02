@@ -62,10 +62,10 @@
 }
 @media (max-width: 640px) {
 		 .btn-circle.btn-lg {
-			  width: 18px;
-			  height: 18px;
-			  padding: 5px 8px;
-			  font-size: 12px;
+			  width: 15px;
+			  height: 15px;
+			  padding: 5px 5px;
+			  font-size: 10px;
 			  line-height: 0.67;
 			  border-radius: 25px;
 			}
