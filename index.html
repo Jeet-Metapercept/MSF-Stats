@@ -786,6 +786,7 @@
       			}, 'text');
       			
       		}
+			
       function readLastBlitzFile(files){
       	$.get(files, function(data) {
 			//files = files.split('/').pop();
@@ -810,7 +811,7 @@
       						console.log(moment.duration(diff).asSeconds());
 														
       						//var count = (7200) - parseInt(diffSec);
-							var count = (4560+55+760-900) - parseInt(diffSec);
+							var count = (4560+55+760+900) - parseInt(diffSec);
 							
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
@@ -1151,6 +1152,7 @@
       //console.log(res);
       }					  
       });
+	   break;	
 	  case 'Team17.txt':  
       $.ajax({
       url: "https://msf-stats.firebaseio.com/team17.json",
@@ -1175,11 +1177,11 @@
       "alltime" : T18.alltime + match_result,
       "live" : T18.live + match_result}),
       success: function(res) {
-      //console.log(res);
+      console.log(res);
       }					  
       });
       break;	  
-      break;	  	  
+       	  
       default: 
       console.log("eerrrrrorrr"); 
       } 
@@ -1187,6 +1189,7 @@
       	}, 'text');	
       
       }
+	 
       		//retrive Last Blitz times
       		readTimesTextFile("Team1LastBlitz.txt");
       	    readTimesTextFile("Team2LastBlitz.txt");
@@ -1208,7 +1211,7 @@
 			readTimesTextFile("Team18LastBlitz.txt");
       
       		readLastBlitzFile("LastBlitz.txt");
-      		
+      	
 	
 			//reload after all functions
 			//Reload page after function work done	
