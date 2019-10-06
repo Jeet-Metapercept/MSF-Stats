@@ -447,7 +447,6 @@
 
       //Saving Teams Times
       function readTimesTextFile(sfile){	 
-	  
       			$.get(sfile, function(data) {
 				//sfile = sfile.split('/').pop();
 				
@@ -461,21 +460,21 @@
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	 // console.log(Team_1_time, battletime);
+	 console.log(Team_1_time, battletime);
       if(battletime > Team_1_time){
-      readTextFile("Team1.txt");
-      $.ajax({
-      	url: "https://msf-stats.firebaseio.com/team1.json",
-      	type: 'PATCH',
-      	contentType: "application/json; charset=utf-8",
-      	dataType: "json",
-      	data: JSON.stringify({"lastbattle" : battletime}),
-      	   success: function(res) {
-      		   //console.log('res');
-      	 
-      	}
-        
-      });
+		readTextFile("Team1.txt");
+		  $.ajax({
+			url: "https://msf-stats.firebaseio.com/team1.json",
+			type: 'PATCH',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data: JSON.stringify({"lastbattle" : battletime}),
+			   success: function(res) {
+				   //console.log('res');
+			 
+			}
+			
+		  });
       
       }
        break; 
@@ -762,7 +761,9 @@
       }
        break;
    case 'Team18LastBlitz.txt': 
+   console.log(Team_18_time, battletime);
       if(battletime > Team_18_time){
+	  console.log('thiisssssssss -- ' + battletime > Team_18_time);
       readTextFile("Team18.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team18.json",
@@ -811,7 +812,7 @@
       						console.log(moment.duration(diff).asSeconds());
 														
       						//var count = (7200) - parseInt(diffSec);
-							var count = (4560+55+760+900) - parseInt(diffSec);
+							var count = (4560+55+760) - parseInt(diffSec);
 							
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
