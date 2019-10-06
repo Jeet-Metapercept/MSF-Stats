@@ -460,7 +460,7 @@
       switch (sfile)  
       { 
       case 'Team1LastBlitz.txt': 
-	 console.log(Team_1_time, battletime);
+	 //console.log(Team_1_time, battletime);
       if(battletime > Team_1_time){
 		readTextFile("Team1.txt");
 		  $.ajax({
@@ -761,9 +761,9 @@
       }
        break;
    case 'Team18LastBlitz.txt': 
-   console.log(Team_18_time, battletime);
+   console.log(Team_18_time, battletime, battletime > Team_18_time);
       if(battletime > Team_18_time){
-	  console.log('thiisssssssss -- ' + battletime > Team_18_time);
+
       readTextFile("Team18.txt");
       $.ajax({
       	url: "https://msf-stats.firebaseio.com/team18.json",
@@ -809,7 +809,7 @@
 							
       						var diff = moment.utc(moment(d1,"DD/MM/YYYY HH:mm:ss").diff(moment(d2,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");  // difference in milliseconds
       						var diffSec = moment.duration(diff).asSeconds()
-      						console.log(moment.duration(diff).asSeconds());
+      						//console.log(moment.duration(diff).asSeconds());
 														
       						//var count = (7200) - parseInt(diffSec);
 							var count = (4560+55+760) - parseInt(diffSec);
@@ -917,7 +917,7 @@
 	  
       	$.get(file, function(data) {
 		//file = file.split('/').pop();
-		//console.log(file);
+		console.log(file);
       	   var allText = data;
       	   //console.log(allText);
       	   var valueCheck = parseInt(allText);
@@ -1169,6 +1169,7 @@
       });
       break;	  
 	  case 'Team18.txt':  
+	  console.log('checked teamm 18');
       $.ajax({
       url: "https://msf-stats.firebaseio.com/team18.json",
       type: 'PATCH',
