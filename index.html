@@ -417,7 +417,7 @@
 				var Team18 = Team_18.match(/W/gi).length;
       			
       			//Count wins/losses
-      			var total_teams = 14;
+      			var total_teams = 18;
       			var wins = 0;
       			if (retrieved_Team1_Results[retrieved_Team1_Results.length -1] ===  'W'){ wins++; };
       			if (retrieved_Team2_Results[retrieved_Team2_Results.length -1] ===  'W'){ wins++; };
@@ -813,7 +813,7 @@
       						//console.log(moment.duration(diff).asSeconds());
 														
       						//var count = (7200) - parseInt(diffSec);
-							var count = (4560+55+760) - parseInt(diffSec);
+							var count = ((4560+55+760)-1800) - parseInt(diffSec);
 							
       						var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
       
