@@ -2234,18 +2234,18 @@
 		 
 		
 		 //lastpush checker
-		 var lastpushtimer = new easytimer.Timer();
-		lastpushtimer.start();
-		lastpushtimer.addEventListener('secondsUpdated', function (e) {
-			$('#lastpush').html(lastpushtimer.getTimeValues().toString());
-		});
+		 <!-- var lastpushtimer = new easytimer.Timer(); -->
+		<!-- lastpushtimer.start(); -->
+		<!-- lastpushtimer.addEventListener('secondsUpdated', function (e) { -->
+			<!-- $('#lastpush').html(lastpushtimer.getTimeValues().toString()); -->
+		<!-- }); -->
 		 
 	    var ref = firebase.database().ref('/Live');                           
 		ref.on("value", function(snapshot){
 		firebaseLive.innerHTML = snapshot.val().step;
 		
 		
-		lastpushtimer.reset();
+		<!-- lastpushtimer.reset(); -->
 		
 		<!-- updateClock(); -->
 		<!-- var timeouttime = 300000;//5 min -->
@@ -2401,8 +2401,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col-70 mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Status</div>
-                      <div class="h5 mb-0  text-gray-800" id="running" style="display: inline-block">-</div>
-					  <span class="ml-2 small  text-gray-800" id="lastpush">lastpush</span>
+                      <div class="h5 mb-0  text-gray-800" id="running">-</div>
+					  <!-- <span class="ml-2 small  text-gray-800" id="lastpush"></span> -->
                     </div>
 					
 					<!-- <div id="liveSignal" class="live-dot" style="position: absolute;left: 0;right: 0;margin: auto"></div>	 -->
